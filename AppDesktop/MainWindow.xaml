@@ -78,7 +78,146 @@
             <Grid x:Name="gridCredit" Background="CadetBlue" Visibility="Hidden"></Grid>
             <Grid x:Name="gridBundles" Background="Bisque" Visibility="Hidden"></Grid>
             <Grid x:Name="gridProvider" Background="LavenderBlush" Visibility="Hidden"></Grid>
-            <Grid x:Name="gridBrandAndBundle" Background="CadetBlue" Visibility="Hidden"></Grid>
+            <Grid x:Name="gridBundle" Background="CadetBlue" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <DataGrid x:Name="dgBundle" Grid.Row="1" Grid.Column="1" Grid.RowSpan="14" Grid.ColumnSpan="22" AutoGenerateColumns="False">
+                </DataGrid>
+
+                <GroupBox x:Name="choixActionBundle"  Grid.Row="16" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="22" Margin="5" Header="ACTION">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <RadioButton x:Name="radioButtonNewBundle"  Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Center" IsChecked="True">Add a new bundle</RadioButton>
+                        <RadioButton x:Name="radioButtonModifyBundle"  Grid.Column="5" Grid.ColumnSpan="3" VerticalAlignment="Center" >Modify a bundle</RadioButton>
+                    </Grid>
+                </GroupBox>
+                <GroupBox x:Name="gbNewBundle"  Grid.Row="18" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="22" Header="NEW" Margin="5,-5,5,5" IsEnabled="True">
+                    <Grid ShowGridLines="False">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label x:Name="lbBrandNewBundle"  Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}" >BRAND</Label>
+                        <ComboBox x:Name="cbbBrandNewBundle" Grid.Row="0" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="2"  Style="{DynamicResource ComboBoxStandard}" HorizontalAlignment="Left"/>
+                        <Label x:Name="lbNamNewBundle"  Grid.Row="0" Grid.Column="2" Grid.RowSpan="1" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}"  >NAME</Label>
+                        <TextBox x:Name="tbNewBundle"  Grid.Row="0" Grid.Column="4" Grid.RowSpan="1" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxStandard}" Width="350"></TextBox>
+                        <Label x:Name="lbweightNewBundle"  Grid.Row="0" Grid.Column="7" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}"  >WEIGHT</Label>
+                        <TextBox x:Name="tbWeightNewBundle"  Grid.Row="0" Grid.Column="8" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxStandard}" Width="40"></TextBox>
+                        <Label x:Name="lbNoteNewBundle"  Grid.Row="1" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}"  >NOTE</Label>
+                        <TextBox x:Name="tbNoteNewBundle"  Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="20"></TextBox>
+                    </Grid>
+                </GroupBox>
+                <GroupBox x:Name="gbModifyBundle"  Grid.Row="21" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="22" Header="MODIFY" Margin="5,-5,5,5" IsEnabled="False">
+                    <Grid ShowGridLines="False">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label  Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}" >BRAND</Label>
+                        <ComboBox x:Name="cbbBrandModifyBundle" Grid.Row="0" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="2"  Style="{DynamicResource ComboBoxStandard}" HorizontalAlignment="Left"/>
+                        <Label   Grid.Row="0" Grid.Column="2" Grid.RowSpan="1" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}"  >NAME</Label>
+                        <TextBox x:Name="tbModifyBundle"  Grid.Row="0" Grid.Column="4" Grid.RowSpan="1" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxStandard}" Width="350"></TextBox>
+                        <Label   Grid.Row="0" Grid.Column="7" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}"  >WEIGHT</Label>
+                        <TextBox x:Name="tbWeightModifyBundle"  Grid.Row="0" Grid.Column="8" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxStandard}" Width="40"></TextBox>
+                        <Label   Grid.Row="1" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}"  >NOTE</Label>
+                        <TextBox x:Name="tbNoteModifyBundle"  Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="20"></TextBox>
+                    </Grid>
+                </GroupBox>
+            </Grid>
             <Grid x:Name="gridBrand" Background="Turquoise" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -186,7 +325,6 @@
                     </Grid>
                 </GroupBox>
 
-
                 <GroupBox x:Name="gbModifyBrand"  Grid.Row="21" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="22" Header="MODIFY" Margin="5,-5,5,5" IsEnabled="False">
                     <Grid ShowGridLines="False">
                         <Grid.ColumnDefinitions>
@@ -226,8 +364,5 @@
             <Button x:Name="btnNew" Style="{StaticResource buttonStackPanelBas}" Click="BtnNew_Click" Visibility="Collapsed">NEW</Button>
             <Button x:Name="btnCancel" Style="{StaticResource buttonStackPanelBas}" Click="BtnCancel_Click" >CANCEL</Button>
         </StackPanel>
-        
-        
-
     </Grid>
 </Window>

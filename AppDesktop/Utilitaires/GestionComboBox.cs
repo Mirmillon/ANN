@@ -4,9 +4,16 @@ namespace AppDesktop.Utilitaires
 {
     internal class GestionComboBox
     {
-        internal void SetCountry(System.Collections.Generic.List<Classes.Countries> l, System.Windows.Controls.ComboBox cb)
+        internal void SetCountry(System.Windows.Controls.ComboBox cb)
         {
-            cb.ItemsSource = l;
+            cb.ItemsSource = new RDMS.Country().GetCountries();
+            cb.SelectedValuePath = "Cle";
+            cb.DisplayMemberPath = "Label";
+        }
+
+        internal void SetBrand(System.Windows.Controls.ComboBox cb)
+        {
+            cb.ItemsSource = new RDMS.Brand().GetBrands();
             cb.SelectedValuePath = "Cle";
             cb.DisplayMemberPath = "Label";
         }

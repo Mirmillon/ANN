@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Windows;
 
 namespace AppDesktop
@@ -14,25 +14,63 @@ namespace AppDesktop
         public MainWindow()
         {
             InitializeComponent();
-
-
+            //BRAND
             dgBrand.SelectionChanged += DgBrand_SelectionChanged;
             cbbCountryBrand.SelectionChanged += CbbCountryBrand_SelectionChanged;
             radioButtonNewBrand.Checked += RadioNew_Checked;
             radioButtonModifyBrand.Checked += RadioModify_Checked;
+            //BUNDLE
+            dgBundle.SelectionChanged += DgBundle_SelectionChanged;
+            radioButtonNewBundle.Checked += RadioNew_Checked;
+            radioButtonModifyBundle.Checked += RadioModify_Checked;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            //BUNDLES
+            new Utilitaires.GestionComboBox().SetBrand(cbbBrandNewBundle);
+            new Utilitaires.GestionComboBox().SetBrand(cbbBrandModifyBundle);
+            //
+            dgBundle.ItemsSource = new RDMS.Bundle().GetBundles();
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgBundle, "LABEL");
+            new Utilitaires.GestionDgColumn().ColumnBrand(dgBundle, "CleBrand");
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgBundle, "WEIGHT", "Weight");
+            new Utilitaires.GestionDgColumn().ColumnLabelNote(dgBundle);
+
+
+
+
+            //BRAND
+            //Set up cbb countries
+            new Utilitaires.GestionComboBox().SetCountry(cbbCountryBrand);
+            new Utilitaires.GestionComboBox().SetCountry(cbbCountryNewBrand);
+            new Utilitaires.GestionComboBox().SetCountry(cbbCountryModifyBrand);
+            //Binding dataGrid
+            dgBrand.ItemsSource = new RDMS.Brand().GetBrands();
+            viewBrand = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(dgBrand.ItemsSource);
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgBrand, "BRAND");
+            new Utilitaires.GestionDgColumn().ColumnCountry(dgBrand, new RDMS.Country().GetCountries());
         }
 
         private void RadioModify_Checked(object sender, RoutedEventArgs e)
         {
             System.Windows.Controls.RadioButton rb = sender as System.Windows.Controls.RadioButton;
-            switch (rb.Content.ToString())
+            switch (rb.Name)
             {
-                case "Modify a brand":
+                case "radioButtonModifyBrand":
                     gbNewBrand.IsEnabled = false;
                     gbModifyBrand.IsEnabled = true;
-                    tbNewBrand.Text = String.Empty;
-                    tbNoteNewBrand.Text = String.Empty;
+                    tbNewBrand.Text = System.String.Empty;
+                    tbNoteNewBrand.Text = System.String.Empty;
                     cbbCountryNewBrand.SelectedIndex = -1;
+                    break;
+                case "radioButtonModifyBundle":
+                    gbNewBundle.IsEnabled = false;
+                    gbModifyBundle.IsEnabled = true;
+                    tbNewBundle.Text = System.String.Empty;
+                    tbNoteNewBundle.Text = System.String.Empty;
+                    tbWeightNewBundle.Text = System.String.Empty;
+                    cbbBrandNewBundle.SelectedIndex = -1;
                     break;
             }
         }
@@ -40,37 +78,25 @@ namespace AppDesktop
         private void RadioNew_Checked(object sender, RoutedEventArgs e)
         {
             System.Windows.Controls.RadioButton rb = sender as System.Windows.Controls.RadioButton;
-            switch(rb.Content.ToString())
+            switch (rb.Name)
             {
-                case "Add a new brand":
+                case "radioButtonNewBrand":
                     gbNewBrand.IsEnabled = true;
                     gbModifyBrand.IsEnabled = false;
-                    tbModifyBrand.Text = String.Empty;
-                    tbNoteModifyBrand.Text = String.Empty;
+                    tbModifyBrand.Text = System.String.Empty;
+                    tbNoteModifyBrand.Text = System.String.Empty;
                     cbbCountryModifyBrand.SelectedIndex = -1;
+                    break;
+                case "radioButtonNewBundle":
+                    gbNewBundle.IsEnabled = true;
+                    gbModifyBundle.IsEnabled = false;
+                    tbModifyBundle.Text = System.String.Empty;
+                    tbNoteModifyBundle.Text = System.String.Empty;
+                    tbWeightModifyBundle.Text = System.String.Empty;
+                    cbbBrandModifyBundle.SelectedIndex = -1;
                     break;
             }
         }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            //BRAND
-            //Get countries
-            System.Collections.Generic.List<Classes.Countries> lc = new RDMS.Country().GetCountries();
-            //Set up cbb countries
-            new Utilitaires.GestionComboBox().SetCountry(lc, cbbCountryBrand);
-            new Utilitaires.GestionComboBox().SetCountry(lc, cbbCountryNewBrand);
-            new Utilitaires.GestionComboBox().SetCountry(lc, cbbCountryModifyBrand);
-            //Binding dataGrid
-            dgBrand.ItemsSource = new RDMS.Brand().GetBrands();
-            viewBrand = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(dgBrand.ItemsSource);
-            new Utilitaires.GestionDgColumn().ColumnLabel(dgBrand, "BRAND");
-            new Utilitaires.GestionDgColumn().ColumnCountry(dgBrand, lc);
-
-            
-        }
-
-        
 
         private void BtnLateralGauche_Click(object sender, RoutedEventArgs e)
         {
@@ -127,7 +153,30 @@ namespace AppDesktop
                    
                     break;
                 case 5:
-                   
+                    if (radioButtonNewBundle.IsChecked == true)
+                    {
+                        if (cbbBrandNewBundle.SelectedIndex != -1 && tbNewBundle.Text.Trim().Length > 1 && tbWeightNewBundle.Text.Trim().Length > 1)
+                        {
+                            Classes.Brands c = cbbBrandNewBundle.SelectedItem as Classes.Brands;
+                            int cleBundle = new RDMS.Bundle().SetBundle(c.Cle, tbNewBundle.Text, System.Convert.ToInt32(tbWeightNewBundle.Text), tbNoteNewBundle.Text);
+                            if (cleBundle > 0)
+                            {
+                                btnOK.Background = System.Windows.Media.Brushes.Green;
+                                dgBundle.ItemsSource = null;
+                                dgBundle.ItemsSource = new RDMS.Bundle().GetBundles();
+                            }
+                            else
+                            {
+                                btnOK.Background = System.Windows.Media.Brushes.Red;
+                            }
+                        }
+                    }
+                    else
+                    {
+                       
+
+                    }
+
                     break;
                 case 6://Brands
                     if (radioButtonNewBrand.IsChecked == true)
@@ -176,6 +225,26 @@ namespace AppDesktop
 
         }
 
+        #region ONGLET BUNDLE
+        private void DgBundle_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            Classes.Bundles bundle = dgBundle.SelectedItem as Classes.Bundles;
+            if(bundle != null)
+            {
+                gbModifyBundle.DataContext = bundle;
+                System.Windows.Data.Binding b = new System.Windows.Data.Binding("Label");
+                tbModifyBundle.SetBinding(System.Windows.Controls.TextBox.TextProperty, b);
+                System.Windows.Data.Binding b1 = new System.Windows.Data.Binding("CleBrand");
+                cbbBrandModifyBundle.SetBinding(System.Windows.Controls.ComboBox.SelectedValueProperty, b1);
+                System.Windows.Data.Binding b3 = new System.Windows.Data.Binding("Weight");
+                tbWeightModifyBundle.SetBinding(System.Windows.Controls.TextBox.TextProperty, b3);
+                System.Windows.Data.Binding b2 = new System.Windows.Data.Binding("Note");
+                tbNoteModifyBundle.SetBinding(System.Windows.Controls.TextBox.TextProperty, b2);
+            }
+        }
+        #endregion FIN ONGLET BUNDLE
+
+        #region ONGLET BRAND
         private void DgBrand_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             Classes.Brands brand = dgBrand.SelectedItem as Classes.Brands;
@@ -193,20 +262,11 @@ namespace AppDesktop
 
         private void CbbCountryBrand_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-
-            if (cbbCountryBrand.SelectedItem is Classes.Countries)
-            {
-                viewBrand.Filter = FilterBrand;
-            }
+            if (cbbCountryBrand.SelectedItem is Classes.Countries) { viewBrand.Filter = FilterBrand; }
         }
 
-        private bool FilterBrand(object o)
-        {
-            
-                return (o as Classes.Brands).CleCountry == (int)cbbCountryBrand.SelectedValue;
-
-           
-        }
+        private bool FilterBrand(object o) { return (o as Classes.Brands).CleCountry == (int)cbbCountryBrand.SelectedValue; }
+        #endregion FIN ONGLET BRAND
 
 
     }
