@@ -4,12 +4,26 @@ namespace AppDesktop.Classes
     internal class Brands : System.ComponentModel.INotifyPropertyChanged
     {
         int cle;
+        int cleCountry;
         string label;
         string note;
 
-        internal int Cle { get => cle; set => cle = value; }
+      
+        public  int Cle { get => cle; set => cle = value; }
 
-        internal string Label {
+        public int CleCountry {
+            get => cleCountry;
+            set
+            {
+                if (cleCountry != value)
+                {
+                    cleCountry = value;
+                    OnPropertyChanged("CleCountry");
+                }
+            }
+        }
+
+        public string Label {
             get => label;
             set
             {
@@ -21,7 +35,7 @@ namespace AppDesktop.Classes
             }
         }
 
-        internal string Note {
+        public  string Note {
             get => note;
             set
             {

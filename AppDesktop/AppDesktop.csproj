@@ -59,8 +59,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\Brands.cs" />
+    <Compile Include="Classes\Countries.cs" />
     <Compile Include="RDMS\Brand.cs" />
     <Compile Include="RDMS\Connexion.cs" />
+    <Compile Include="RDMS\Country.cs" />
+    <Compile Include="Utilitaires\GestionComboBox.cs" />
+    <Compile Include="Utilitaires\GestionDgColumn.cs" />
+    <Compile Include="Utilitaires\GestionGrille.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

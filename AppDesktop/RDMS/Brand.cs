@@ -23,10 +23,11 @@ namespace AppDesktop.RDMS
                         {
                             Classes.Brands b = new Classes.Brands();
                             b.Cle = (int)reader[0];
-                            b.Label = (string)reader[1];
-                            if (!(reader[2] == System.DBNull.Value))
+                            b.CleCountry = (int)reader[1];
+                            b.Label = (string)reader[2];
+                            if (!(reader[3] == System.DBNull.Value))
                             {
-                                b.Note = (string)reader[2];
+                                b.Note = (string)reader[3];
                             }
                             l.Add(b);
 
@@ -89,9 +90,9 @@ namespace AppDesktop.RDMS
             }
         }
 
-        public int SetBrand(string name, string note)
+        public int SetBrand(int cleCountry,string name, string note)
         {
-            int i = -1;
+            int cleBrand  = 0;
             FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
             using (FirebirdSql.Data.FirebirdClient.FbCommand commande = conn.CreateCommand())
             {
@@ -99,12 +100,14 @@ namespace AppDesktop.RDMS
                 commande.CommandType = System.Data.CommandType.StoredProcedure;
                 FirebirdSql.Data.FirebirdClient.FbParameterCollection pc = commande.Parameters;
                 pc.Add("CLE", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Direction = System.Data.ParameterDirection.Output;
+                pc.Add("COUNTRY", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cleCountry;
                 pc.Add("LABEL", FirebirdSql.Data.FirebirdClient.FbDbType.VarChar, 30).Value = name;
                 pc.Add("NOTE", FirebirdSql.Data.FirebirdClient.FbDbType.VarChar, 300).Value = note;
                 try
                 {
                     conn.Open();
-                    i = (System.Int32)commande.ExecuteScalar();
+                    cleBrand = (System.Int32)commande.ExecuteScalar();
+                    return cleBrand;
                 }
                 catch (System.Exception ex)
                 {
@@ -112,7 +115,7 @@ namespace AppDesktop.RDMS
                     conn.Close();
                     return -1;
                 }
-                return i;
+                
             }
         }
 

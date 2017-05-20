@@ -5,8 +5,229 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppDesktop"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
+        Title="Ann's Business" Height="1000" Width="1500" WindowState="Maximized" Loaded="Window_Loaded" WindowStyle="None">
+    <Grid x:Name="mainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Style="{DynamicResource stackPanelHautSup}" Grid.ColumnSpan="24">
+            <Label x:Name="lbTitle" Style="{StaticResource LabelTitre}">ANN'S BUSINESS</Label>
+            <Button x:Name="btnOK" Style="{StaticResource buttonStackPanelBas}"></Button>
+        </StackPanel>
+        <StackPanel x:Name="stackPanelGauche" Style="{DynamicResource stackPanelVerticalgauche}" Grid.ColumnSpan="2" Grid.RowSpan="22">
+            <Button x:Name="btnDashBoard" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">DASHBOARD</Button>
+            <Button x:Name="btnSellings" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">SELLINGS</Button>
+            <Button x:Name="btnCredits" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">CREDITS</Button>
+            <Button x:Name="btnStocks" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">STOCKS</Button>
+            <Button x:Name="btnProvider" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">PROVIDERS</Button>
+            <Button x:Name="btnBundles" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">BUNDLES</Button>
+            <Button x:Name="btnBrands" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">BRANDS</Button>
+        </StackPanel>
+        <Grid x:Name="gridCentre" Grid.Row="1" Grid.RowSpan="22" Grid.Column="2" Grid.ColumnSpan="22">
+            <Grid x:Name="gridDashBoard" Background="LightGreen" Visibility="Visible"></Grid>
+            <Grid x:Name="gridSelling" Background="LavenderBlush" Visibility="Hidden"></Grid>
+            <Grid x:Name="gridCredit" Background="CadetBlue" Visibility="Hidden"></Grid>
+            <Grid x:Name="gridBundles" Background="Bisque" Visibility="Hidden"></Grid>
+            <Grid x:Name="gridProvider" Background="LavenderBlush" Visibility="Hidden"></Grid>
+            <Grid x:Name="gridBrandAndBundle" Background="CadetBlue" Visibility="Hidden"></Grid>
+            <Grid x:Name="gridBrand" Background="Turquoise" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lbCountryBrand"  Grid.Row="0" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}"  >COUNTRY</Label>
+                <ComboBox x:Name="cbbCountryBrand" Grid.Row="0" Grid.Column="3" Grid.RowSpan="1" Grid.ColumnSpan="3"  Style="{DynamicResource ComboBoxStandard}" HorizontalAlignment="Left"/>
+                <DataGrid x:Name="dgBrand" Grid.Row="1" Grid.Column="1" Grid.RowSpan="14" Grid.ColumnSpan="22" AutoGenerateColumns="False">
+                </DataGrid>
+                <GroupBox x:Name="choixActionBrand"  Grid.Row="16" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="22" Margin="5" Header="ACTION">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <RadioButton x:Name="radioButtonNewBrand"  Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Center" IsChecked="True">Add a new brand</RadioButton>
+                        <RadioButton x:Name="radioButtonModifyBrand"  Grid.Column="5" Grid.ColumnSpan="3" VerticalAlignment="Center" >Modify a brand</RadioButton>
+                    </Grid>
+                </GroupBox>
+                <GroupBox x:Name="gbNewBrand"  Grid.Row="18" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="22" Header="NEW" Margin="5,-5,5,5" IsEnabled="True">
+                    <Grid ShowGridLines="False">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label x:Name="lbCountryNewBrand"  Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}" >COUNTRY</Label>
+                        <ComboBox x:Name="cbbCountryNewBrand" Grid.Row="0" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="2"  Style="{DynamicResource ComboBoxStandard}" HorizontalAlignment="Left"/>
+                        <Label x:Name="lbNamNewBrand"  Grid.Row="0" Grid.Column="3" Grid.RowSpan="1" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}"  >NAME</Label>
+                        <TextBox x:Name="tbNewBrand"  Grid.Row="0" Grid.Column="5" Grid.RowSpan="1" Grid.ColumnSpan="5" Style="{DynamicResource TextBoxStandard}" Width="250"></TextBox>
+                        <Label x:Name="lbNoteNewBrand"  Grid.Row="1" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}"  >NOTE</Label>
+                        <TextBox x:Name="tbNoteNewBrand"  Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="20"></TextBox>
+                    </Grid>
+                </GroupBox>
+
+
+                <GroupBox x:Name="gbModifyBrand"  Grid.Row="21" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="22" Header="MODIFY" Margin="5,-5,5,5" IsEnabled="False">
+                    <Grid ShowGridLines="False">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label x:Name="lbCountryModifyBrand"  Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}"  >COUNTRY</Label>
+                        <ComboBox x:Name="cbbCountryModifyBrand" Grid.Row="0" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="2"  Style="{DynamicResource ComboBoxStandard}" HorizontalAlignment="Left"/>
+                        <Label x:Name="lbNameModifyBrand"  Grid.Row="0" Grid.Column="3" Grid.RowSpan="1" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}" >NAME</Label>
+                        <TextBox x:Name="tbModifyBrand"  Grid.Row="0" Grid.Column="5" Grid.RowSpan="1" Grid.ColumnSpan="5" Style="{DynamicResource TextBoxStandard}" Width="250"></TextBox>
+                        <Label x:Name="lbNoteModifyBrand"  Grid.Row="1" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}"  >NOTE</Label>
+                        <TextBox x:Name="tbNoteModifyBrand"  Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="20"></TextBox>
+                    </Grid>
+                </GroupBox>
+
+            </Grid>
+        </Grid>
+        <StackPanel Style="{DynamicResource stackPanelBas}" Grid.Row="23"  Grid.ColumnSpan="24">
+            <Button x:Name="btnClose" Style="{StaticResource buttonStackPanelBas}" Click="BtnClose_Click">CLOSE</Button>
+            <Button x:Name="btnValidate" Style="{StaticResource buttonStackPanelBas}" Click="BtnValidate_Click" >VALIDATE</Button>
+            <Button x:Name="btnDelete" Style="{StaticResource buttonStackPanelBas}" Click="BtnDelete_Click" Visibility="Collapsed">DELETE</Button>
+            <Button x:Name="btnNew" Style="{StaticResource buttonStackPanelBas}" Click="BtnNew_Click" Visibility="Collapsed">NEW</Button>
+            <Button x:Name="btnCancel" Style="{StaticResource buttonStackPanelBas}" Click="BtnCancel_Click" >CANCEL</Button>
+        </StackPanel>
         
+        
+
     </Grid>
 </Window>
