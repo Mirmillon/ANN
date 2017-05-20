@@ -77,7 +77,66 @@
             <Grid x:Name="gridSelling" Background="LavenderBlush" Visibility="Hidden"></Grid>
             <Grid x:Name="gridCredit" Background="CadetBlue" Visibility="Hidden"></Grid>
             <Grid x:Name="gridBundles" Background="Bisque" Visibility="Hidden"></Grid>
-            <Grid x:Name="gridProvider" Background="LavenderBlush" Visibility="Hidden"></Grid>
+            <Grid x:Name="gridProvider" Background="LavenderBlush" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="1"  Grid.ColumnSpan="3" Style="{DynamicResource LabelSousTitre}">PROVIDERS</Label>
+                <DataGrid x:Name="dgProvider" Grid.Row="1" Grid.Column="1" Grid.RowSpan="6" Grid.ColumnSpan="22" AutoGenerateColumns="False" Margin="5,10">
+                </DataGrid>
+                <Label Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3"  Style="{DynamicResource LabelSousTitre}">ITEMS' PROVIDERS</Label>
+                <DataGrid x:Name="dgProviderBundle" Grid.Row="8" Grid.Column="1" Grid.RowSpan="17" Grid.ColumnSpan="22" AutoGenerateColumns="False" Margin="5,10">
+                </DataGrid>
+            </Grid>
             <Grid x:Name="gridBundle" Background="CadetBlue" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -361,7 +420,7 @@
             <Button x:Name="btnClose" Style="{StaticResource buttonStackPanelBas}" Click="BtnClose_Click">CLOSE</Button>
             <Button x:Name="btnValidate" Style="{StaticResource buttonStackPanelBas}" Click="BtnValidate_Click" >VALIDATE</Button>
             <Button x:Name="btnDelete" Style="{StaticResource buttonStackPanelBas}" Click="BtnDelete_Click" Visibility="Collapsed">DELETE</Button>
-            <Button x:Name="btnNew" Style="{StaticResource buttonStackPanelBas}" Click="BtnNew_Click" Visibility="Collapsed">NEW</Button>
+            <Button x:Name="btnNewProvider" Style="{StaticResource buttonStackPanelBas}" Click="BtnNewProvider_Click" Visibility="Collapsed">NEW PROVIDER</Button>
             <Button x:Name="btnCancel" Style="{StaticResource buttonStackPanelBas}" Click="BtnCancel_Click" >CANCEL</Button>
         </StackPanel>
     </Grid>

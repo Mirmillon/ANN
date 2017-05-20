@@ -61,13 +61,22 @@
     <Compile Include="Classes\Brands.cs" />
     <Compile Include="Classes\Bundles.cs" />
     <Compile Include="Classes\Countries.cs" />
+    <Compile Include="Classes\Providers.cs" />
+    <Compile Include="Fenetres\Provider.xaml.cs">
+      <DependentUpon>Provider.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RDMS\Brand.cs" />
     <Compile Include="RDMS\Bundle.cs" />
     <Compile Include="RDMS\Connexion.cs" />
     <Compile Include="RDMS\Country.cs" />
+    <Compile Include="RDMS\Provider.cs" />
     <Compile Include="Utilitaires\GestionComboBox.cs" />
     <Compile Include="Utilitaires\GestionDgColumn.cs" />
     <Compile Include="Utilitaires\GestionGrille.cs" />
+    <Page Include="Fenetres\Provider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

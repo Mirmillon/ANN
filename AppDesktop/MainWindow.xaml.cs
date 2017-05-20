@@ -107,28 +107,45 @@ namespace AppDesktop
                 {
                     case "DASHBOARD":
                         lbTitle.Content = "ANN'S BUSINESS - DASHBOARDS";
+                        btnNewProvider.Visibility = Visibility.Collapsed;
                         break;
                     case "SELLINGS":
                         lbTitle.Content = "ANN'S BUSINESS - SELLINGS MANAGEMENT";
+                        btnNewProvider.Visibility = Visibility.Collapsed;
                         break;
                     case "CREDITS":
                         lbTitle.Content = "ANN'S BUSINESS - CREDITS MANAGEMENT";
+                        btnNewProvider.Visibility = Visibility.Collapsed;
                         break;
                     case "STOCKS":
                         lbTitle.Content = "ANN'S BUSINESS - STOCKS MANAGEMENT";
+                        btnNewProvider.Visibility = Visibility.Collapsed;
                         break;
                     case "PROVIDERS":
                         lbTitle.Content = "ANN'S BUSINESS - PROVIDERS MANAGEMENT : SEE, MODIFY AND DELETE PROVIDER";
+                        btnNewProvider.Visibility = Visibility.Visible;
                         break;
                     case "BUNDLES":
                         lbTitle.Content = "ANN'S BUSINESS - BUNDLES  MANAGEMENT";
+                        btnNewProvider.Visibility = Visibility.Collapsed;
                         break;
                     case "BRANDS":
                         lbTitle.Content = "ANN'S BUSINESS - BRANDS  MANAGEMENT";
+                        btnNewProvider.Visibility = Visibility.Collapsed;
                         break;
                 }
             }
             new Personnes.Classes.Utilitaires.GestionGrille().GridVisibilty(gridCentre, stackPanelGauche.Children.IndexOf((UIElement)sender));
+        }
+
+        private void BtnNewProvider_Click(object sender, RoutedEventArgs e)
+        {
+            Fenetres.Provider f = new Fenetres.Provider();
+            f.ShowDialog();
+            if(f.DialogResult == true)
+            {
+                btnOK.Background = System.Windows.Media.Brushes.Green;
+            }
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e )  {Close();}
@@ -266,6 +283,7 @@ namespace AppDesktop
         }
 
         private bool FilterBrand(object o) { return (o as Classes.Brands).CleCountry == (int)cbbCountryBrand.SelectedValue; }
+
         #endregion FIN ONGLET BRAND
 
 
