@@ -72,6 +72,8 @@
     <Compile Include="RDMS\Connexion.cs" />
     <Compile Include="RDMS\Country.cs" />
     <Compile Include="RDMS\Generic.cs" />
+    <Compile Include="RDMS\Outcome.cs" />
+    <Compile Include="RDMS\Payment.cs" />
     <Compile Include="RDMS\Provider.cs" />
     <Compile Include="Utilitaires\GestionComboBox.cs" />
     <Compile Include="Utilitaires\GestionDgColumn.cs" />

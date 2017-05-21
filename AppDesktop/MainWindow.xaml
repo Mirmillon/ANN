@@ -71,6 +71,7 @@
             <Button x:Name="btnProvider" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">PROVIDERS</Button>
             <Button x:Name="btnBundles" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">BUNDLES</Button>
             <Button x:Name="btnBrands" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">BRANDS</Button>
+            <Button x:Name="btnOutcome" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">OUTCOMES</Button>
         </StackPanel>
         <Grid x:Name="gridCentre" Grid.Row="1" Grid.RowSpan="22" Grid.Column="2" Grid.ColumnSpan="22">
             <Grid x:Name="gridDashBoard" Background="LightGreen" Visibility="Visible"></Grid>
@@ -424,12 +425,13 @@
                 </GroupBox>
 
             </Grid>
+            <Grid x:Name="gridOutcome" Background="Red" Visibility="Hidden"></Grid>
         </Grid>
         <StackPanel Style="{DynamicResource stackPanelBas}" Grid.Row="23"  Grid.ColumnSpan="24">
             <Button x:Name="btnClose" Style="{StaticResource buttonStackPanelBas}" Click="BtnClose_Click">CLOSE</Button>
             <Button x:Name="btnValidate" Style="{StaticResource buttonStackPanelBas}" Click="BtnValidate_Click" >VALIDATE</Button>
             <Button x:Name="btnDelete" Style="{StaticResource buttonStackPanelBas}" Click="BtnDelete_Click" Visibility="Collapsed">DELETE</Button>
-            <Button x:Name="btnNewProvider" Style="{StaticResource buttonStackPanelBas}" Click="BtnNewProvider_Click" Visibility="Collapsed">NEW PROVIDER</Button>
+            <Button x:Name="btnNew" Style="{StaticResource buttonStackPanelBas}" Click="BtnNew_Click" Visibility="Collapsed">NEW</Button>
             <Button x:Name="btnCancel" Style="{StaticResource buttonStackPanelBas}" Click="BtnCancel_Click" >CANCEL</Button>
         </StackPanel>
     </Grid>

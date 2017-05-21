@@ -32,10 +32,9 @@ namespace AppDesktop
             //PROVIDER
             dgProvider.ItemsSource = new RDMS.Provider().GetProviders();
             dgProviderBundle.ItemsSource = new RDMS.Bundle().GetProviderBundles();
-            new Utilitaires.GestionComboBox().SetKind(cbbKindNewBundle);
+            new Utilitaires.GestionComboBox().SetKindBundle(cbbKindNewBundle);
             new Utilitaires.GestionComboBox().SetProvider(cbbProviderNewBundle);
             new Utilitaires.GestionComboBox().SetCountry(cbbCountryNewBundle);
-
 
             //BUNDLES
             new Utilitaires.GestionComboBox().SetBrand(cbbBrandNewBundle);
@@ -119,45 +118,41 @@ namespace AppDesktop
                 {
                     case "DASHBOARD":
                         lbTitle.Content = "ANN'S BUSINESS - DASHBOARDS";
-                        btnNewProvider.Visibility = Visibility.Collapsed;
+                        btnNew.Visibility = Visibility.Collapsed;
                         break;
                     case "SELLINGS":
                         lbTitle.Content = "ANN'S BUSINESS - SELLINGS MANAGEMENT";
-                        btnNewProvider.Visibility = Visibility.Collapsed;
+                        btnNew.Visibility = Visibility.Collapsed;
                         break;
                     case "CREDITS":
                         lbTitle.Content = "ANN'S BUSINESS - CREDITS MANAGEMENT";
-                        btnNewProvider.Visibility = Visibility.Collapsed;
+                        btnNew.Visibility = Visibility.Collapsed;
                         break;
                     case "STOCKS":
                         lbTitle.Content = "ANN'S BUSINESS - STOCKS MANAGEMENT";
-                        btnNewProvider.Visibility = Visibility.Collapsed;
+                        btnNew.Visibility = Visibility.Collapsed;
                         break;
                     case "PROVIDERS":
                         lbTitle.Content = "ANN'S BUSINESS - PROVIDERS MANAGEMENT : SEE, MODIFY AND DELETE PROVIDER AND CHOOSE BUNDLES";
-                        btnNewProvider.Visibility = Visibility.Visible;
+                        btnNew.Visibility = Visibility.Visible;
+                        btnNew.Content = "NEW PROVIDER";
                         break;
                     case "BUNDLES":
                         lbTitle.Content = "ANN'S BUSINESS - BUNDLES  MANAGEMENT";
-                        btnNewProvider.Visibility = Visibility.Collapsed;
+                        btnNew.Visibility = Visibility.Collapsed;
                         break;
                     case "BRANDS":
                         lbTitle.Content = "ANN'S BUSINESS - BRANDS  MANAGEMENT";
-                        btnNewProvider.Visibility = Visibility.Collapsed;
+                        btnNew.Visibility = Visibility.Collapsed;
+                        break;
+                    case "OUTCOMES":
+                        lbTitle.Content = "ANN'S BUSINESS - OUTCOME  MANAGEMENT";
+                        btnNew.Visibility = Visibility.Visible;
+                        btnNew.Content = "NEW OUTCOME";
                         break;
                 }
             }
             new Personnes.Classes.Utilitaires.GestionGrille().GridVisibilty(gridCentre, stackPanelGauche.Children.IndexOf((UIElement)sender));
-        }
-
-        private void BtnNewProvider_Click(object sender, RoutedEventArgs e)
-        {
-            Fenetres.Provider f = new Fenetres.Provider();
-            f.ShowDialog();
-            if(f.DialogResult == true)
-            {
-                btnOK.Background = System.Windows.Media.Brushes.Green;
-            }
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e )  {Close();}
@@ -251,7 +246,40 @@ namespace AppDesktop
 
         private void BtnNew_Click(object sender, RoutedEventArgs e)
         {
+            switch (new Personnes.Classes.Utilitaires.GestionGrille().GetIndexGrille(gridCentre))
+            {
+                case 0:
 
+                    break;
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+                    Fenetres.Provider f = new Fenetres.Provider();
+                    f.ShowDialog();
+                    if (f.DialogResult == true)
+                    {
+                        btnOK.Background = System.Windows.Media.Brushes.Green;
+                    }
+
+                    break;
+                case 5:
+
+                    break;
+                case 6:
+
+                    break;
+                case 7:
+
+
+                    break;
+            }
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)

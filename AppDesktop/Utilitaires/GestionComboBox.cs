@@ -25,9 +25,23 @@ namespace AppDesktop.Utilitaires
             cb.DisplayMemberPath = "FullName";
         }
 
-        internal void SetKind(System.Windows.Controls.ComboBox cb)
+        internal void SetKindBundle(System.Windows.Controls.ComboBox cb)
         {
             cb.ItemsSource = new RDMS.Bundle().GetKindBundles();
+            cb.SelectedValuePath = "Cle";
+            cb.DisplayMemberPath = "Label";
+        }
+
+        internal void SetKindPayment(System.Windows.Controls.ComboBox cb)
+        {
+            cb.ItemsSource = new RDMS.Payment().GetKindPayment();
+            cb.SelectedValuePath = "Cle";
+            cb.DisplayMemberPath = "Label";
+        }
+
+        internal void SetKindOutcome(System.Windows.Controls.ComboBox cb)
+        {
+            cb.ItemsSource = new RDMS.Outcome().GetKindOutcome();
             cb.SelectedValuePath = "Cle";
             cb.DisplayMemberPath = "Label";
         }
