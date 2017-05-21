@@ -61,7 +61,9 @@
     <Compile Include="Classes\Brands.cs" />
     <Compile Include="Classes\Bundles.cs" />
     <Compile Include="Classes\Countries.cs" />
+    <Compile Include="Classes\KindBundles.cs" />
     <Compile Include="Classes\Providers.cs" />
+    <Compile Include="Classes\ReferencesSimples.cs" />
     <Compile Include="Fenetres\Provider.xaml.cs">
       <DependentUpon>Provider.xaml</DependentUpon>
     </Compile>
@@ -69,6 +71,7 @@
     <Compile Include="RDMS\Bundle.cs" />
     <Compile Include="RDMS\Connexion.cs" />
     <Compile Include="RDMS\Country.cs" />
+    <Compile Include="RDMS\Generic.cs" />
     <Compile Include="RDMS\Provider.cs" />
     <Compile Include="Utilitaires\GestionComboBox.cs" />
     <Compile Include="Utilitaires\GestionDgColumn.cs" />

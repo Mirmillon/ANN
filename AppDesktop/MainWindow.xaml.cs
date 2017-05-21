@@ -27,6 +27,12 @@ namespace AppDesktop
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            //PROVIDER
+            dgProvider.ItemsSource = new RDMS.Provider().GetProviders();
+            new Utilitaires.GestionComboBox().SetKind(cbbKindNewBundle);
+            new Utilitaires.GestionComboBox().SetProvider(cbbProviderNewBundle);
+            new Utilitaires.GestionComboBox().SetCountry(cbbCountryNewBundle);
+
             //BUNDLES
             new Utilitaires.GestionComboBox().SetBrand(cbbBrandNewBundle);
             new Utilitaires.GestionComboBox().SetBrand(cbbBrandModifyBundle);
@@ -122,7 +128,7 @@ namespace AppDesktop
                         btnNewProvider.Visibility = Visibility.Collapsed;
                         break;
                     case "PROVIDERS":
-                        lbTitle.Content = "ANN'S BUSINESS - PROVIDERS MANAGEMENT : SEE, MODIFY AND DELETE PROVIDER";
+                        lbTitle.Content = "ANN'S BUSINESS - PROVIDERS MANAGEMENT : SEE, MODIFY AND DELETE PROVIDER AND CHOOSE BUNDLES";
                         btnNewProvider.Visibility = Visibility.Visible;
                         break;
                     case "BUNDLES":
@@ -175,7 +181,7 @@ namespace AppDesktop
                         if (cbbBrandNewBundle.SelectedIndex != -1 && tbNewBundle.Text.Trim().Length > 1 && tbWeightNewBundle.Text.Trim().Length > 1)
                         {
                             Classes.Brands c = cbbBrandNewBundle.SelectedItem as Classes.Brands;
-                            int cleBundle = new RDMS.Bundle().SetBundle(c.Cle, tbNewBundle.Text, System.Convert.ToInt32(tbWeightNewBundle.Text), tbNoteNewBundle.Text);
+                            int cleBundle = new RDMS.Bundle().SetBundle(c.Cle, (int)cbbKindNewBundle.SelectedValue,(int)cbbCountryNewBundle.SelectedValue, tbNewBundle.Text, System.Convert.ToInt32(tbWeightNewBundle.Text), tbNoteNewBundle.Text);
                             if (cleBundle > 0)
                             {
                                 btnOK.Background = System.Windows.Media.Brushes.Green;
@@ -185,6 +191,10 @@ namespace AppDesktop
                             else
                             {
                                 btnOK.Background = System.Windows.Media.Brushes.Red;
+                            }
+                            if(cbbProviderNewBundle.SelectedIndex != -1)
+                            {
+                                int i = new RDMS.Bundle().SetBundleProvider((int)cbbProviderNewBundle.SelectedValue, cleBundle, System.Convert.ToDouble(tbPriceNewBundle.Text), null);
                             }
                         }
                     }

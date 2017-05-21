@@ -3,7 +3,7 @@ namespace AppDesktop.RDMS
 {
     internal class Bundle
     {
-        internal int SetBundle(int cleBrand, string label, int weight, string note)
+        internal int SetBundle(int cleBrand, int cleKind, int cleCountry, string label, int weight, string note)
         {
             int cle = 0;
             FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
@@ -14,6 +14,8 @@ namespace AppDesktop.RDMS
                 FirebirdSql.Data.FirebirdClient.FbParameterCollection pc = commande.Parameters;
                 pc.Add("CLE", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Direction = System.Data.ParameterDirection.Output;
                 pc.Add("BRAND", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cleBrand;
+                pc.Add("KIND", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cleKind;
+                pc.Add("COUNTRY", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cleCountry;
                 pc.Add("WEIGHT", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = weight;
                 pc.Add("LABEL", FirebirdSql.Data.FirebirdClient.FbDbType.VarChar, 60).Value = label;
                 pc.Add("NOTE", FirebirdSql.Data.FirebirdClient.FbDbType.VarChar, 300).Value = note;
@@ -73,6 +75,41 @@ namespace AppDesktop.RDMS
                     conn.Close();
                     return null;
                 }
+            }
+        }
+
+        internal System.Collections.Generic.List<Classes.ReferencesSimples> GetKindBundles()
+        {
+           return  new Generic().GetReferencesSimples("GET_KINDS");
+        }
+
+
+        internal int SetBundleProvider(int cleProvider, int cleBundle, double price, string note)
+        {
+            int cle = 0;
+            FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
+            using (FirebirdSql.Data.FirebirdClient.FbCommand commande = conn.CreateCommand())
+            {
+                commande.CommandText = "SET_BUNDLE_PROVIDER";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                FirebirdSql.Data.FirebirdClient.FbParameterCollection pc = commande.Parameters;
+                pc.Add("PROVIDER", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cleProvider;
+                pc.Add("BUNDLE", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cleBundle;
+                pc.Add("PRICE", FirebirdSql.Data.FirebirdClient.FbDbType.Double, 0).Value = price;
+                pc.Add("NOTE", FirebirdSql.Data.FirebirdClient.FbDbType.VarChar, 300).Value = note;
+                try
+                {
+                    conn.Open();
+                    cle = (System.Int32)commande.ExecuteScalar();
+                    return cle;
+                }
+                catch (System.Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.ToString());
+                    conn.Close();
+                    return int;
+                }
+
             }
         }
     }

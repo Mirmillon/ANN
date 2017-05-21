@@ -17,5 +17,19 @@ namespace AppDesktop.Utilitaires
             cb.SelectedValuePath = "Cle";
             cb.DisplayMemberPath = "Label";
         }
+
+        internal void SetProvider(System.Windows.Controls.ComboBox cb)
+        {
+            cb.ItemsSource = new RDMS.Provider().GetProviders();
+            cb.SelectedValuePath = "Cle";
+            cb.DisplayMemberPath = "FullName";
+        }
+
+        internal void SetKind(System.Windows.Controls.ComboBox cb)
+        {
+            cb.ItemsSource = new RDMS.Bundle().GetKindBundles();
+            cb.SelectedValuePath = "Cle";
+            cb.DisplayMemberPath = "Label";
+        }
     }
 }

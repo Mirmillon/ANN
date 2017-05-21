@@ -131,7 +131,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.Column="1"  Grid.ColumnSpan="3" Style="{DynamicResource LabelSousTitre}">PROVIDERS</Label>
-                <DataGrid x:Name="dgProvider" Grid.Row="1" Grid.Column="1" Grid.RowSpan="6" Grid.ColumnSpan="22" AutoGenerateColumns="False" Margin="5,10">
+                <DataGrid x:Name="dgProvider" Grid.Row="1" Grid.Column="1" Grid.RowSpan="6" Grid.ColumnSpan="22" AutoGenerateColumns="True" Margin="5,10">
                 </DataGrid>
                 <Label Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3"  Style="{DynamicResource LabelSousTitre}">ITEMS' PROVIDERS</Label>
                 <DataGrid x:Name="dgProviderBundle" Grid.Row="8" Grid.Column="1" Grid.RowSpan="17" Grid.ColumnSpan="22" AutoGenerateColumns="False" Margin="5,10">
@@ -237,12 +237,21 @@
                         </Grid.RowDefinitions>
                         <Label x:Name="lbBrandNewBundle"  Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}" >BRAND</Label>
                         <ComboBox x:Name="cbbBrandNewBundle" Grid.Row="0" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="2"  Style="{DynamicResource ComboBoxStandard}" HorizontalAlignment="Left"/>
-                        <Label x:Name="lbNamNewBundle"  Grid.Row="0" Grid.Column="2" Grid.RowSpan="1" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}"  >NAME</Label>
-                        <TextBox x:Name="tbNewBundle"  Grid.Row="0" Grid.Column="4" Grid.RowSpan="1" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxStandard}" Width="350"></TextBox>
-                        <Label x:Name="lbweightNewBundle"  Grid.Row="0" Grid.Column="7" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}"  >WEIGHT</Label>
-                        <TextBox x:Name="tbWeightNewBundle"  Grid.Row="0" Grid.Column="8" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxStandard}" Width="40"></TextBox>
-                        <Label x:Name="lbNoteNewBundle"  Grid.Row="1" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}"  >NOTE</Label>
-                        <TextBox x:Name="tbNoteNewBundle"  Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="20"></TextBox>
+                        <Label x:Name="lbNamNewBundle"  Grid.Row="0" Grid.Column="2" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}"  >NAME</Label>
+                        <TextBox x:Name="tbNewBundle"  Grid.Row="0" Grid.Column="3" Grid.RowSpan="1" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxStandard}" Width="350"></TextBox>
+                        <Label x:Name="lbKinddNewBundle"  Grid.Row="0" Grid.Column="5" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}" >KIND</Label>
+                        <ComboBox x:Name="cbbKindNewBundle" Grid.Row="0" Grid.Column="6" Grid.RowSpan="1" Grid.ColumnSpan="2"  Style="{DynamicResource ComboBoxStandard}" HorizontalAlignment="Left"/>
+                        <Label x:Name="lbCountryNewBundle"  Grid.Row="0" Grid.Column="7" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}" >COUNTRY</Label>
+                        <ComboBox x:Name="cbbCountryNewBundle" Grid.Row="0" Grid.Column="8" Grid.RowSpan="1" Grid.ColumnSpan="2"  Style="{DynamicResource ComboBoxStandard}" HorizontalAlignment="Left"/>
+                        <Label x:Name="lbweightNewBundle"  Grid.Row="0" Grid.Column="9" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}"  >WEIGHT</Label>
+                        <TextBox x:Name="tbWeightNewBundle"  Grid.Row="0" Grid.Column="10" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxStandard}" Width="40"></TextBox>
+                        <Label Grid.Row="1" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}" >PROVIDER</Label>
+                        <ComboBox x:Name="cbbProviderNewBundle" Grid.Row="1" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="3"  Style="{DynamicResource ComboBoxStandard}" Width="300" HorizontalAlignment="Left"/>
+                        <Label Grid.Row="1" Grid.Column="3" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}"  >PRICE</Label>
+                        <TextBox x:Name="tbPriceNewBundle"  Grid.Row="1" Grid.Column="4" Grid.RowSpan="1" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxStandard}" Width="100"></TextBox>
+
+                        <Label x:Name="lbNoteNewBundle"  Grid.Row="2" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}"  >NOTE</Label>
+                        <TextBox x:Name="tbNoteNewBundle"  Grid.Row="2" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="20" Margin="5,3"></TextBox>
                     </Grid>
                 </GroupBox>
                 <GroupBox x:Name="gbModifyBundle"  Grid.Row="21" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="22" Header="MODIFY" Margin="5,-5,5,5" IsEnabled="False">

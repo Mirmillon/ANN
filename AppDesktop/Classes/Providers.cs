@@ -59,8 +59,23 @@ namespace AppDesktop.Classes
             {
                 if (phone != value)
                 {
-                    note = value;
+                    phone = value;
                     OnPropertyChanged("Phone");
+                }
+            }
+        }
+
+        public string FullName
+        {
+            get
+            {
+                if(middleName != null)
+                {
+                    return name + " " + middleName + " " + lastName;
+                }
+                else
+                {
+                    return name + " " + lastName;
                 }
             }
         }
