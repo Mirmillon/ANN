@@ -134,7 +134,7 @@
                 <DataGrid x:Name="dgProvider" Grid.Row="1" Grid.Column="1" Grid.RowSpan="6" Grid.ColumnSpan="22" AutoGenerateColumns="True" Margin="5,10">
                 </DataGrid>
                 <Label Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3"  Style="{DynamicResource LabelSousTitre}">ITEMS' PROVIDERS</Label>
-                <DataGrid x:Name="dgProviderBundle" Grid.Row="8" Grid.Column="1" Grid.RowSpan="17" Grid.ColumnSpan="22" AutoGenerateColumns="False" Margin="5,10">
+                <DataGrid x:Name="dgProviderBundle" Grid.Row="8" Grid.Column="1" Grid.RowSpan="17" Grid.ColumnSpan="22" AutoGenerateColumns="True" Margin="5,10">
                 </DataGrid>
             </Grid>
             <Grid x:Name="gridBundle" Background="CadetBlue" Visibility="Hidden">

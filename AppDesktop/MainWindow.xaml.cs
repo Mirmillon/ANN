@@ -23,15 +23,19 @@ namespace AppDesktop
             dgBundle.SelectionChanged += DgBundle_SelectionChanged;
             radioButtonNewBundle.Checked += RadioNew_Checked;
             radioButtonModifyBundle.Checked += RadioModify_Checked;
+            //
+            dgProvider.SelectionChanged += DgProvider_SelectionChanged;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //PROVIDER
             dgProvider.ItemsSource = new RDMS.Provider().GetProviders();
+            dgProviderBundle.ItemsSource = new RDMS.Bundle().GetProviderBundles();
             new Utilitaires.GestionComboBox().SetKind(cbbKindNewBundle);
             new Utilitaires.GestionComboBox().SetProvider(cbbProviderNewBundle);
             new Utilitaires.GestionComboBox().SetCountry(cbbCountryNewBundle);
+
 
             //BUNDLES
             new Utilitaires.GestionComboBox().SetBrand(cbbBrandNewBundle);
@@ -57,6 +61,8 @@ namespace AppDesktop
             new Utilitaires.GestionDgColumn().ColumnLabel(dgBrand, "BRAND");
             new Utilitaires.GestionDgColumn().ColumnCountry(dgBrand, new RDMS.Country().GetCountries());
         }
+
+
 
         private void RadioModify_Checked(object sender, RoutedEventArgs e)
         {
@@ -173,6 +179,7 @@ namespace AppDesktop
 
                     break;
                 case 4:
+
                    
                     break;
                 case 5:
@@ -251,6 +258,23 @@ namespace AppDesktop
         {
 
         }
+
+        #region ONGLET PROVIDER
+        private void DgProvider_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            Classes.Providers p = dgProvider.SelectedItem as Classes.Providers;
+            if(p != null)
+            {
+
+            }
+        }
+
+
+        private bool FilterBundleProvider(object o)
+        {
+            return (o as Classes.Bundles).CleProvider == (int)dgProvider.SelectedValue;
+        }
+        #endregion END ONGLET PROVIDER
 
         #region ONGLET BUNDLE
         private void DgBundle_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)

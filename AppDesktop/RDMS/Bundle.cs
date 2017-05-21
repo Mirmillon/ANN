@@ -54,14 +54,24 @@ namespace AppDesktop.RDMS
                             Classes.Bundles b = new Classes.Bundles();
                             b.Cle = (int)reader[0];
                             b.CleBrand = (int)reader[1];
-                            b.Label = (string)reader[2];
-                            b.Weight = (int)reader[3];
-                            if (!(reader[4] == System.DBNull.Value))
+                            if (!(reader[2] == System.DBNull.Value))
                             {
-                                b.Note = (string)reader[4];
+                                b.CleCountry = (int)reader[2];
+                            }
+                            if (!(reader[3] == System.DBNull.Value))
+                            {
+                                b.CleKind = (int)reader[3];
+                            }
+                            b.Label = (string)reader[4];
+                            if (!(reader[5] == System.DBNull.Value))
+                            {
+                                b.Weight = (int)reader[5];
+                            }
+                            if (!(reader[6] == System.DBNull.Value))
+                            {
+                                b.Note = (string)reader[6];
                             }
                             l.Add(b);
-
                         }
                         conn.Close();
                         return l;
@@ -80,7 +90,7 @@ namespace AppDesktop.RDMS
 
         internal System.Collections.Generic.List<Classes.ReferencesSimples> GetKindBundles()
         {
-           return  new Generic().GetReferencesSimples("GET_KINDS");
+            return new Generic().GetReferencesSimples("GET_KINDS");
         }
 
 
@@ -107,10 +117,16 @@ namespace AppDesktop.RDMS
                 {
                     System.Windows.Forms.MessageBox.Show(ex.ToString());
                     conn.Close();
-                    return int;
+                    return cle;
                 }
 
             }
+        }
+
+        internal System.Collections.Generic.List<Classes.Bundles> GetProviderBundles()
+        {
+            System.Collections.Generic.List<Classes.Bundles> l = new System.Collections.Generic.List<Classes.Bundles>();
+            return l;
         }
     }
 }
