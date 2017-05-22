@@ -14,6 +14,8 @@ namespace AppDesktop
         public MainWindow()
         {
             InitializeComponent();
+            //SELLING
+            cbbKindPayment.SelectionChanged += CbbKindPayment_SelectionChanged;
             //BRAND
             dgBrand.SelectionChanged += DgBrand_SelectionChanged;
             cbbCountryBrand.SelectionChanged += CbbCountryBrand_SelectionChanged;
@@ -27,8 +29,13 @@ namespace AppDesktop
             dgProvider.SelectionChanged += DgProvider_SelectionChanged;
         }
 
+     
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            //SELLING
+            dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
+            new Utilitaires.GestionComboBox().SetKindPayment(cbbKindPayment);
             //PROVIDER
             dgProvider.ItemsSource = new RDMS.Provider().GetProviders();
             dgProviderBundle.ItemsSource = new RDMS.Bundle().GetProviderBundles();
@@ -59,6 +66,8 @@ namespace AppDesktop
             viewBrand = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(dgBrand.ItemsSource);
             new Utilitaires.GestionDgColumn().ColumnLabel(dgBrand, "BRAND");
             new Utilitaires.GestionDgColumn().ColumnCountry(dgBrand, new RDMS.Country().GetCountries());
+
+            lbIncome.Content = new RDMS.Dashboard().GetIncome();
         }
 
 
@@ -122,7 +131,8 @@ namespace AppDesktop
                         break;
                     case "SELLINGS":
                         lbTitle.Content = "ANN'S BUSINESS - SELLINGS MANAGEMENT";
-                        btnNew.Visibility = Visibility.Collapsed;
+                        btnNew.Visibility = Visibility.Visible;
+                        btnNew.Content = "NEW SELLING";
                         break;
                     case "CREDITS":
                         lbTitle.Content = "ANN'S BUSINESS - CREDITS MANAGEMENT";
@@ -252,6 +262,9 @@ namespace AppDesktop
 
                     break;
                 case 1:
+                    Fenetres.Selling selling = new Fenetres.Selling();
+                    selling.Owner = this;
+                    selling.Show();
 
                     break;
                 case 2:
@@ -286,6 +299,14 @@ namespace AppDesktop
         {
 
         }
+
+
+        #region ONGLET SELLING
+        private void CbbKindPayment_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+        #endregion FIN ONGLET SELLING
 
         #region ONGLET PROVIDER
         private void DgProvider_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)

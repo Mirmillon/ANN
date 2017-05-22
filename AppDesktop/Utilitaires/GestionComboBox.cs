@@ -45,5 +45,6 @@ namespace AppDesktop.Utilitaires
             cb.SelectedValuePath = "Cle";
             cb.DisplayMemberPath = "Label";
         }
+
     }
 }

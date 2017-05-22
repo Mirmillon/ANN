@@ -74,8 +74,113 @@
             <Button x:Name="btnOutcome" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">OUTCOMES</Button>
         </StackPanel>
         <Grid x:Name="gridCentre" Grid.Row="1" Grid.RowSpan="22" Grid.Column="2" Grid.ColumnSpan="22">
-            <Grid x:Name="gridDashBoard" Background="LightGreen" Visibility="Visible"></Grid>
-            <Grid x:Name="gridSelling" Background="LavenderBlush" Visibility="Hidden"></Grid>
+            <Grid x:Name="gridDashBoard" Background="LightGreen" Visibility="Visible">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+    
+                </Grid.ColumnDefinitions>
+                <StackPanel Style="{DynamicResource stackPanelHautSup}">
+                    
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="3" Background="Bisque">
+                    
+                </StackPanel>
+                <StackPanel  Grid.Row="2" Grid.RowSpan="3" Grid.Column="4" Grid.ColumnSpan="3" Background="White">
+                    <Label x:Name="lbIncome" Background="Aqua" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26"></Label>
+                </StackPanel>
+                <StackPanel  Grid.Row="4" Style="{DynamicResource stackPanelHautSup}">
+
+                </StackPanel>
+                <StackPanel  Grid.Row="8" Style="{DynamicResource stackPanelHautSup}">
+
+                </StackPanel>
+            </Grid>
+            <Grid x:Name="gridSelling" Background="LavenderBlush" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource LabelStandard}">KIND SELLING</Label>
+                <ComboBox x:Name="cbbKindItems" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="3" Style="{StaticResource ComboBoxStandard}"></ComboBox>
+                <Label Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Style="{StaticResource LabelStandard}">KIND PAYMENT</Label>
+                <ComboBox x:Name="cbbKindPayment" Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="3" Style="{StaticResource ComboBoxStandard}"></ComboBox>
+                <DataGrid x:Name="dgSelling" Grid.Row="1" Grid.Column="1" Grid.RowSpan="22" Grid.ColumnSpan="22" AutoGenerateColumns="True" Margin="5,10">
+                </DataGrid>
+
+            </Grid>
             <Grid x:Name="gridCredit" Background="CadetBlue" Visibility="Hidden"></Grid>
             <Grid x:Name="gridBundles" Background="Bisque" Visibility="Hidden"></Grid>
             <Grid x:Name="gridProvider" Background="LavenderBlush" Visibility="Hidden">

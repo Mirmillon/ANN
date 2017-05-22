@@ -290,7 +290,37 @@
             <Setter Property="MaxLength" Value="4"/>
             <Setter Property="MaxLines" Value="1"/>
         </Style>
+        <Style x:Key="TextBoxBusiness" TargetType="TextBox" >
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="85"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Margin" Value="3,5"/>
+            <Setter Property="Padding" Value="3"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="MaxLength" Value="4"/>
+            <Setter Property="MaxLines" Value="1"/>
+        </Style>
         <!--END sTEXTBOX-->
+        <Style x:Key="DateTimeStandard" TargetType="DatePicker" >
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="125"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="12"/>
+
+            <Setter Property="Margin" Value="3,5"/>
+            <Setter Property="Padding" Value="3"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
 
     </Application.Resources>
 </Application>

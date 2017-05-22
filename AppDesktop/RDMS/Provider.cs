@@ -52,8 +52,6 @@ namespace AppDesktop.RDMS
                     return null;
                 }
             }
-
-            return l;
         }
 
         internal int  SetProvider(string name,string middleName,string lastName,string phone,string note)

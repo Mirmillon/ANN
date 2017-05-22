@@ -1,0 +1,104 @@
+﻿<Window x:Class="AppDesktop.Fenetres.Selling"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AppDesktop.Fenetres"
+        mc:Ignorable="d"
+        Title="Selling" Height="525" Width="500" WindowStartupLocation="CenterOwner" WindowStyle="None" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Style="{StaticResource stackPanelHautSup}" IsEnabled="True"></StackPanel>
+        <Grid x:Name="dgSelling" Grid.Row="1" Grid.RowSpan="5">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+           
+            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">DATE</Label>
+            <DatePicker x:Name="dpDateSelling" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="4"  Style="{DynamicResource DateTimeStandard}"></DatePicker>
+            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">ITEMS NUMBER</Label>
+            <TextBox x:Name="tbNbItem" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxBusiness}"/>
+            <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">AMOUNT</Label>
+            <TextBox x:Name="tbAmount" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxBusiness}"/>
+            <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">PAYMENT</Label>
+            <ComboBox x:Name="cbbTypePayment" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="5"  Style="{DynamicResource ComboBoxStandard}"/>
+            <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">CASH</Label>
+            <TextBox x:Name="tbCash" Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxBusiness}"/>
+
+        </Grid>
+        <Grid x:Name="dgCredit" Grid.Row="6" Grid.RowSpan="5" IsEnabled="False">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">DATE DUE</Label>
+            <DatePicker x:Name="dpDateDue" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="4"  Style="{DynamicResource DateTimeStandard}"></DatePicker>
+            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">BALANCE</Label>
+            <TextBox x:Name="tbDue" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxBusiness}"/>
+            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">NAME</Label>
+            <TextBox x:Name="tbName" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="6" Style="{DynamicResource TextBoxStandard}"/>
+            <!--<Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">MIDDLE NAME</Label>
+            <TextBox x:Name="tbMName" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxStandard}"/>-->
+            <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">LAST NAME</Label>
+            <TextBox x:Name="tbLName" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="6" Style="{DynamicResource TextBoxStandard}"/>
+            <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">PHONE NUMBER</Label>
+            <TextBox x:Name="tbPhone" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="6" Style="{DynamicResource TextBoxStandard}"/>
+          
+        </Grid>
+        <StackPanel Grid.Row="11" x:Name="spBas" Style="{StaticResource stackPanelBas}">
+            <Button x:Name="btnClose" Style="{StaticResource buttonStackPanelBas}" Click="BtnClose_Click">CLOSE</Button>
+            <Button x:Name="btnValidate" Style="{StaticResource buttonStackPanelBas}" Click="BtnValidate_Click" >VALIDATE</Button>
+            <Button x:Name="btnCancel" Style="{StaticResource buttonStackPanelBas}" Click="BtnCancel_Click" >CANCEL</Button>
+        </StackPanel>
+    </Grid>
+</Window>
