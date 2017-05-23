@@ -90,7 +90,7 @@ namespace AppDesktop.RDMS
 
         internal System.Collections.Generic.List<Classes.ReferencesSimples> GetKindBundles()
         {
-            return new Generic().GetReferencesSimples("GET_KINDS");
+            return new Generic().GetReferencesSimples("GET_BUNDLE_KINDS");
         }
 
 

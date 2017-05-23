@@ -65,7 +65,7 @@
         </StackPanel>
         <StackPanel x:Name="stackPanelGauche" Style="{DynamicResource stackPanelVerticalgauche}" Grid.ColumnSpan="2" Grid.RowSpan="22">
             <Button x:Name="btnDashBoard" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">DASHBOARD</Button>
-            <Button x:Name="btnSellings" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">SELLINGS</Button>
+            <Button x:Name="btnSellings" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">SALES</Button>
             <Button x:Name="btnCredits" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">CREDITS</Button>
             <Button x:Name="btnStocks" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">STOCKS</Button>
             <Button x:Name="btnProvider" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">PROVIDERS</Button>
@@ -115,6 +115,14 @@
                 </StackPanel>
                 <StackPanel  Grid.Row="4" Style="{DynamicResource stackPanelHautSup}">
 
+
+
+                </StackPanel>
+                <StackPanel Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="3" Background="Bisque">
+
+                </StackPanel>
+                <StackPanel  Grid.Row="6" Grid.RowSpan="3" Grid.Column="4" Grid.ColumnSpan="3" Background="White">
+                    <Label x:Name="lbNbItems" Background="Aqua" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26"></Label>
                 </StackPanel>
                 <StackPanel  Grid.Row="8" Style="{DynamicResource stackPanelHautSup}">
 
@@ -173,11 +181,11 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource LabelStandard}">KIND SELLING</Label>
+                <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource LabelStandard}">KIND OF CLOTHES</Label>
                 <ComboBox x:Name="cbbKindItems" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="3" Style="{StaticResource ComboBoxStandard}"></ComboBox>
-                <Label Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Style="{StaticResource LabelStandard}">KIND PAYMENT</Label>
-                <ComboBox x:Name="cbbKindPayment" Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="3" Style="{StaticResource ComboBoxStandard}"></ComboBox>
-                <DataGrid x:Name="dgSelling" Grid.Row="1" Grid.Column="1" Grid.RowSpan="22" Grid.ColumnSpan="22" AutoGenerateColumns="True" Margin="5,10">
+                <Label Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="2" Style="{StaticResource LabelStandard}">KIND OF PAYMENT</Label>
+                <ComboBox x:Name="cbbKindPayment" Grid.Row="0" Grid.Column="8" Grid.ColumnSpan="3" Style="{StaticResource ComboBoxStandard}"></ComboBox>
+                <DataGrid x:Name="dgSelling" Grid.Row="1" Grid.Column="1" Grid.RowSpan="22" Grid.ColumnSpan="22" AutoGenerateColumns="False" Margin="5,10">
                 </DataGrid>
 
             </Grid>
@@ -236,7 +244,7 @@
                 </Grid.ColumnDefinitions>
                 <DataGrid x:Name="dgCredit" Grid.Row="1" Grid.Column="1" Grid.RowSpan="19" Grid.ColumnSpan="22" AutoGenerateColumns="True" Margin="5,10">
                 </DataGrid>
-                <GroupBox x:Name="gbCredit"  Grid.Row="21" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="22" Header="PAYMENT" Margin="5,-5,5,-5">
+                <GroupBox x:Name="gbPaiement"  Grid.Row="21" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="22" Header="PAYMENT" Margin="5,-5,5,-5">
                     <Grid ShowGridLines="True">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>

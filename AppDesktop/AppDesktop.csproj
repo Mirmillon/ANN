@@ -64,6 +64,7 @@
     <Compile Include="Classes\Credits.cs" />
     <Compile Include="Classes\Customers.cs" />
     <Compile Include="Classes\KindBundles.cs" />
+    <Compile Include="Classes\Payments.cs" />
     <Compile Include="Classes\Providers.cs" />
     <Compile Include="Classes\ReferencesSimples.cs" />
     <Compile Include="Classes\Sellings.cs" />

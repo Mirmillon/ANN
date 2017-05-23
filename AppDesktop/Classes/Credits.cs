@@ -3,7 +3,7 @@
 
 namespace AppDesktop.Classes
 {
-    internal  class Credits : System.ComponentModel.INotifyPropertyChanged
+    class Credits : System.ComponentModel.INotifyPropertyChanged
     {
         private int cle;
         private System.DateTime dateDue;
@@ -37,7 +37,7 @@ namespace AppDesktop.Classes
             }
         }
 
-        public double MontantPaye
+        public double MontantDu
         {
             get => montantPaye;
             set

@@ -10,12 +10,17 @@ namespace AppDesktop
     {
 
         System.Windows.Data.CollectionView viewBrand = null;
+        System.Windows.Data.CollectionView viewSales = null;
 
         public MainWindow()
         {
             InitializeComponent();
+            //DASHBOARD
+            SetDashboard();
             //SELLING
             cbbKindPayment.SelectionChanged += CbbKindPayment_SelectionChanged;
+            //CREDIT
+            dgCredit.SelectionChanged += DgCredit_SelectionChanged;
             //BRAND
             dgBrand.SelectionChanged += DgBrand_SelectionChanged;
             cbbCountryBrand.SelectionChanged += CbbCountryBrand_SelectionChanged;
@@ -25,19 +30,30 @@ namespace AppDesktop
             dgBundle.SelectionChanged += DgBundle_SelectionChanged;
             radioButtonNewBundle.Checked += RadioNew_Checked;
             radioButtonModifyBundle.Checked += RadioModify_Checked;
-            //
+            //PROVIDER
             dgProvider.SelectionChanged += DgProvider_SelectionChanged;
         }
 
-     
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //SELLING
+            //SALES
             dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
             new Utilitaires.GestionComboBox().SetKindPayment(cbbKindPayment);
+            new Utilitaires.GestionComboBox().SetKindBundle(cbbKindItems);
+            viewSales = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(dgSelling.ItemsSource);
+
+            //Binding dgSelling
+            new Utilitaires.GestionDgColumn().ColumnDate(dgSelling, "SALE DATE", "DateSelling");
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgSelling, "ITEMS NUMBER", "NbItems");
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgSelling, "SUM TOTAL", "Amount");
+            new Utilitaires.GestionDgColumn().ColumnCbKindPayment(dgSelling,"TypePayment");
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgSelling, "SUM TOTAL PAID", "Cash");
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgSelling, "CREDIT", "Credit");
+
             //CREDIT
             dgCredit.ItemsSource = new RDMS.Credit().GetCredit();
+            Classes.Payments paiement = new Classes.Payments();
+            gbPaiement.DataContext = paiement;
             //PROVIDER
             dgProvider.ItemsSource = new RDMS.Provider().GetProviders();
             dgProviderBundle.ItemsSource = new RDMS.Bundle().GetProviderBundles();
@@ -48,15 +64,12 @@ namespace AppDesktop
             //BUNDLES
             new Utilitaires.GestionComboBox().SetBrand(cbbBrandNewBundle);
             new Utilitaires.GestionComboBox().SetBrand(cbbBrandModifyBundle);
-            //
+
             dgBundle.ItemsSource = new RDMS.Bundle().GetBundles();
             new Utilitaires.GestionDgColumn().ColumnLabel(dgBundle, "LABEL");
             new Utilitaires.GestionDgColumn().ColumnBrand(dgBundle, "CleBrand");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgBundle, "WEIGHT", "Weight");
             new Utilitaires.GestionDgColumn().ColumnLabelNote(dgBundle);
-
-
-
 
             //BRAND
             //Set up cbb countries
@@ -69,10 +82,7 @@ namespace AppDesktop
             new Utilitaires.GestionDgColumn().ColumnLabel(dgBrand, "BRAND");
             new Utilitaires.GestionDgColumn().ColumnCountry(dgBrand, new RDMS.Country().GetCountries());
 
-            lbIncome.Content = new RDMS.Dashboard().GetIncome();
         }
-
-
 
         private void RadioModify_Checked(object sender, RoutedEventArgs e)
         {
@@ -130,11 +140,12 @@ namespace AppDesktop
                     case "DASHBOARD":
                         lbTitle.Content = "ANN'S BUSINESS - DASHBOARDS";
                         btnNew.Visibility = Visibility.Collapsed;
+                        SetDashboard();
                         break;
-                    case "SELLINGS":
-                        lbTitle.Content = "ANN'S BUSINESS - SELLINGS MANAGEMENT";
+                    case "SALES":
+                        lbTitle.Content = "ANN'S BUSINESS - SALES MANAGEMENT";
                         btnNew.Visibility = Visibility.Visible;
-                        btnNew.Content = "NEW SELLING";
+                        btnNew.Content = "NEW SALE";
                         break;
                     case "CREDITS":
                         lbTitle.Content = "ANN'S BUSINESS - CREDITS MANAGEMENT";
@@ -303,12 +314,37 @@ namespace AppDesktop
         }
 
 
+        #region ONGLET DASHBOARD
+        private void SetDashboard()
+        {
+            lbIncome.Content = new RDMS.Dashboard().GetIncome();
+            lbNbItems.Content = new RDMS.Dashboard().GetNbItems();
+        }
+        #endregion FIN ONGLET DASHBOARD
+
+
+
         #region ONGLET SELLING
         private void CbbKindPayment_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            if(cbbKindPayment.SelectedIndex != -1)
+            {
+                viewSales.Filter = FilterSelling;
+            }
+        }
+
+        private bool FilterSelling(object o)
+        {
+            return (o as Classes.Sellings).TypePayment == (int)cbbKindPayment.SelectedValue;
         }
         #endregion FIN ONGLET SELLING
+
+        #region ONGLET CREDIT
+        private void DgCredit_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        } 
+        #endregion FIN ONGLET CREDIT
 
         #region ONGLET PROVIDER
         private void DgProvider_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)

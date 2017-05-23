@@ -3,7 +3,7 @@ namespace AppDesktop.RDMS
 {
     internal class Credit
     {
-        internal int SetCredit(int cleClient, int cleSelling, System.DateTime dateDue)
+        internal int SetCredit(int cleClient, int cleSelling, System.DateTime dateDue,double montant)
         {
             int cle = 0;
             FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
@@ -16,6 +16,7 @@ namespace AppDesktop.RDMS
                 pc.Add("CLIENT", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cleClient;
                 pc.Add("SELLING", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cleSelling;
                 pc.Add("DATEDUE", FirebirdSql.Data.FirebirdClient.FbDbType.Date, 0).Value = dateDue;
+                pc.Add("MONTANT", FirebirdSql.Data.FirebirdClient.FbDbType.Double, 0).Value = montant;
                 try
                 {
                     conn.Open();
@@ -53,7 +54,7 @@ namespace AppDesktop.RDMS
                             b.Client.Cle = (int)reader[2];
                             b.DateDue = System.Convert.ToDateTime(reader[4]);
                             b.Vente.Credit = (double)reader[5];
-                            b.MontantPaye = (double)reader[6];
+                            b.MontantDu = (double)reader[6];
                             l.Add(b);
                         }
                         conn.Close();

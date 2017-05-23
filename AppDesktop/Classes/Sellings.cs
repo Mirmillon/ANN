@@ -22,7 +22,18 @@ namespace AppDesktop.Classes
         public double Cash { get => cash; set => cash = value; }
         public double Credit
         {
-            get => credit - cash;
+            get
+            {
+                if(amount > cash)
+                {
+                    return amount - cash;
+                }
+                else
+                {
+                    return 0;
+                }
+                
+            }
             set => credit = value;
 
         }
