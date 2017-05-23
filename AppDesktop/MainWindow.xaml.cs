@@ -36,6 +36,8 @@ namespace AppDesktop
             //SELLING
             dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
             new Utilitaires.GestionComboBox().SetKindPayment(cbbKindPayment);
+            //CREDIT
+            dgCredit.ItemsSource = new RDMS.Credit().GetCredit();
             //PROVIDER
             dgProvider.ItemsSource = new RDMS.Provider().GetProviders();
             dgProviderBundle.ItemsSource = new RDMS.Bundle().GetProviderBundles();

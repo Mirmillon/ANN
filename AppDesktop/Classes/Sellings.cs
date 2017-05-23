@@ -2,7 +2,7 @@
 
 namespace AppDesktop.Classes
 {
-    class Sellings
+    internal class Sellings
     {
         int cle;
         System.DateTime dateSelling;
@@ -21,7 +21,9 @@ namespace AppDesktop.Classes
         public int TypePayment { get => typePayment; set => typePayment = value; }
         public double Cash { get => cash; set => cash = value; }
         public double Credit
-        { get => amount - cash;
+        {
+            get => credit - cash;
+            set => credit = value;
 
         }
         public System.DateTime DateDue { get => dateDue; set => dateDue = value; }

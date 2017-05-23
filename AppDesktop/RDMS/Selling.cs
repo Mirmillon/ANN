@@ -69,5 +69,43 @@ namespace AppDesktop.RDMS
             }
         }
 
+
+        internal int SetSelling(int cleKindPayment, System.DateTime dateSelling, int n, double amount, double cash)
+        {
+            /*
+              KIND_PAYMENT TYPE OF D_FK,
+  DATE_SELLING TYPE OF D_DATE,
+  NUMBER_ITEMS TYPE OF D_NOMBRE,
+  AMOUNT TYPE OF D_MONEY,
+  CASH TYPE OF D_MONEY*/
+            int cle = 0;
+            FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
+            using (FirebirdSql.Data.FirebirdClient.FbCommand commande = conn.CreateCommand())
+            {
+                commande.CommandText = "SET_SETTING";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                FirebirdSql.Data.FirebirdClient.FbParameterCollection pc = commande.Parameters;
+                pc.Add("CLE", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Direction = System.Data.ParameterDirection.Output;
+                pc.Add("PAYMENT", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cleKindPayment;
+                pc.Add("DATE", FirebirdSql.Data.FirebirdClient.FbDbType.Date, 0).Value = dateSelling;
+                pc.Add("NUMBER", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = n;
+                pc.Add("AMOUNT", FirebirdSql.Data.FirebirdClient.FbDbType.Double, 0).Value = amount;
+                pc.Add("CASH", FirebirdSql.Data.FirebirdClient.FbDbType.Double, 0).Value = cash;
+                try
+                {
+                    conn.Open();
+                    cle = (System.Int32)commande.ExecuteScalar();
+                    return cle;
+                }
+                catch (System.Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.ToString());
+                    conn.Close();
+                    return cle;
+                }
+
+            }
+        }
+
     }
 }

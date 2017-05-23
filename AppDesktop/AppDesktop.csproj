@@ -61,6 +61,8 @@
     <Compile Include="Classes\Brands.cs" />
     <Compile Include="Classes\Bundles.cs" />
     <Compile Include="Classes\Countries.cs" />
+    <Compile Include="Classes\Credits.cs" />
+    <Compile Include="Classes\Customers.cs" />
     <Compile Include="Classes\KindBundles.cs" />
     <Compile Include="Classes\Providers.cs" />
     <Compile Include="Classes\ReferencesSimples.cs" />
@@ -75,6 +77,8 @@
     <Compile Include="RDMS\Bundle.cs" />
     <Compile Include="RDMS\Connexion.cs" />
     <Compile Include="RDMS\Country.cs" />
+    <Compile Include="RDMS\Credit.cs" />
+    <Compile Include="RDMS\Customer.cs" />
     <Compile Include="RDMS\Dashboard.cs" />
     <Compile Include="RDMS\Generic.cs" />
     <Compile Include="RDMS\Outcome.cs" />

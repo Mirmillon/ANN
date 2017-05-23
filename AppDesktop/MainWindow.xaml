@@ -181,7 +181,95 @@
                 </DataGrid>
 
             </Grid>
-            <Grid x:Name="gridCredit" Background="CadetBlue" Visibility="Hidden"></Grid>
+            <Grid x:Name="gridCredit" Background="CadetBlue" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <DataGrid x:Name="dgCredit" Grid.Row="1" Grid.Column="1" Grid.RowSpan="19" Grid.ColumnSpan="22" AutoGenerateColumns="True" Margin="5,10">
+                </DataGrid>
+                <GroupBox x:Name="gbCredit"  Grid.Row="21" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="22" Header="PAYMENT" Margin="5,-5,5,-5">
+                    <Grid ShowGridLines="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}"  >FULL NAME</Label>
+                        <TextBox x:Name="tbFullName" Grid.Row="0" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="3"  Style="{DynamicResource TextBoxStandard}" Width="300" HorizontalAlignment="Left"/>
+                        <Label Grid.Row="0" Grid.Column="4" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}" >BALANCE</Label>
+                        <TextBox x:Name="tbAmountdue"  Grid.Row="0" Grid.Column="5" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxStandard}" ></TextBox>
+                        <Label   Grid.Row="0" Grid.Column="6" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}"  >DATE DUE</Label>
+                        <DatePickerTextBox x:Name="tbDateDue"  Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxDate }"></DatePickerTextBox>
+                        <Label Grid.Row="1" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}" >PAYMENT</Label>
+                        <TextBox x:Name="tbPayment"  Grid.Row="1" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxStandard}" ></TextBox>
+                        <Label   Grid.Row="1" Grid.Column="2" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}" HorizontalAlignment="Left" >PHP</Label>
+                        <Label   Grid.Row="1" Grid.Column="3" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}"  >DATE PAYMENT</Label>
+                        <DatePicker x:Name="tbDatePayment"  Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="1" Style="{DynamicResource DateTimeStandard }"></DatePicker>
+                    </Grid>
+                </GroupBox>
+            </Grid>
             <Grid x:Name="gridBundles" Background="Bisque" Visibility="Hidden"></Grid>
             <Grid x:Name="gridProvider" Background="LavenderBlush" Visibility="Hidden">
                 <Grid.RowDefinitions>
