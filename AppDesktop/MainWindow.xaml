@@ -185,7 +185,9 @@
                 <ComboBox x:Name="cbbKindItems" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="3" Style="{StaticResource ComboBoxStandard}"></ComboBox>
                 <Label Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="2" Style="{StaticResource LabelStandard}">KIND OF PAYMENT</Label>
                 <ComboBox x:Name="cbbKindPayment" Grid.Row="0" Grid.Column="8" Grid.ColumnSpan="3" Style="{StaticResource ComboBoxStandard}"></ComboBox>
-                <DataGrid x:Name="dgSelling" Grid.Row="1" Grid.Column="1" Grid.RowSpan="22" Grid.ColumnSpan="22" AutoGenerateColumns="False" Margin="5,10">
+                <DataGrid x:Name="dgSelling" Grid.Row="1" Grid.Column="1" Grid.RowSpan="20" Grid.ColumnSpan="22" AutoGenerateColumns="False" Margin="5,10">
+                </DataGrid>
+                <DataGrid x:Name="dgCustomerSale" Grid.Row="21" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="22" AutoGenerateColumns="False" Margin="5,10">
                 </DataGrid>
 
             </Grid>
@@ -242,7 +244,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <DataGrid x:Name="dgCredit" Grid.Row="1" Grid.Column="1" Grid.RowSpan="19" Grid.ColumnSpan="22" AutoGenerateColumns="True" Margin="5,10">
+                <DataGrid x:Name="dgCredit" Grid.Row="1" Grid.Column="1" Grid.RowSpan="19" Grid.ColumnSpan="22" AutoGenerateColumns="False" Margin="5,10">
                 </DataGrid>
                 <GroupBox x:Name="gbPaiement"  Grid.Row="21" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="22" Header="PAYMENT" Margin="5,-5,5,-5">
                     <Grid ShowGridLines="True">

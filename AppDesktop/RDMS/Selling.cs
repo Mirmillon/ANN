@@ -37,7 +37,7 @@ namespace AppDesktop.RDMS
                             }
                             if (!(reader[6] == System.DBNull.Value))
                             {
-                                b.Customer = (int)reader[6];
+                                b.CleClient = (int)reader[6];
                             }
                             if (!(reader[7] == System.DBNull.Value))
                             {

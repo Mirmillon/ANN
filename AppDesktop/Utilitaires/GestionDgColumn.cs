@@ -104,6 +104,21 @@ namespace AppDesktop.Utilitaires
             return ColumnReferenceSimple(dg, new RDMS.Payment().GetKindPayment(), "KIND PAYMENT",s);
         }
 
+        internal System.Windows.Controls.DataGridComboBoxColumn ColumnCustomer(System.Windows.Controls.DataGrid dg)
+        {
+            System.Windows.Controls.DataGridComboBoxColumn d = new System.Windows.Controls.DataGridComboBoxColumn();
+            System.Windows.Data.Binding b = new System.Windows.Data.Binding("CleClient");
+            //Set the properties on the new column
+            d.ItemsSource = new RDMS.Customer().GetCustomers();
+            d.SelectedValuePath = "Cle";
+            d.DisplayMemberPath = "FullName";
+            d.SelectedValueBinding = b;
+            d.Header = "CUSTOMER";
+            //Add the column to the DataGrid
+            dg.Columns.Add(d);
+            return d;
+        }
+
 
     }
 }

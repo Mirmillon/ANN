@@ -46,5 +46,12 @@ namespace AppDesktop.Utilitaires
             cb.DisplayMemberPath = "Label";
         }
 
+        internal void SetCustomer(System.Windows.Controls.ComboBox cb)
+        {
+            cb.ItemsSource = new RDMS.Customer().GetCustomers();
+            cb.SelectedValuePath = "Cle";
+            cb.DisplayMemberPath = "FullName";
+        }
+
     }
 }

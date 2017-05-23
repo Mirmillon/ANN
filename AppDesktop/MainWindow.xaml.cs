@@ -1,5 +1,4 @@
-﻿
-using System.Windows;
+﻿using System.Windows;
 
 namespace AppDesktop
 {
@@ -11,6 +10,8 @@ namespace AppDesktop
 
         System.Windows.Data.CollectionView viewBrand = null;
         System.Windows.Data.CollectionView viewSales = null;
+        System.Windows.Data.CollectionView viewCustomer = null;
+
 
         public MainWindow()
         {
@@ -19,6 +20,7 @@ namespace AppDesktop
             SetDashboard();
             //SELLING
             cbbKindPayment.SelectionChanged += CbbKindPayment_SelectionChanged;
+            dgSelling.SelectionChanged += DgSelling_SelectionChanged;
             //CREDIT
             dgCredit.SelectionChanged += DgCredit_SelectionChanged;
             //BRAND
@@ -34,13 +36,17 @@ namespace AppDesktop
             dgProvider.SelectionChanged += DgProvider_SelectionChanged;
         }
 
+
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //SALES
             dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
+            dgCustomerSale.ItemsSource = new RDMS.Customer().GetCustomers();
             new Utilitaires.GestionComboBox().SetKindPayment(cbbKindPayment);
             new Utilitaires.GestionComboBox().SetKindBundle(cbbKindItems);
             viewSales = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(dgSelling.ItemsSource);
+            viewCustomer = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(dgCustomerSale.ItemsSource);
 
             //Binding dgSelling
             new Utilitaires.GestionDgColumn().ColumnDate(dgSelling, "SALE DATE", "DateSelling");
@@ -50,8 +56,15 @@ namespace AppDesktop
             new Utilitaires.GestionDgColumn().ColumnLabel(dgSelling, "SUM TOTAL PAID", "Cash");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgSelling, "CREDIT", "Credit");
 
+            new Utilitaires.GestionDgColumn().ColumnCustomer(dgCustomerSale);
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgCustomerSale, "PHONE NUMBER", "Phone");
+
             //CREDIT
             dgCredit.ItemsSource = new RDMS.Credit().GetCredit();
+            new Utilitaires.GestionDgColumn().ColumnCustomer(dgCredit);
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgCredit, "PHONE NUMBER", "Phone");
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgCredit, "BALANCE", "MontantDu");
+            new Utilitaires.GestionDgColumn().ColumnDate(dgCredit, "DUE DATE", "DateDue");
             Classes.Payments paiement = new Classes.Payments();
             gbPaiement.DataContext = paiement;
             //PROVIDER
@@ -140,38 +153,47 @@ namespace AppDesktop
                     case "DASHBOARD":
                         lbTitle.Content = "ANN'S BUSINESS - DASHBOARDS";
                         btnNew.Visibility = Visibility.Collapsed;
+                        btnValidate.IsEnabled = false;
                         SetDashboard();
                         break;
                     case "SALES":
                         lbTitle.Content = "ANN'S BUSINESS - SALES MANAGEMENT";
                         btnNew.Visibility = Visibility.Visible;
                         btnNew.Content = "NEW SALE";
+                        btnValidate.IsEnabled = false;
                         break;
                     case "CREDITS":
                         lbTitle.Content = "ANN'S BUSINESS - CREDITS MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
+                        btnValidate.IsEnabled = true;
+                        dgCredit.ItemsSource = new RDMS.Credit().GetCredit();
                         break;
                     case "STOCKS":
                         lbTitle.Content = "ANN'S BUSINESS - STOCKS MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
+                        btnValidate.IsEnabled = true;
                         break;
                     case "PROVIDERS":
                         lbTitle.Content = "ANN'S BUSINESS - PROVIDERS MANAGEMENT : SEE, MODIFY AND DELETE PROVIDER AND CHOOSE BUNDLES";
                         btnNew.Visibility = Visibility.Visible;
                         btnNew.Content = "NEW PROVIDER";
+                        btnValidate.IsEnabled = true;
                         break;
                     case "BUNDLES":
                         lbTitle.Content = "ANN'S BUSINESS - BUNDLES  MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
+                        btnValidate.IsEnabled = true;
                         break;
                     case "BRANDS":
                         lbTitle.Content = "ANN'S BUSINESS - BRANDS  MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
+                        btnValidate.IsEnabled = true;
                         break;
                     case "OUTCOMES":
                         lbTitle.Content = "ANN'S BUSINESS - OUTCOME  MANAGEMENT";
                         btnNew.Visibility = Visibility.Visible;
                         btnNew.Content = "NEW OUTCOME";
+                        btnValidate.IsEnabled = true;
                         break;
                 }
             }
@@ -325,6 +347,17 @@ namespace AppDesktop
 
 
         #region ONGLET SELLING
+        private void DgSelling_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            Classes.Sellings sale = dgSelling.SelectedItem as Classes.Sellings;
+
+            if(sale != null)
+            {
+                viewCustomer.Filter = FilterCustomer;
+            }
+        }
+
+
         private void CbbKindPayment_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if(cbbKindPayment.SelectedIndex != -1)
@@ -337,12 +370,23 @@ namespace AppDesktop
         {
             return (o as Classes.Sellings).TypePayment == (int)cbbKindPayment.SelectedValue;
         }
+
+        private bool FilterCustomer(object o)
+        {
+            Classes.Sellings sale = dgSelling.SelectedItem as Classes.Sellings;
+            if (sale != null)
+            {
+                return (o as Classes.Customers).Cle == sale.CleClient;
+            }
+            else { return false; }
+            
+        }
         #endregion FIN ONGLET SELLING
 
         #region ONGLET CREDIT
         private void DgCredit_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            throw new System.NotImplementedException();
+           // throw new System.NotImplementedException();
         } 
         #endregion FIN ONGLET CREDIT
 

@@ -50,11 +50,10 @@ namespace AppDesktop.RDMS
                         {
                             Classes.Credits b = new Classes.Credits();
                             b.Cle = (int)reader[0];
-                            b.Vente.Cle = (int)reader[1];
-                            b.Client.Cle = (int)reader[2];
-                            b.DateDue = System.Convert.ToDateTime(reader[4]);
-                            b.Vente.Credit = (double)reader[5];
-                            b.MontantDu = (double)reader[6];
+                            b.CleVente = (int)reader[1];
+                            b.CleClient = (int)reader[2];
+                            b.DateDue = System.Convert.ToDateTime(reader[3]);
+                            b.MontantDu = (double)reader[4];
                             l.Add(b);
                         }
                         conn.Close();

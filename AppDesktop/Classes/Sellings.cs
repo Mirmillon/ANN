@@ -38,6 +38,6 @@ namespace AppDesktop.Classes
 
         }
         public System.DateTime DateDue { get => dateDue; set => dateDue = value; }
-        public int Customer { get => customer; set => customer = value; }
+        public int CleClient { get => customer; set => customer = value; }
     }
 }

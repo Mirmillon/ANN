@@ -7,22 +7,13 @@ namespace AppDesktop.Classes
     {
         private int cle;
         private System.DateTime dateDue;
-        private Customers client = null;
-        private Sellings vente = null;
+        private int cleClient;
+        private int cleVente;
         private double montantPaye;
 
-
-        public Credits()
-        {
-            client = new Customers();
-            vente = new Sellings();
-        }
-
         public int Cle { get => cle; set => cle = value; }
-        internal Customers Client { get => client; set => client = value; }
-        internal Sellings Vente { get => vente; set => vente = value; }
-
-
+        public int CleClient { get => cleClient; set => cleClient = value; }
+        public int CleVente { get => cleVente; set => cleVente = value; }
 
         public System.DateTime DateDue
         {

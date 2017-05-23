@@ -75,6 +75,7 @@ namespace AppDesktop.Fenetres
                         cleSelling = SetSelling(sale);
                         cleCustomer = SetCustomer(credit);
                         cleCredit = SetCredit(cleCustomer, cleSelling, credit);
+                        new RDMS.Customer().SetCustomerSale(cleSelling, cleCustomer);
                         f.dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
                       
                         break;
@@ -82,6 +83,7 @@ namespace AppDesktop.Fenetres
                         cleSelling = SetSelling(sale);
                         cleCustomer = SetCustomer(credit);
                         cleCredit = SetCredit(cleCustomer, cleSelling, credit);
+                        new RDMS.Customer().SetCustomerSale(cleSelling, cleCustomer);
                         f.dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
                         tbCash.TextChanged -= TbCash_TextChanged;
                         break;
