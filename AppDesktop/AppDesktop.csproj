@@ -82,11 +82,13 @@
     <Compile Include="RDMS\Customer.cs" />
     <Compile Include="RDMS\Dashboard.cs" />
     <Compile Include="RDMS\Generic.cs" />
+    <Compile Include="RDMS\Income.cs" />
     <Compile Include="RDMS\Outcome.cs" />
     <Compile Include="RDMS\Payment.cs" />
     <Compile Include="RDMS\Provider.cs" />
     <Compile Include="RDMS\Selling.cs" />
     <Compile Include="Utilitaires\GestionComboBox.cs" />
+    <Compile Include="Utilitaires\GestionDateControls.cs" />
     <Compile Include="Utilitaires\GestionDgColumn.cs" />
     <Compile Include="Utilitaires\GestionGrille.cs" />
     <Page Include="Fenetres\Provider.xaml">

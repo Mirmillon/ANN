@@ -244,10 +244,10 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <DataGrid x:Name="dgCredit" Grid.Row="1" Grid.Column="1" Grid.RowSpan="19" Grid.ColumnSpan="22" AutoGenerateColumns="False" Margin="5,10">
+                <DataGrid x:Name="dgCredit" Grid.Row="1" Grid.Column="1" Grid.RowSpan="17" Grid.ColumnSpan="22" AutoGenerateColumns="False" Margin="5,10">
                 </DataGrid>
-                <GroupBox x:Name="gbPaiement"  Grid.Row="21" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="22" Header="PAYMENT" Margin="5,-5,5,-5">
-                    <Grid ShowGridLines="True">
+                <GroupBox x:Name="gbPaiement"  Grid.Row="19" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="22" Header="PAYMENT" Margin="5,-5,5,-5">
+                    <Grid ShowGridLines="False">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -267,16 +267,16 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}"  >FULL NAME</Label>
-                        <TextBox x:Name="tbFullName" Grid.Row="0" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="3"  Style="{DynamicResource TextBoxStandard}" Width="300" HorizontalAlignment="Left"/>
+                        <ComboBox x:Name="cbFullName" Grid.Row="0" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="3"  Style="{DynamicResource ComboBoxStandard}" Width="300" HorizontalAlignment="Left"/>
                         <Label Grid.Row="0" Grid.Column="4" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}" >BALANCE</Label>
                         <TextBox x:Name="tbAmountdue"  Grid.Row="0" Grid.Column="5" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxStandard}" ></TextBox>
                         <Label   Grid.Row="0" Grid.Column="6" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}"  >DATE DUE</Label>
-                        <DatePickerTextBox x:Name="tbDateDue"  Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxDate }"></DatePickerTextBox>
+                        <DatePickerTextBox x:Name="tbDateDue"  Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxDate }" Text="{Binding DateDue, StringFormat=dd/MM/yyyy}"></DatePickerTextBox>
                         <Label Grid.Row="1" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}" >PAYMENT</Label>
                         <TextBox x:Name="tbPayment"  Grid.Row="1" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxStandard}" ></TextBox>
                         <Label   Grid.Row="1" Grid.Column="2" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}" HorizontalAlignment="Left" >PHP</Label>
                         <Label   Grid.Row="1" Grid.Column="3" Grid.RowSpan="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}"  >DATE PAYMENT</Label>
-                        <DatePicker x:Name="tbDatePayment"  Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="1" Style="{DynamicResource DateTimeStandard }"></DatePicker>
+                        <DatePickerTextBox x:Name="tbDatePayment"  Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"  Style="{DynamicResource TextBoxDate }" Text="{Binding DatePaiement, StringFormat=dd/MM/yyyy}"></DatePickerTextBox>
                     </Grid>
                 </GroupBox>
             </Grid>

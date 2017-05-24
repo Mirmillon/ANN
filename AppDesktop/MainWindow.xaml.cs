@@ -19,27 +19,6 @@ namespace AppDesktop
             //DASHBOARD
             SetDashboard();
             //SELLING
-            cbbKindPayment.SelectionChanged += CbbKindPayment_SelectionChanged;
-            dgSelling.SelectionChanged += DgSelling_SelectionChanged;
-            //CREDIT
-            dgCredit.SelectionChanged += DgCredit_SelectionChanged;
-            //BRAND
-            dgBrand.SelectionChanged += DgBrand_SelectionChanged;
-            cbbCountryBrand.SelectionChanged += CbbCountryBrand_SelectionChanged;
-            radioButtonNewBrand.Checked += RadioNew_Checked;
-            radioButtonModifyBrand.Checked += RadioModify_Checked;
-            //BUNDLE
-            dgBundle.SelectionChanged += DgBundle_SelectionChanged;
-            radioButtonNewBundle.Checked += RadioNew_Checked;
-            radioButtonModifyBundle.Checked += RadioModify_Checked;
-            //PROVIDER
-            dgProvider.SelectionChanged += DgProvider_SelectionChanged;
-        }
-
-
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
             //SALES
             dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
             dgCustomerSale.ItemsSource = new RDMS.Customer().GetCustomers();
@@ -47,33 +26,31 @@ namespace AppDesktop
             new Utilitaires.GestionComboBox().SetKindBundle(cbbKindItems);
             viewSales = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(dgSelling.ItemsSource);
             viewCustomer = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(dgCustomerSale.ItemsSource);
-
-            //Binding dgSelling
+            //dgSelling
             new Utilitaires.GestionDgColumn().ColumnDate(dgSelling, "SALE DATE", "DateSelling");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgSelling, "ITEMS NUMBER", "NbItems");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgSelling, "SUM TOTAL", "Amount");
-            new Utilitaires.GestionDgColumn().ColumnCbKindPayment(dgSelling,"TypePayment");
+            new Utilitaires.GestionDgColumn().ColumnCbKindPayment(dgSelling, "TypePayment");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgSelling, "SUM TOTAL PAID", "Cash");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgSelling, "CREDIT", "Credit");
-
+            //dgCustomerSale
             new Utilitaires.GestionDgColumn().ColumnCustomer(dgCustomerSale);
             new Utilitaires.GestionDgColumn().ColumnLabel(dgCustomerSale, "PHONE NUMBER", "Phone");
-
             //CREDIT
             dgCredit.ItemsSource = new RDMS.Credit().GetCredit();
-            new Utilitaires.GestionDgColumn().ColumnCustomer(dgCredit);
+            new Utilitaires.GestionDgColumn().ColumnCustomerCredit(dgCredit);
             new Utilitaires.GestionDgColumn().ColumnLabel(dgCredit, "PHONE NUMBER", "Phone");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgCredit, "BALANCE", "MontantDu");
             new Utilitaires.GestionDgColumn().ColumnDate(dgCredit, "DUE DATE", "DateDue");
-            Classes.Payments paiement = new Classes.Payments();
-            gbPaiement.DataContext = paiement;
+
+            new Utilitaires.GestionComboBox().SetCustomer(cbFullName);
+
             //PROVIDER
             dgProvider.ItemsSource = new RDMS.Provider().GetProviders();
             dgProviderBundle.ItemsSource = new RDMS.Bundle().GetProviderBundles();
             new Utilitaires.GestionComboBox().SetKindBundle(cbbKindNewBundle);
             new Utilitaires.GestionComboBox().SetProvider(cbbProviderNewBundle);
             new Utilitaires.GestionComboBox().SetCountry(cbbCountryNewBundle);
-
             //BUNDLES
             new Utilitaires.GestionComboBox().SetBrand(cbbBrandNewBundle);
             new Utilitaires.GestionComboBox().SetBrand(cbbBrandModifyBundle);
@@ -94,6 +71,32 @@ namespace AppDesktop
             viewBrand = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(dgBrand.ItemsSource);
             new Utilitaires.GestionDgColumn().ColumnLabel(dgBrand, "BRAND");
             new Utilitaires.GestionDgColumn().ColumnCountry(dgBrand, new RDMS.Country().GetCountries());
+
+        }
+
+
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+
+
+            cbbKindPayment.SelectionChanged += CbbKindPayment_SelectionChanged;
+            dgSelling.SelectionChanged += DgSelling_SelectionChanged;
+            dgCustomerSale.SelectionChanged += DgCustomerSale_SelectionChanged;
+            //CREDIT
+            dgCredit.SelectionChanged += DgCredit_SelectionChanged;
+            //BRAND
+            dgBrand.SelectionChanged += DgBrand_SelectionChanged;
+            cbbCountryBrand.SelectionChanged += CbbCountryBrand_SelectionChanged;
+            radioButtonNewBrand.Checked += RadioNew_Checked;
+            radioButtonModifyBrand.Checked += RadioModify_Checked;
+            //BUNDLE
+            dgBundle.SelectionChanged += DgBundle_SelectionChanged;
+            radioButtonNewBundle.Checked += RadioNew_Checked;
+            radioButtonModifyBundle.Checked += RadioModify_Checked;
+            //PROVIDER
+            dgProvider.SelectionChanged += DgProvider_SelectionChanged;
 
         }
 
@@ -207,20 +210,27 @@ namespace AppDesktop
             switch (new Personnes.Classes.Utilitaires.GestionGrille().GetIndexGrille(gridCentre))
             {
                 case 0:
-
                     break;
                 case 1:
-
                     break;
-                case 2:
-
+                case 2://CREDIT
+                    Classes.Payments paiement = gbPaiement.DataContext as Classes.Payments;
+                    //MessageBox.Show(paiement.DatePaiement.ToShortDateString());
+                    int clePaiement = 0;
+                    if (paiement != null)
+                    {
+                        if (tbAmountdue.Text.Trim().Length > 1)
+                        {
+                            clePaiement = new RDMS.Payment().SetPayment(paiement.CleVente, paiement.Cle, paiement.Paiement, paiement.DatePaiement);
+                            new RDMS.Income().SetIncome(paiement.CleVente, paiement.Paiement, paiement.DatePaiement);
+                            new RDMS.Credit().UpdCredit(paiement.Cle, paiement.MontantDu - paiement.Paiement);
+                        }
+                    }
+                    dgCredit.ItemsSource = new RDMS.Credit().GetCredit();
                     break;
                 case 3:
-
                     break;
                 case 4:
-
-                   
                     break;
                 case 5:
                     if (radioButtonNewBundle.IsChecked == true)
@@ -278,16 +288,12 @@ namespace AppDesktop
                         {
                             new RDMS.Brand().UpdBrand(brand.Cle, brand.Label, brand.Note);
                         }
-                        
                     }
                     break;
             }
         }
 
-        private void BtnDelete_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        private void BtnDelete_Click(object sender, RoutedEventArgs e){}
 
         private void BtnNew_Click(object sender, RoutedEventArgs e)
         {
@@ -330,11 +336,7 @@ namespace AppDesktop
             }
         }
 
-        private void BtnCancel_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+        private void BtnCancel_Click(object sender, RoutedEventArgs e){}
 
         #region ONGLET DASHBOARD
         private void SetDashboard()
@@ -344,19 +346,21 @@ namespace AppDesktop
         }
         #endregion FIN ONGLET DASHBOARD
 
-
-
         #region ONGLET SELLING
         private void DgSelling_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             Classes.Sellings sale = dgSelling.SelectedItem as Classes.Sellings;
-
             if(sale != null)
             {
+                int cle = sale.CleClient;
                 viewCustomer.Filter = FilterCustomer;
             }
         }
 
+        private void DgCustomerSale_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            Classes.Customers c = dgCustomerSale.SelectedItem as Classes.Customers;
+        }
 
         private void CbbKindPayment_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
@@ -379,14 +383,30 @@ namespace AppDesktop
                 return (o as Classes.Customers).Cle == sale.CleClient;
             }
             else { return false; }
-            
         }
         #endregion FIN ONGLET SELLING
 
         #region ONGLET CREDIT
         private void DgCredit_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-           // throw new System.NotImplementedException();
+            Classes.Credits credit = dgCredit.SelectedItem as Classes.Credits;
+            if(credit != null)
+            {
+                Classes.Payments paiement = new Classes.Payments();
+                gbPaiement.DataContext = paiement;
+                paiement.CleClient = credit.CleClient;
+                paiement.CleVente = credit.CleVente;
+                paiement.Cle = credit.Cle;
+                paiement.MontantDu = credit.MontantDu;
+                paiement.DateDue = credit.DateDue;
+                System.Windows.Data.Binding b1 = new System.Windows.Data.Binding("CleClient");
+                cbFullName.SetBinding(System.Windows.Controls.ComboBox.SelectedValueProperty, b1);
+                System.Windows.Data.Binding b2 = new System.Windows.Data.Binding("MontantDu");
+                tbAmountdue.SetBinding(System.Windows.Controls.TextBox.TextProperty, b2);
+                System.Windows.Data.Binding b4 = new System.Windows.Data.Binding("Paiement");
+                tbPayment.SetBinding(System.Windows.Controls.TextBox.TextProperty, b4);
+                System.Windows.Data.Binding b5 = new System.Windows.Data.Binding("DatePaiement");
+            }
         } 
         #endregion FIN ONGLET CREDIT
 
@@ -399,7 +419,6 @@ namespace AppDesktop
 
             }
         }
-
 
         private bool FilterBundleProvider(object o)
         {

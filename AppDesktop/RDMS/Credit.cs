@@ -52,8 +52,12 @@ namespace AppDesktop.RDMS
                             b.Cle = (int)reader[0];
                             b.CleVente = (int)reader[1];
                             b.CleClient = (int)reader[2];
-                            b.DateDue = System.Convert.ToDateTime(reader[3]);
-                            b.MontantDu = (double)reader[4];
+                            if (!(reader[3] == System.DBNull.Value))
+                            {
+                                b.Phone = (string)reader[3];
+                            }
+                            b.DateDue = System.Convert.ToDateTime(reader[4]);
+                            b.MontantDu = (double)reader[5];
                             l.Add(b);
                         }
                         conn.Close();
@@ -68,6 +72,29 @@ namespace AppDesktop.RDMS
                     conn.Close();
                     return null;
                 }
+            }
+        }
+
+        internal void UpdCredit(int cleCredit, double montant)
+        {
+            FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
+            using (FirebirdSql.Data.FirebirdClient.FbCommand commande = conn.CreateCommand())
+            {
+                commande.CommandText = "UPD_CREDIT";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                FirebirdSql.Data.FirebirdClient.FbParameterCollection pc = commande.Parameters;
+                pc.Add("CLE_CREDIT", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cleCredit;
+                pc.Add("MONTANT", FirebirdSql.Data.FirebirdClient.FbDbType.Double, 0).Value = montant;
+                try
+                {
+                    conn.Open();
+                    commande.ExecuteScalar();
+                }
+                catch (System.Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.ToString());
+                    conn.Close();
+                }   
             }
         }
     }

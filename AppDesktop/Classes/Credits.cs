@@ -10,6 +10,7 @@ namespace AppDesktop.Classes
         private int cleClient;
         private int cleVente;
         private double montantPaye;
+        private string phone;
 
         public int Cle { get => cle; set => cle = value; }
         public int CleClient { get => cleClient; set => cleClient = value; }
@@ -40,6 +41,8 @@ namespace AppDesktop.Classes
                 }
             }
         }
+
+        public string Phone { get => phone; set => phone = value; }
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 

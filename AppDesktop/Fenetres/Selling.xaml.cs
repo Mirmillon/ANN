@@ -57,7 +57,7 @@ namespace AppDesktop.Fenetres
             if (r != null)
             {
 
-                int cleSelling = 0;
+                int cleSale = 0;
                 int cleCustomer = 0;
                 int cleCredit = 0;
                 MainWindow f = (MainWindow)Owner;
@@ -67,23 +67,29 @@ namespace AppDesktop.Fenetres
                 {
                    
                     case "CASH":
-                        cleSelling = SetSelling(sale);
+                        cleSale = SetSelling(sale);
+                        sale.Cle = cleSale;
                         f.dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
+                        SetIncome(sale);
                         tbCash.TextChanged -= TbCash_TextChanged;
                         break;
                     case "CASH-CREDIT":
-                        cleSelling = SetSelling(sale);
+                        cleSale = SetSelling(sale);
+                        sale.Cle = cleSale;
+                        SetIncome(sale);
                         cleCustomer = SetCustomer(credit);
-                        cleCredit = SetCredit(cleCustomer, cleSelling, credit);
-                        new RDMS.Customer().SetCustomerSale(cleSelling, cleCustomer);
+                        cleCredit = SetCredit(cleCustomer, cleSale, credit);
+                        new RDMS.Customer().SetCustomerSale(cleSale, cleCustomer);
                         f.dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
                       
                         break;
                     case "CREDIT":
-                        cleSelling = SetSelling(sale);
+                        cleSale = SetSelling(sale);
+                        sale.Cle = cleSale;
+                        SetIncome(sale);
                         cleCustomer = SetCustomer(credit);
-                        cleCredit = SetCredit(cleCustomer, cleSelling, credit);
-                        new RDMS.Customer().SetCustomerSale(cleSelling, cleCustomer);
+                        cleCredit = SetCredit(cleCustomer, cleSale, credit);
+                        new RDMS.Customer().SetCustomerSale(cleSale, cleCustomer);
                         f.dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
                         tbCash.TextChanged -= TbCash_TextChanged;
                         break;
@@ -134,6 +140,17 @@ namespace AppDesktop.Fenetres
                 {
                     cle = new RDMS.Customer().SetCustomer(tbName.Text, tbLName.Text, tbPhone.Text);
                 }
+            }
+            return cle;
+        }
+
+        private int SetIncome(Classes.Sellings s)
+        {
+            int cle = 0;
+            if (s != null)
+            {
+
+                    cle = new RDMS.Income().SetIncome(s.Cle, System.Convert.ToDouble(tbCash.Text),s.DateSelling);
             }
             return cle;
         }
