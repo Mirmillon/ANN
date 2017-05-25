@@ -134,5 +134,11 @@ namespace AppDesktop.Utilitaires
             return d;
         }
 
+        internal System.Windows.Controls.DataGridComboBoxColumn ColumnCbKindItem(System.Windows.Controls.DataGrid dg, string s)
+        {
+
+            return ColumnReferenceSimple(dg, new RDMS.Bundle().GetKindBundles(), "ITEM KIND" , s);
+        }
+
     }
 }

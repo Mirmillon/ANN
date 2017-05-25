@@ -6,7 +6,7 @@ namespace AppDesktop.Classes
     class Credits : System.ComponentModel.INotifyPropertyChanged
     {
         private int cle;
-        private System.DateTime dateDue;
+        private System.DateTime dateDue = System.DateTime.Today.AddDays(1);
         private int cleClient;
         private int cleVente;
         private double montantPaye;

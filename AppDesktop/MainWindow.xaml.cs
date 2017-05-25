@@ -196,7 +196,7 @@ namespace AppDesktop
                         lbTitle.Content = "ANN'S BUSINESS - OUTCOME  MANAGEMENT";
                         btnNew.Visibility = Visibility.Visible;
                         btnNew.Content = "NEW OUTCOME";
-                        btnValidate.IsEnabled = true;
+                        btnValidate.IsEnabled = false;
                         break;
                 }
             }
@@ -330,7 +330,9 @@ namespace AppDesktop
 
                     break;
                 case 7:
-
+                    Fenetres.Outcome outcome = new Fenetres.Outcome();
+                    outcome.Owner = this;
+                    outcome.Show();
 
                     break;
             }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AppDesktop.Fenetres"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Selling" Height="525" Width="500" WindowStartupLocation="CenterOwner" WindowStyle="None" Loaded="Window_Loaded">
+        Title="Selling" Height="625" Width="900" WindowStartupLocation="CenterOwner" WindowStyle="None" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -22,8 +22,10 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Style="{StaticResource stackPanelHautSup}" IsEnabled="True"></StackPanel>
-        <Grid x:Name="dgSelling" Grid.Row="1" Grid.RowSpan="5">
+        <StackPanel Style="{StaticResource stackPanelHautSup}" IsEnabled="True">
+            <Label Style="{DynamicResource LabelTitre}">NEW SALE</Label>
+        </StackPanel>
+        <Grid x:Name="dgSelling" Grid.Row="1" Grid.RowSpan="7">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -31,6 +33,8 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
+
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -44,33 +48,81 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
+
             </Grid.ColumnDefinitions>
-           
-            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">SALE DATE</Label>
-            <DatePicker x:Name="dpDateSale" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="4"  
+
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}">SALE DATE</Label>
+            <DatePicker x:Name="dpDateSale" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="3"  
                         Style="{DynamicResource DateTimeStandard}" 
                         SelectedDate="{Binding
-        Path=AvailableFrom,
-        Mode=TwoWay,
-        TargetNullValue={x:Static System:DateTime.Now}}"
-                                          ></DatePicker>
-            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">ITEMS NUMBER</Label>
-            <TextBox x:Name="tbNbItem" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxBusiness}"/>
-            <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">SUM TOTAL</Label>
-            <TextBox x:Name="tbAmount" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxBusiness}"/>
-            <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">PAYMENT</Label>
-            <ComboBox x:Name="cbbTypePayment" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="5"  Style="{DynamicResource ComboBoxStandard}" SelectedValue="{Binding TypePayment}"/>
-            <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">CASH</Label>
-            <TextBox x:Name="tbCash" Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxBusiness}"/>
+                                       Path=DateSelling,
+                                       Mode=TwoWay,
+                                       TargetNullValue={x:Static System:DateTime.Now}}"
+            ></DatePicker>
+            <Label Grid.Row="5" Grid.Column="7" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}">ITEMS NUMBER</Label>
+            <TextBox x:Name="tbNbItem" Grid.Row="5" Grid.Column="9" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxBusiness}"  Text="{Binding NbItems}"/>
+            <Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}">SUM TOTAL</Label>
+            <TextBox x:Name="tbAmount" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxBusiness}" Text="{Binding Amount}"/>
+            <Label Grid.Row="6" Grid.Column="3" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}">PAYMENT</Label>
+            <ComboBox x:Name="cbbTypePayment" Grid.Row="6" Grid.Column="5" Grid.ColumnSpan="3"  Style="{DynamicResource ComboBoxStandard}" SelectedValue="{Binding TypePayment}"/>
+            <Label Grid.Row="6" Grid.Column="7" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}">CASH</Label>
+            <TextBox x:Name="tbCash" Grid.Row="6" Grid.Column="9" Grid.ColumnSpan="2" Style="{DynamicResource TextBoxBusiness}" Text="{Binding Cash}"/>
+            <DataGrid  x:Name="gridItems" Grid.ColumnSpan="9" Grid.Column="1" HorizontalAlignment="Left" Height="206" Margin="10,0,0,0" Grid.Row="1" Grid.RowSpan="4" VerticalAlignment="Top" Width="720" AutoGenerateColumns="False"></DataGrid>
+            <!--<Grid x:Name="gridItems" Grid.ColumnSpan="9" Grid.Column="1" HorizontalAlignment="Left" Height="206" Margin="10,0,0,0" Grid.Row="1" Grid.RowSpan="4" VerticalAlignment="Top" Width="720">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2"  Style="{DynamicResource LabelStandard}" ></Label>
+                <TextBox Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxBusiness}" Margin="22,5,3,5"  TextChanged="TextBoxNombre_Changed"/>
+                <Label Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"  Style="{DynamicResource LabelStandard}"></Label>
+                <TextBox Grid.Row="1" Grid.Column="7" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxBusiness}" Margin="22,5,3,5" TextChanged="TextBoxNombre_Changed"/>
+                <Label Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"  Style="{DynamicResource LabelStandard}"></Label>
+                <TextBox Grid.Row="2" Grid.Column="7" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxBusiness}" Margin="22,5,3,5" TextChanged="TextBoxNombre_Changed"/>
+                <Label Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="2"  Style="{DynamicResource LabelStandard}"></Label>
+                <TextBox Grid.Row="3" Grid.Column="7" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxBusiness}" Margin="22,5,3,5" TextChanged="TextBoxNombre_Changed"/>
+            </Grid>-->
 
         </Grid>
-        <Grid x:Name="dgCredit" Grid.Row="6" Grid.RowSpan="5" IsEnabled="False">
+        <Grid x:Name="dgCredit" Grid.Row="8" Grid.RowSpan="1" IsEnabled="False">
             <Grid.RowDefinitions>
                 <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}">DATE DUE</Label>
+            <DatePicker x:Name="dpDateDue" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="3"  Style="{DynamicResource DateTimeStandard}"
+                          SelectedDate="{Binding Path=DateDue,
+                                                 Mode=TwoWay,
+                                                 TargetNullValue={x:Static System:DateTime.Now}}"
+            ></DatePicker>
+            <Label Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}">BALANCE</Label>
+            <TextBox x:Name="tbDue" Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxBusiness}" Text="{Binding MontantDu}"/>
+        </Grid>
+        <Grid x:Name="dgCustomer" Grid.Row="9" Grid.RowSpan="2" IsEnabled="False" ShowGridLines="True">
+            <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
@@ -86,26 +138,14 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
+
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">DATE DUE</Label>
-            <DatePicker x:Name="dpDateDue" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="4"  Style="{DynamicResource DateTimeStandard}"
-                          SelectedDate="{Binding
-        Path=AvailableFrom,
-        Mode=TwoWay,
-        TargetNullValue={x:Static System:DateTime.Now}}"
-                                          ></DatePicker>
-            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">BALANCE</Label>
-            <TextBox x:Name="tbDue" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxBusiness}"/>
-            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">NAME</Label>
-            <TextBox x:Name="tbName" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="6" Style="{DynamicResource TextBoxStandard}"/>
-            <!--<Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">MIDDLE NAME</Label>
-            <TextBox x:Name="tbMName" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxStandard}"/>-->
-            <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">LAST NAME</Label>
-            <TextBox x:Name="tbLName" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="6" Style="{DynamicResource TextBoxStandard}"/>
-            <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">PHONE NUMBER</Label>
-            <TextBox x:Name="tbPhone" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="6" Style="{DynamicResource TextBoxStandard}"/>
-          
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}">NAME</Label>
+            <TextBox x:Name="tbName" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxStandard}" Text="{Binding Name}"/>
+            <Label Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}">LAST NAME</Label>
+            <TextBox x:Name="tbLName" Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxStandard}" Text="{Binding LastName}"/>
+            <Label  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}">PHONE</Label>
+            <TextBox x:Name="tbPhone"  Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxStandard}" Width="110" Text="{Binding Phone}"/>
         </Grid>
         <StackPanel Grid.Row="11" x:Name="spBas" Style="{StaticResource stackPanelBas}">
             <Button x:Name="btnClose" Style="{StaticResource buttonStackPanelBas}" Click="BtnClose_Click">CLOSE</Button>

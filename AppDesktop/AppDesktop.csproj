@@ -63,11 +63,17 @@
     <Compile Include="Classes\Countries.cs" />
     <Compile Include="Classes\Credits.cs" />
     <Compile Include="Classes\Customers.cs" />
+    <Compile Include="Classes\Items.cs" />
+    <Compile Include="Classes\ItemsSale.cs" />
     <Compile Include="Classes\KindBundles.cs" />
+    <Compile Include="Classes\Outcomes.cs" />
     <Compile Include="Classes\Payments.cs" />
     <Compile Include="Classes\Providers.cs" />
     <Compile Include="Classes\ReferencesSimples.cs" />
     <Compile Include="Classes\Sellings.cs" />
+    <Compile Include="Fenetres\Outcome.xaml.cs">
+      <DependentUpon>Outcome.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Fenetres\Provider.xaml.cs">
       <DependentUpon>Provider.xaml</DependentUpon>
     </Compile>
@@ -91,6 +97,10 @@
     <Compile Include="Utilitaires\GestionDateControls.cs" />
     <Compile Include="Utilitaires\GestionDgColumn.cs" />
     <Compile Include="Utilitaires\GestionGrille.cs" />
+    <Page Include="Fenetres\Outcome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Fenetres\Provider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

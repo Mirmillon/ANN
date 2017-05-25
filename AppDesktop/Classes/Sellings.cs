@@ -5,14 +5,16 @@ namespace AppDesktop.Classes
     internal class Sellings
     {
         int cle;
-        System.DateTime dateSelling;
+        System.DateTime dateSelling = System.DateTime.Today;
         int nbItems;
         double amount;
         int typePayment;
         double cash;
         double credit;
         int customer;
-        System.DateTime dateDue;
+        System.DateTime dateDue = System.DateTime.Today.AddDays(1);
+
+
 
         public int Cle { get => cle; set => cle = value; }
         public System.DateTime DateSelling { get => dateSelling; set => dateSelling = value; }

@@ -11,9 +11,14 @@ namespace AppDesktop.Fenetres
         {
             InitializeComponent();
             cbbTypePayment.SelectionChanged += CbbTypePayment_SelectionChanged;
-            dpDateSale.SelectedDate = System.DateTime.Today;
             tbCash.TextChanged += TbCash_TextChanged;
+            System.Collections.Generic.List<Classes.ReferencesSimples> l = new RDMS.Bundle().GetKindBundles();
+            gridItems.ItemsSource = GetListeSimple();
+            new Utilitaires.GestionDgColumn().ColumnCbKindItem(gridItems, "TypeArticle");
+            new Utilitaires.GestionDgColumn().ColumnLabel(gridItems, "NOMBRE" , "Nombre");
+            gridItems.Columns[0].IsReadOnly = true;
         }
+       
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -21,31 +26,12 @@ namespace AppDesktop.Fenetres
             //SALE
             Classes.Sellings sale = new Classes.Sellings();
             dgSelling.DataContext = sale;
-            //System.Windows.Data.Binding b1 = new System.Windows.Data.Binding("DateSelling");
-            //dpDateSale.SetBinding(System.Windows.Controls.DatePicker.TextProperty, b1);
-            System.Windows.Data.Binding b2 = new System.Windows.Data.Binding("NbItems");
-            tbNbItem.SetBinding(System.Windows.Controls.TextBox.TextProperty, b2);
-            System.Windows.Data.Binding b3 = new System.Windows.Data.Binding("Amount");
-            tbAmount.SetBinding(System.Windows.Controls.TextBox.TextProperty, b3);
-            System.Windows.Data.Binding b5 = new System.Windows.Data.Binding("Cash");
-            tbCash.SetBinding(System.Windows.Controls.TextBox.TextProperty, b5);
             //CREDIT
             Classes.Credits credit = new Classes.Credits();
             dgCredit.DataContext = credit;
-            System.Windows.Data.Binding c1 = new System.Windows.Data.Binding("MontantDu");
-            tbDue.SetBinding(System.Windows.Controls.DatePicker.TextProperty, c1);
-            System.Windows.Data.Binding c2 = new System.Windows.Data.Binding("DateDue");
-            dpDateDue.SetBinding(System.Windows.Controls.DatePicker.TextProperty, c2);
-            System.Windows.Data.Binding c3 = new System.Windows.Data.Binding("Provider.Name");
-            tbName.SetBinding(System.Windows.Controls.TextBox.TextProperty, c3);
-            System.Windows.Data.Binding c4 = new System.Windows.Data.Binding("Provider.LastName");
-            tbLName.SetBinding(System.Windows.Controls.TextBox.TextProperty, c4);
-            System.Windows.Data.Binding c5 = new System.Windows.Data.Binding("Provider.Phone");
-            tbPhone.SetBinding(System.Windows.Controls.TextBox.TextProperty, c5);
-
-
-
-
+            //CUSTOMER
+            Classes.Customers customer = new Classes.Customers();
+            dgCustomer.DataContext = customer;
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e){Close();}
@@ -63,35 +49,33 @@ namespace AppDesktop.Fenetres
                 MainWindow f = (MainWindow)Owner;
                 Classes.Credits credit = dgCredit.DataContext as Classes.Credits;
                 Classes.Sellings sale = dgSelling.DataContext as Classes.Sellings;
+                Classes.Customers customer = dgCustomer.DataContext as Classes.Customers;
                 switch (r.Label)
                 {
                    
                     case "CASH":
                         cleSale = SetSelling(sale);
                         sale.Cle = cleSale;
-                        f.dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
                         SetIncome(sale);
-                        tbCash.TextChanged -= TbCash_TextChanged;
+                        f.dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
                         break;
                     case "CASH-CREDIT":
                         cleSale = SetSelling(sale);
                         sale.Cle = cleSale;
                         SetIncome(sale);
-                        cleCustomer = SetCustomer(credit);
+                        cleCustomer = SetCustomer(customer);
                         cleCredit = SetCredit(cleCustomer, cleSale, credit);
                         new RDMS.Customer().SetCustomerSale(cleSale, cleCustomer);
                         f.dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
-                      
                         break;
                     case "CREDIT":
                         cleSale = SetSelling(sale);
                         sale.Cle = cleSale;
                         SetIncome(sale);
-                        cleCustomer = SetCustomer(credit);
+                        cleCustomer = SetCustomer(customer);
                         cleCredit = SetCredit(cleCustomer, cleSale, credit);
                         new RDMS.Customer().SetCustomerSale(cleSale, cleCustomer);
                         f.dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
-                        tbCash.TextChanged -= TbCash_TextChanged;
                         break;
                 }
             }
@@ -131,14 +115,14 @@ namespace AppDesktop.Fenetres
             return cle;
         }
 
-        private int SetCustomer(Classes.Credits s)
+        private int SetCustomer(Classes.Customers s)
         {
             int cle = 0;
             if (s != null)
             {
                 if (tbName.Text.Trim().Length > 0 && tbLName.Text.Trim().Length > 0)
                 {
-                    cle = new RDMS.Customer().SetCustomer(tbName.Text, tbLName.Text, tbPhone.Text);
+                    cle = new RDMS.Customer().SetCustomer(s.Name, s.LastName, s.Phone);
                 }
             }
             return cle;
@@ -155,10 +139,7 @@ namespace AppDesktop.Fenetres
             return cle;
         }
 
-        private void BtnCancel_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        private void BtnCancel_Click(object sender, RoutedEventArgs e) {}
 
         private void CbbTypePayment_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
@@ -169,26 +150,51 @@ namespace AppDesktop.Fenetres
                 {
                     case "CASH":
                         dgCredit.IsEnabled = false;
+                        dgCustomer.IsEnabled = false;
                         tbCash.Text = tbAmount.Text;
-                        //System.Windows.Data.Binding b = new System.Windows.Data.Binding("Text");
-                        //b.ElementName = "tbAmount";
-                        //tbCash.SetBinding(System.Windows.Controls.TextBox.TextProperty, b);
                         break;
                     case "CASH-CREDIT":
                         dgCredit.IsEnabled = true;
-                        //System.Windows.Data.BindingOperations.ClearBinding(tbCash, System.Windows.Controls.TextBox.TextProperty);
+                        dgCustomer.IsEnabled = true;
                         break;
                     case "CREDIT":
                         dgCredit.IsEnabled = true;
-                        //System.Windows.Data.BindingOperations.ClearBinding(tbCash, System.Windows.Controls.TextBox.TextProperty);
-                        //System.Windows.Data.Binding b2 = new System.Windows.Data.Binding("Text");
-                        //b2.ElementName = "tbAmount";
-                        //tbDue.SetBinding(System.Windows.Controls.TextBox.TextProperty, b2);
+                        dgCustomer.IsEnabled = true;
                         tbDue.Text = tbAmount.Text;
                         tbCash.Text = "0";
                         break;
                 }
             }
         }
+
+        private void TextBoxNombre_Changed(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            //int total = 0;
+            //foreach (System.Windows.Controls.Control c in gridItems.Children)
+            //{
+            //        System.Windows.Controls.TextBox t = c as System.Windows.Controls.TextBox;
+                
+            //        if (t != null && t.Text.Trim().Length >0)
+            //        {
+            //            int i = System.Convert.ToInt32(t.Text);
+            //            total += i;
+            //            tbNbItem.Text = total.ToString();
+
+            //        }
+            //}
+        }
+
+        private System.Collections.Generic.List<Classes.ItemsSale> GetListeSimple()
+        {
+            System.Collections.Generic.List<Classes.ItemsSale> l = new System.Collections.Generic.List<Classes.ItemsSale>();
+            System.Collections.Generic.List<Classes.ReferencesSimples> type = new RDMS.Bundle().GetKindBundles();
+            for (int i = 0; i < type.Count; ++i)
+            {
+                Classes.ItemsSale s = new Classes.ItemsSale();
+                s.TypeArticle = type[i].Cle;
+                l.Add(s);
+            }
+            return l;
+        }    
     }
 }

@@ -294,7 +294,7 @@
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="Height" Value="25"/>
-            <Setter Property="Width" Value="85"/>
+            <Setter Property="Width" Value="75"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="Medium"/>
