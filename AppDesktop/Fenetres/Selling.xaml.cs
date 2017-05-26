@@ -17,8 +17,17 @@ namespace AppDesktop.Fenetres
             new Utilitaires.GestionDgColumn().ColumnCbKindItem(gridItems, "TypeArticle");
             new Utilitaires.GestionDgColumn().ColumnLabel(gridItems, "NOMBRE" , "Nombre");
             gridItems.Columns[0].IsReadOnly = true;
+            gridItems.RowEditEnding += GridItems_RowEditEnding;
+
         }
-       
+
+        private void GridItems_RowEditEnding(object sender, System.Windows.Controls.DataGridRowEditEndingEventArgs e)
+        {
+            if (e.EditAction == System.Windows.Controls.DataGridEditAction.Commit)
+            {
+                SetNombre();
+            }
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -54,24 +63,27 @@ namespace AppDesktop.Fenetres
                 {
                    
                     case "CASH":
-                        cleSale = SetSelling(sale);
+                        cleSale = SetSale(sale);
                         sale.Cle = cleSale;
                         SetIncome(sale);
+                        SetListeItems(cleSale);
                         f.dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
                         break;
                     case "CASH-CREDIT":
-                        cleSale = SetSelling(sale);
+                        cleSale = SetSale(sale);
                         sale.Cle = cleSale;
                         SetIncome(sale);
+                        SetListeItems(cleSale);
                         cleCustomer = SetCustomer(customer);
                         cleCredit = SetCredit(cleCustomer, cleSale, credit);
                         new RDMS.Customer().SetCustomerSale(cleSale, cleCustomer);
                         f.dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
                         break;
                     case "CREDIT":
-                        cleSale = SetSelling(sale);
+                        cleSale = SetSale(sale);
                         sale.Cle = cleSale;
                         SetIncome(sale);
+                        SetListeItems(cleSale);
                         cleCustomer = SetCustomer(customer);
                         cleCredit = SetCredit(cleCustomer, cleSale, credit);
                         new RDMS.Customer().SetCustomerSale(cleSale, cleCustomer);
@@ -96,20 +108,20 @@ namespace AppDesktop.Fenetres
             {
                 if (cbbTypePayment.SelectedIndex != -1 &&  tbDue.Text.Trim().Length > 0)
                 {
-                    cle = new RDMS.Credit().SetCredit(cleClient, cleSelling, System.Convert.ToDateTime(dpDateDue.Text), System.Convert.ToDouble(tbDue.Text));
+                    cle = new RDMS.Credit().SetCredit(cleClient, cleSelling, s.DateDue, System.Convert.ToDouble(tbDue.Text));
                 }
             }
             return cle;
         }
 
-        private int SetSelling(Classes.Sellings s)
+        private int SetSale(Classes.Sellings s)
         {
             int cle = 0;
             if (s != null)
             {
                 if (cbbTypePayment.SelectedIndex != -1 && tbNbItem.Text.Trim().Length > 0 && tbAmount.Text.Trim().Length > 0 && tbCash.Text.Trim().Length > 0)
                 {
-                   cle = new  RDMS.Selling().SetSale((int)cbbTypePayment.SelectedValue, System.Convert.ToDateTime( dpDateSale.Text), s.NbItems, s.Amount, System.Convert.ToDouble( tbCash.Text));
+                   cle = new  RDMS.Selling().SetSale(s.TypePayment, s.DateSelling, System.Convert.ToInt32(tbNbItem.Text), s.Amount, System.Convert.ToDouble( tbCash.Text));
                 }
             }
             return cle;
@@ -139,13 +151,15 @@ namespace AppDesktop.Fenetres
             return cle;
         }
 
-        private void BtnCancel_Click(object sender, RoutedEventArgs e) {}
+        private void BtnCancel_Click(object sender, RoutedEventArgs e){ }
 
         private void CbbTypePayment_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             Classes.ReferencesSimples r = cbbTypePayment.SelectedItem as Classes.ReferencesSimples;
+
             if (r != null)
             {
+                SetNombre();
                 switch (r.Label)
                 {
                     case "CASH":
@@ -167,23 +181,6 @@ namespace AppDesktop.Fenetres
             }
         }
 
-        private void TextBoxNombre_Changed(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-            //int total = 0;
-            //foreach (System.Windows.Controls.Control c in gridItems.Children)
-            //{
-            //        System.Windows.Controls.TextBox t = c as System.Windows.Controls.TextBox;
-                
-            //        if (t != null && t.Text.Trim().Length >0)
-            //        {
-            //            int i = System.Convert.ToInt32(t.Text);
-            //            total += i;
-            //            tbNbItem.Text = total.ToString();
-
-            //        }
-            //}
-        }
-
         private System.Collections.Generic.List<Classes.ItemsSale> GetListeSimple()
         {
             System.Collections.Generic.List<Classes.ItemsSale> l = new System.Collections.Generic.List<Classes.ItemsSale>();
@@ -195,6 +192,48 @@ namespace AppDesktop.Fenetres
                 l.Add(s);
             }
             return l;
-        }    
+        } 
+        
+        private int GetNombre()
+        {
+            int nombre = 0;
+            System.Collections.Generic.List<Classes.ItemsSale> liste = GetListeItems();
+            for (int i = 0;i < liste.Count;++i)
+            {
+                nombre += liste[i].Nombre;
+            }
+
+            return nombre;
+        }
+
+        private void SetNombre()
+        {
+            tbNbItem.Text = System.String.Empty;
+            tbNbItem.Text = GetNombre().ToString();
+        }
+
+        private System.Collections.Generic.List<Classes.ItemsSale>  GetListeItems()
+        {
+
+            System.Collections.Generic.List<Classes.ItemsSale> liste = new System.Collections.Generic.List<Classes.ItemsSale>();
+            System.Collections.IEnumerable l = gridItems.ItemsSource;
+            foreach (var i in l)
+            {
+                liste.Add((Classes.ItemsSale)i);
+            }
+            return liste;
+        }
+
+        private void  SetListeItems(int cleVente)
+        {
+            System.Collections.Generic.List<Classes.ItemsSale> liste = GetListeItems();
+            foreach(Classes.ItemsSale item in liste)
+            {
+                if(item.Nombre > 0)
+                {
+                    new RDMS.Selling().SetItemSale(cleVente, item.TypeArticle, item.Nombre);
+                }
+            }
+        }
     }
 }

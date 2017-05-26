@@ -60,7 +60,6 @@ namespace AppDesktop.RDMS
             }
         }
 
-
         internal int SetSale(int cleKindPayment, System.DateTime dateSale, int n, double amount, double cash)
         {
             int cle = 0;
@@ -91,5 +90,31 @@ namespace AppDesktop.RDMS
 
             }
         }
+
+        internal void SetItemSale(int cleVente, int cleType, int nombre)
+        {
+            FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
+            using (FirebirdSql.Data.FirebirdClient.FbCommand commande = conn.CreateCommand())
+            {
+                commande.CommandText = "SET_ITEM_SALE";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                FirebirdSql.Data.FirebirdClient.FbParameterCollection pc = commande.Parameters;
+                pc.Add("CLE_VENTE", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cleVente;
+                pc.Add("CLE_TYPE", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cleType;
+                pc.Add("NUMBER", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = nombre;
+
+                try
+                {
+                    conn.Open();
+                    commande.ExecuteScalar();
+                }
+                catch (System.Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.ToString());
+                    conn.Close();
+                }
+            }
+        }
+
     }
 }
