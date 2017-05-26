@@ -171,6 +171,11 @@ namespace AppDesktop
                         btnValidate.IsEnabled = true;
                         dgCredit.ItemsSource = new RDMS.Credit().GetCredit();
                         break;
+                    case "CUSTOMERS":
+                        lbTitle.Content = "ANN'S BUSINESS - CUSTOMERS MANAGEMENT";
+                        btnNew.Visibility = Visibility.Collapsed;
+                        btnValidate.IsEnabled = false;
+                        break;
                     case "STOCKS":
                         lbTitle.Content = "ANN'S BUSINESS - STOCKS MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
@@ -209,9 +214,9 @@ namespace AppDesktop
         {
             switch (new Personnes.Classes.Utilitaires.GestionGrille().GetIndexGrille(gridCentre))
             {
-                case 0:
+                case 0://DASHBOARD
                     break;
-                case 1:
+                case 1://SALES
                     break;
                 case 2://CREDIT
                     Classes.Payments paiement = gbPaiement.DataContext as Classes.Payments;
@@ -228,11 +233,13 @@ namespace AppDesktop
                     }
                     dgCredit.ItemsSource = new RDMS.Credit().GetCredit();
                     break;
-                case 3:
+                case 3://CUSTOMERS
                     break;
-                case 4:
+                case 4://STOCKS
                     break;
-                case 5:
+                case 5://PROVIDERS
+                    break;
+                case 6://BUNDLE
                     if (radioButtonNewBundle.IsChecked == true)
                     {
                         if (cbbBrandNewBundle.SelectedIndex != -1 && tbNewBundle.Text.Trim().Length > 1 && tbWeightNewBundle.Text.Trim().Length > 1)
@@ -262,7 +269,7 @@ namespace AppDesktop
                     }
 
                     break;
-                case 6://Brands
+                case 7://Brands
                     if (radioButtonNewBrand.IsChecked == true)
                     {
                         if(cbbCountryNewBrand.SelectedIndex != -1 && tbNewBrand.Text.Trim().Length > 1)

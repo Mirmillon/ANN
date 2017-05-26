@@ -71,6 +71,7 @@
     <Compile Include="Classes\Providers.cs" />
     <Compile Include="Classes\ReferencesSimples.cs" />
     <Compile Include="Classes\Sellings.cs" />
+    <Compile Include="Classes\Stocks.cs" />
     <Compile Include="Fenetres\Outcome.xaml.cs">
       <DependentUpon>Outcome.xaml</DependentUpon>
     </Compile>

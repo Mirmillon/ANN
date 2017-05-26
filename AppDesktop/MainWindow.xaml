@@ -67,6 +67,7 @@
             <Button x:Name="btnDashBoard" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">DASHBOARD</Button>
             <Button x:Name="btnSellings" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">SALES</Button>
             <Button x:Name="btnCredits" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">CREDITS</Button>
+            <Button x:Name="btnCustomers" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">CUSTOMERS</Button>
             <Button x:Name="btnStocks" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">STOCKS</Button>
             <Button x:Name="btnProvider" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">PROVIDERS</Button>
             <Button x:Name="btnBundles" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">BUNDLES</Button>
@@ -280,7 +281,124 @@
                     </Grid>
                 </GroupBox>
             </Grid>
-            <Grid x:Name="gridBundles" Background="Bisque" Visibility="Hidden"></Grid>
+            <Grid x:Name="gridCustomer" Background="CadetBlue" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+             
+            </Grid>
+            <Grid x:Name="gridStocks" Background="Bisque" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="1"  Grid.ColumnSpan="3" Style="{DynamicResource LabelSousTitre}">BUNDLES IN STOCK</Label>
+                <DataGrid Grid.Row="1" Grid.Column="1"  Grid.ColumnSpan="21" Grid.RowSpan="9">
+
+                </DataGrid>
+
+                <Label Grid.Row="10" Grid.Column="1"  Grid.ColumnSpan="3" Style="{DynamicResource LabelSousTitre}">ITEMS IN STOCK</Label>
+                <DataGrid Grid.Row="11" Grid.Column="1"  Grid.ColumnSpan="21" Grid.RowSpan="12">
+                    
+                </DataGrid>
+            </Grid>
             <Grid x:Name="gridProvider" Background="LavenderBlush" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
