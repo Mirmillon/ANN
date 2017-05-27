@@ -125,16 +125,6 @@ namespace AppDesktop.RDMS
 
         internal System.Collections.Generic.List<Classes.Bundles> GetProviderBundles()
         {
-            /*
-            create procedure GET_BUNDLES_PROVIDERS
-returns
-(
-CLE_PROVIDER TYPE OF D_FK,
-  CLE_BUNDLE TYPE OF D_FK,
-  CLE_BRAND TYPE OF D_FK,
-  LABEL TYPE OF D_LABEL_60
-  )
-AS*/
             System.Collections.Generic.List<Classes.Bundles> l = new System.Collections.Generic.List<Classes.Bundles>();
             FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
             using (FirebirdSql.Data.FirebirdClient.FbCommand cmd = conn.CreateCommand())
@@ -153,7 +143,11 @@ AS*/
                             b.CleProvider = (int)reader[0];
                             b.Cle = (int)reader[1];
                             b.CleBrand = (int)reader[2];
-                            b.Label = (string)reader[3];
+                            b.CleCountry = (int)reader[3];
+                            b.CleKind = (int)reader[4];
+                            b.Weight = (int)reader[5];
+                            b.Label = (string)reader[6];
+                            b.Prix = (double)reader[7];
                             l.Add(b);
                         }
                         conn.Close();

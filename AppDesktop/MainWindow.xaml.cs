@@ -48,10 +48,20 @@ namespace AppDesktop
 
             //PROVIDER
             dgProvider.ItemsSource = new RDMS.Provider().GetProviders();
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgProvider,"PROVIDER", "FullName");
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgProvider, "PHONE", "Phone");
             dgProviderBundle.ItemsSource = new RDMS.Bundle().GetProviderBundles();
+            new Utilitaires.GestionDgColumn().ColumnBrand(dgProviderBundle, "CleBrand");
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgProviderBundle, "DESCRIPTION", "Label");
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgProviderBundle, "WEIGHT", "Weight");
+            new Utilitaires.GestionDgColumn().ColumnCountry(dgProviderBundle, new RDMS.Country().GetCountries());
+            new Utilitaires.GestionDgColumn().ColumnCbKindItem(dgProviderBundle,"CleKind");
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgProviderBundle, "PRICE", "Prix");
+
             new Utilitaires.GestionComboBox().SetKindBundle(cbbKindNewBundle);
             new Utilitaires.GestionComboBox().SetProvider(cbbProviderNewBundle);
             new Utilitaires.GestionComboBox().SetCountry(cbbCountryNewBundle);
+
             //BUNDLES
             new Utilitaires.GestionComboBox().SetBrand(cbbBrandNewBundle);
             new Utilitaires.GestionComboBox().SetBrand(cbbBrandModifyBundle);
@@ -168,50 +178,60 @@ namespace AppDesktop
                         lbTitle.Content = "ANN'S BUSINESS - DASHBOARDS";
                         btnNew.Visibility = Visibility.Collapsed;
                         btnValidate.IsEnabled = false;
+                        btnValidate.Content = "VALIDATE";
                         SetDashboard();
                         break;
                     case "SALES":
                         lbTitle.Content = "ANN'S BUSINESS - SALES MANAGEMENT";
                         btnNew.Visibility = Visibility.Visible;
                         btnNew.Content = "NEW SALE";
+                        btnValidate.Content = "VALIDATE";
                         btnValidate.IsEnabled = false;
                         break;
                     case "CREDITS":
                         lbTitle.Content = "ANN'S BUSINESS - CREDITS MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
                         btnValidate.IsEnabled = true;
+                        btnValidate.Content = "VALIDATE";
                         dgCredit.ItemsSource = new RDMS.Credit().GetCredit();
                         break;
                     case "CUSTOMERS":
                         lbTitle.Content = "ANN'S BUSINESS - CUSTOMERS MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
                         btnValidate.IsEnabled = false;
+                        btnValidate.Content = "VALIDATE";
                         break;
                     case "STOCKS":
                         lbTitle.Content = "ANN'S BUSINESS - STOCKS MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
                         btnValidate.IsEnabled = true;
+                        btnValidate.Content = "VALIDATE";
                         break;
                     case "PROVIDERS":
                         lbTitle.Content = "ANN'S BUSINESS - PROVIDERS MANAGEMENT : SEE, MODIFY AND DELETE PROVIDER AND CHOOSE BUNDLES";
                         btnNew.Visibility = Visibility.Visible;
                         btnNew.Content = "NEW PROVIDER";
+                        dgProviderBundle.ItemsSource = new RDMS.Bundle().GetProviderBundles();
+                        btnValidate.Content = "BUY";
                         btnValidate.IsEnabled = true;
                         break;
                     case "BUNDLES":
                         lbTitle.Content = "ANN'S BUSINESS - BUNDLES  MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
+                        btnValidate.Content = "VALIDATE";
                         btnValidate.IsEnabled = true;
                         break;
                     case "BRANDS":
                         lbTitle.Content = "ANN'S BUSINESS - BRANDS  MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
                         btnValidate.IsEnabled = true;
+                        btnValidate.Content = "VALIDATE";
                         break;
                     case "OUTCOMES":
                         lbTitle.Content = "ANN'S BUSINESS - OUTCOME  MANAGEMENT";
                         btnNew.Visibility = Visibility.Visible;
                         btnNew.Content = "NEW OUTCOME";
+                        btnValidate.Content = "VALIDATE";
                         btnValidate.IsEnabled = false;
                         break;
                 }
@@ -249,6 +269,19 @@ namespace AppDesktop
                 case 4://STOCKS
                     break;
                 case 5://PROVIDERS
+                    Classes.Bundles b = dgProviderBundle.SelectedItem as Classes.Bundles;
+                    if (b != null)
+                    {
+                        int cleStock = new RDMS.Stock().SetBundleInStock(b.Cle,b.CleProvider);
+                        if (cleStock > 0)
+                        {
+                            btnOK.Background = System.Windows.Media.Brushes.Green;
+                        }
+                        else
+                        {
+                            btnOK.Background = System.Windows.Media.Brushes.Red;
+                        }
+                    }
                     break;
                 case 6://BUNDLE
                     if (radioButtonNewBundle.IsChecked == true)

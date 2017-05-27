@@ -94,6 +94,7 @@
     <Compile Include="RDMS\Payment.cs" />
     <Compile Include="RDMS\Provider.cs" />
     <Compile Include="RDMS\Selling.cs" />
+    <Compile Include="RDMS\Stock.cs" />
     <Compile Include="Utilitaires\GestionComboBox.cs" />
     <Compile Include="Utilitaires\GestionDateControls.cs" />
     <Compile Include="Utilitaires\GestionDgColumn.cs" />
