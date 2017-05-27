@@ -40,5 +40,47 @@ namespace AppDesktop.RDMS
                 }
             }
         }
+
+        internal System.Collections.Generic.List<Classes.Outcomes> GetOutcome()
+        {
+            System.Collections.Generic.List<Classes.Outcomes> l = new System.Collections.Generic.List<Classes.Outcomes>();
+            FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
+            using (FirebirdSql.Data.FirebirdClient.FbCommand commande = conn.CreateCommand())
+            {
+                commande.CommandText = "GET_OUTCOMES";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                try
+                {
+                    conn.Open();
+                    FirebirdSql.Data.FirebirdClient.FbDataReader reader = commande.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            Classes.Outcomes b = new Classes.Outcomes();
+                            b.Cle = (int)reader[0];
+                            b.DateOutcome = System.Convert.ToDateTime(reader[1]);
+                            b.CleTypeOutcome = (int)reader[2];
+                            b.Montant = (double)reader[3];
+                            if (!(reader[4] == System.DBNull.Value))
+                            {
+                                b.Note = (string)reader[4];
+                            }
+                            l.Add(b);
+                        }
+                        conn.Close();
+                        return l;
+                    }
+                    conn.Close();
+                    return null;
+                }
+                catch (System.Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.ToString());
+                    conn.Close();
+                    return null;
+                }
+            }
+        }
     }
 }

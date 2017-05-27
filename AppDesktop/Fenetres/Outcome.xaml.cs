@@ -16,10 +16,7 @@ namespace AppDesktop.Fenetres
             new Utilitaires.GestionComboBox().SetKindOutcome(cbTypeOutcome);
         }
 
-        private void BtnClose_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+        private void BtnClose_Click(object sender, RoutedEventArgs e){ Close();}
 
         private void BtnValidate_Click(object sender, RoutedEventArgs e)
         {
@@ -38,9 +35,6 @@ namespace AppDesktop.Fenetres
             }
         }
 
-        private void BtnCancel_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        private void BtnCancel_Click(object sender, RoutedEventArgs e){}
     }
 }

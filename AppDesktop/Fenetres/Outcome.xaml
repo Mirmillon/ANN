@@ -39,7 +39,7 @@
         </StackPanel>
         <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">DATE</Label>
         <DatePicker x:Name="dpDateOutcome" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="5" Style="{DynamicResource DateTimeStandard}" SelectedDate="{Binding DateOutcome}"> </DatePicker>
-        <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">KIND INCOME</Label>
+        <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">KIND OUTCOME</Label>
         <ComboBox x:Name="cbTypeOutcome"  Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="6"  Style="{DynamicResource ComboBoxStandard}" SelectedValue="{Binding CleTypeOutcome}"></ComboBox>
         <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">MONTANT</Label>
         <TextBox x:Name="tbMontant" Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxStandard}" Text="{Binding Montant}" Width="100"/>

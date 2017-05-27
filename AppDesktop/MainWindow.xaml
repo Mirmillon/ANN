@@ -75,7 +75,7 @@
             <Button x:Name="btnOutcome" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">OUTCOMES</Button>
         </StackPanel>
         <Grid x:Name="gridCentre" Grid.Row="1" Grid.RowSpan="22" Grid.Column="2" Grid.ColumnSpan="22">
-            <Grid x:Name="gridDashBoard" Background="LightGreen" Visibility="Visible">
+            <Grid x:Name="gridDashBoard" Style="{StaticResource GridStandard}" Visibility="Visible">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -129,7 +129,7 @@
 
                 </StackPanel>
             </Grid>
-            <Grid x:Name="gridSelling" Background="LavenderBlush" Visibility="Hidden">
+            <Grid x:Name="gridSelling" Style="{StaticResource GridStandard}" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -192,7 +192,7 @@
                 </DataGrid>
 
             </Grid>
-            <Grid x:Name="gridCredit" Background="CadetBlue" Visibility="Hidden">
+            <Grid x:Name="gridCredit" Style="{StaticResource GridStandard}" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -247,7 +247,7 @@
                 </Grid.ColumnDefinitions>
                 <DataGrid x:Name="dgCredit" Grid.Row="1" Grid.Column="1" Grid.RowSpan="17" Grid.ColumnSpan="22" AutoGenerateColumns="False" Margin="5,10">
                 </DataGrid>
-                <GroupBox x:Name="gbPaiement"  Grid.Row="19" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="22" Header="PAYMENT" Margin="5,-5,5,-5">
+                <GroupBox x:Name="gbPaiement"  Grid.Row="19" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="22" Header="PAYMENT" Margin="5,-5,5,-5">
                     <Grid ShowGridLines="False">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -281,7 +281,7 @@
                     </Grid>
                 </GroupBox>
             </Grid>
-            <Grid x:Name="gridCustomer" Background="CadetBlue" Visibility="Hidden">
+            <Grid x:Name="gridCustomer" Style="{StaticResource GridStandard}" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -336,7 +336,7 @@
                 </Grid.ColumnDefinitions>
              
             </Grid>
-            <Grid x:Name="gridStocks" Background="Bisque" Visibility="Hidden">
+            <Grid x:Name="gridStocks" Style="{StaticResource GridStandard}" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -399,7 +399,7 @@
                     
                 </DataGrid>
             </Grid>
-            <Grid x:Name="gridProvider" Background="LavenderBlush" Visibility="Hidden">
+            <Grid x:Name="gridProvider" Style="{StaticResource GridStandard}" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -459,7 +459,7 @@
                 <DataGrid x:Name="dgProviderBundle" Grid.Row="8" Grid.Column="1" Grid.RowSpan="17" Grid.ColumnSpan="22" AutoGenerateColumns="True" Margin="5,10">
                 </DataGrid>
             </Grid>
-            <Grid x:Name="gridBundle" Background="CadetBlue" Visibility="Hidden">
+            <Grid x:Name="gridBundle" Style="{StaticResource GridStandard}" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -608,7 +608,7 @@
                     </Grid>
                 </GroupBox>
             </Grid>
-            <Grid x:Name="gridBrand" Background="Turquoise" Visibility="Hidden">
+            <Grid x:Name="gridBrand" Style="{StaticResource GridStandard}" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -746,7 +746,64 @@
                 </GroupBox>
 
             </Grid>
-            <Grid x:Name="gridOutcome" Background="Red" Visibility="Hidden"></Grid>
+            <Grid x:Name="gridOutcome" Style="{StaticResource GridStandard}" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="1"  Grid.ColumnSpan="3" Style="{DynamicResource LabelSousTitre}">OUTCOMES LIST</Label>
+                <ComboBox x:Name="cbOutcome" Grid.Row="0" Grid.Column="4"  Grid.ColumnSpan="3" Style="{DynamicResource ComboBoxStandard}"/>
+                <DataGrid x:Name="dgOutcome" Grid.Row="1" Grid.Column="1" Grid.RowSpan="15" Grid.ColumnSpan="22" AutoGenerateColumns="True" Margin="5,10">
+                </DataGrid>
+            </Grid>
         </Grid>
         <StackPanel Style="{DynamicResource stackPanelBas}" Grid.Row="23"  Grid.ColumnSpan="24">
             <Button x:Name="btnClose" Style="{StaticResource buttonStackPanelBas}" Click="BtnClose_Click">CLOSE</Button>

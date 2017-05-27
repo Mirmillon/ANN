@@ -11,6 +11,7 @@ namespace AppDesktop
         System.Windows.Data.CollectionView viewBrand = null;
         System.Windows.Data.CollectionView viewSales = null;
         System.Windows.Data.CollectionView viewCustomer = null;
+        System.Windows.Data.CollectionView viewOutcome = null;
 
 
         public MainWindow()
@@ -72,6 +73,12 @@ namespace AppDesktop
             new Utilitaires.GestionDgColumn().ColumnLabel(dgBrand, "BRAND");
             new Utilitaires.GestionDgColumn().ColumnCountry(dgBrand, new RDMS.Country().GetCountries());
 
+            //OUTCOME
+            dgOutcome.ItemsSource = new RDMS.Outcome().GetOutcome();
+            viewOutcome = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(dgOutcome.ItemsSource);
+            new Utilitaires.GestionComboBox().SetKindOutcome(cbOutcome);
+
+
         }
 
 
@@ -97,8 +104,12 @@ namespace AppDesktop
             radioButtonModifyBundle.Checked += RadioModify_Checked;
             //PROVIDER
             dgProvider.SelectionChanged += DgProvider_SelectionChanged;
+            //OUTCOME
+            cbOutcome.SelectionChanged += CbOutcome_SelectionChanged;
 
         }
+
+
 
         private void RadioModify_Checked(object sender, RoutedEventArgs e)
         {
@@ -256,7 +267,7 @@ namespace AppDesktop
                             {
                                 btnOK.Background = System.Windows.Media.Brushes.Red;
                             }
-                            if(cbbProviderNewBundle.SelectedIndex != -1)
+                            if (cbbProviderNewBundle.SelectedIndex != -1)
                             {
                                 int i = new RDMS.Bundle().SetBundleProvider((int)cbbProviderNewBundle.SelectedValue, cleBundle, System.Convert.ToDouble(tbPriceNewBundle.Text), null);
                             }
@@ -297,6 +308,7 @@ namespace AppDesktop
                         }
                     }
                     break;
+
             }
         }
 
@@ -337,6 +349,10 @@ namespace AppDesktop
 
                     break;
                 case 7:
+
+
+                    break;
+                case 8:
                     Fenetres.Outcome outcome = new Fenetres.Outcome();
                     outcome.Owner = this;
                     outcome.Show();
@@ -480,5 +496,15 @@ namespace AppDesktop
         #endregion FIN ONGLET BRAND
 
 
+        private void CbOutcome_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e) { viewOutcome.Filter = FilterOutcome;}
+
+        private bool FilterOutcome(object o)
+        {
+            if(cbOutcome.SelectedItem is Classes.ReferencesSimples)
+            {
+                return (o as Classes.Outcomes).CleTypeOutcome == (int)cbOutcome.SelectedValue;
+            }
+            else { return false; }
+        }
     }
 }

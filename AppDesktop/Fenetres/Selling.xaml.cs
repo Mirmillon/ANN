@@ -12,7 +12,6 @@ namespace AppDesktop.Fenetres
             InitializeComponent();
             cbbTypePayment.SelectionChanged += CbbTypePayment_SelectionChanged;
             tbCash.TextChanged += TbCash_TextChanged;
-            System.Collections.Generic.List<Classes.ReferencesSimples> l = new RDMS.Bundle().GetKindBundles();
             gridItems.ItemsSource = GetListeSimple();
             new Utilitaires.GestionDgColumn().ColumnCbKindItem(gridItems, "TypeArticle");
             new Utilitaires.GestionDgColumn().ColumnLabel(gridItems, "NOMBRE" , "Nombre");

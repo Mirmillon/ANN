@@ -16,8 +16,8 @@ namespace AppDesktop.RDMS
                 pc.Add("BRAND", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cleBrand;
                 pc.Add("KIND", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cleKind;
                 pc.Add("COUNTRY", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cleCountry;
-                pc.Add("WEIGHT", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = weight;
                 pc.Add("LABEL", FirebirdSql.Data.FirebirdClient.FbDbType.VarChar, 60).Value = label;
+                pc.Add("WEIGHT", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = weight;
                 pc.Add("NOTE", FirebirdSql.Data.FirebirdClient.FbDbType.VarChar, 300).Value = note;
                 try
                 {
@@ -110,7 +110,7 @@ namespace AppDesktop.RDMS
                 try
                 {
                     conn.Open();
-                    cle = (System.Int32)commande.ExecuteScalar();
+                    commande.ExecuteScalar();
                     return cle;
                 }
                 catch (System.Exception ex)
@@ -125,7 +125,51 @@ namespace AppDesktop.RDMS
 
         internal System.Collections.Generic.List<Classes.Bundles> GetProviderBundles()
         {
+            /*
+            create procedure GET_BUNDLES_PROVIDERS
+returns
+(
+CLE_PROVIDER TYPE OF D_FK,
+  CLE_BUNDLE TYPE OF D_FK,
+  CLE_BRAND TYPE OF D_FK,
+  LABEL TYPE OF D_LABEL_60
+  )
+AS*/
             System.Collections.Generic.List<Classes.Bundles> l = new System.Collections.Generic.List<Classes.Bundles>();
+            FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
+            using (FirebirdSql.Data.FirebirdClient.FbCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = "GET_BUNDLES_PROVIDERS";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                try
+                {
+                    conn.Open();
+                    FirebirdSql.Data.FirebirdClient.FbDataReader reader = cmd.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            Classes.Bundles b = new Classes.Bundles();
+                            b.CleProvider = (int)reader[0];
+                            b.Cle = (int)reader[1];
+                            b.CleBrand = (int)reader[2];
+                            b.Label = (string)reader[3];
+                            l.Add(b);
+                        }
+                        conn.Close();
+                        return l;
+                    }
+                    conn.Close();
+                    return null;
+                }
+                catch (System.Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.ToString());
+                    conn.Close();
+                    return null;
+                }
+            }
+
             return l;
         }
     }
