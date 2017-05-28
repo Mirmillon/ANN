@@ -140,5 +140,28 @@ namespace AppDesktop.Utilitaires
             return ColumnReferenceSimple(dg, new RDMS.Bundle().GetKindBundles(), "ITEM KIND" , s);
         }
 
+        internal System.Windows.Controls.DataGridComboBoxColumn ColumnCbSize(System.Windows.Controls.DataGrid dg, string s)
+        {
+
+            return ColumnReferenceSimple(dg, new RDMS.Item().GetSizes(), "SIZE", s);
+        }
+
+        internal System.Windows.Controls.DataGridComboBoxColumn ColumnCbColor(System.Windows.Controls.DataGrid dg, string s)
+        {
+
+            return ColumnReferenceSimple(dg, new RDMS.Item().GetColors(), "COLOR", s);
+        }
+
+        internal System.Windows.Controls.DataGridComboBoxColumn ColumnCbTypeClothe(System.Windows.Controls.DataGrid dg, string s)
+        {
+
+            return ColumnReferenceSimple(dg, new RDMS.Item().GetCategories(), "CLASS", s);
+        }
+
+        internal System.Windows.Controls.DataGridComboBoxColumn ColumnCbGender(System.Windows.Controls.DataGrid dg, string s)
+        {
+
+            return ColumnReferenceSimple(dg, new RDMS.Item().GetGenders(), "GENDER", s);
+        }
     }
 }

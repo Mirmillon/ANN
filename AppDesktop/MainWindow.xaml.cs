@@ -12,6 +12,7 @@ namespace AppDesktop
         System.Windows.Data.CollectionView viewSales = null;
         System.Windows.Data.CollectionView viewCustomer = null;
         System.Windows.Data.CollectionView viewOutcome = null;
+        System.Windows.Data.CollectionView viewItem = null;
 
 
         public MainWindow()
@@ -45,6 +46,26 @@ namespace AppDesktop
             new Utilitaires.GestionDgColumn().ColumnDate(dgCredit, "DUE DATE", "DateDue");
 
             new Utilitaires.GestionComboBox().SetCustomer(cbFullName);
+
+            //ITEMS
+            new Utilitaires.GestionComboBox().SetBrand(cbBrand);
+            new Utilitaires.GestionComboBox().SetSize(cbSize);
+            new Utilitaires.GestionComboBox().SetColor(cbColor);
+            new Utilitaires.GestionComboBox().SetKindClothes(cbType);
+            new Utilitaires.GestionComboBox().SetGender(cbGender);
+
+            dgItem.ItemsSource = new RDMS.Item().GetItemsInStock();
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgItem, "REFERENCE", "RefArticle");
+            new Utilitaires.GestionDgColumn().ColumnCbTypeClothe(dgItem, "Categorie");
+            new Utilitaires.GestionDgColumn().ColumnBrand(dgItem, "Brand");
+            new Utilitaires.GestionDgColumn().ColumnCbSize(dgItem, "Size");
+            new Utilitaires.GestionDgColumn().ColumnCbColor(dgItem, "Color");
+            new Utilitaires.GestionDgColumn().ColumnCbKindItem(dgItem, "TypeArticle");
+            new Utilitaires.GestionDgColumn().ColumnCbGender(dgItem, "GenderArticle");
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgItem, "DESCRIPTION", "Description");
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgItem, "PRICE", "Prix");
+            viewItem = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(dgItem.ItemsSource);
+
 
             //PROVIDER
             dgProvider.ItemsSource = new RDMS.Provider().GetProviders();
@@ -116,9 +137,14 @@ namespace AppDesktop
             dgProvider.SelectionChanged += DgProvider_SelectionChanged;
             //OUTCOME
             cbOutcome.SelectionChanged += CbOutcome_SelectionChanged;
+            //ITEM
+            cbBrand.SelectionChanged += CbBrand_SelectionChanged;
+            cbSize.SelectionChanged += CbSize_SelectionChanged;
+            cbColor.SelectionChanged += CbColor_SelectionChanged;
+            cbType.SelectionChanged += CbType_SelectionChanged;
+            cbGender.SelectionChanged += CbGender_SelectionChanged;
 
         }
-
 
 
         private void RadioModify_Checked(object sender, RoutedEventArgs e)
@@ -201,6 +227,13 @@ namespace AppDesktop
                         btnValidate.IsEnabled = false;
                         btnValidate.Content = "VALIDATE";
                         break;
+                    case "ITEMS":
+                        lbTitle.Content = "ANN'S BUSINESS - ITEMS MANAGEMENT";
+                        btnNew.Visibility = Visibility.Visible;
+                        btnNew.Content = "NEW ITEM";
+                        btnValidate.IsEnabled = false;
+                        btnValidate.Content = "VALIDATE";
+                        break;
                     case "STOCKS":
                         lbTitle.Content = "ANN'S BUSINESS - STOCKS MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
@@ -266,9 +299,11 @@ namespace AppDesktop
                     break;
                 case 3://CUSTOMERS
                     break;
-                case 4://STOCKS
+                case 4://ITEMS
                     break;
-                case 5://PROVIDERS
+                case 5://STOCKS
+                    break;
+                case 6://PROVIDERS
                     Classes.Bundles b = dgProviderBundle.SelectedItem as Classes.Bundles;
                     if (b != null)
                     {
@@ -283,7 +318,7 @@ namespace AppDesktop
                         }
                     }
                     break;
-                case 6://BUNDLE
+                case 7://BUNDLE
                     if (radioButtonNewBundle.IsChecked == true)
                     {
                         if (cbbBrandNewBundle.SelectedIndex != -1 && tbNewBundle.Text.Trim().Length > 1 && tbWeightNewBundle.Text.Trim().Length > 1)
@@ -313,7 +348,7 @@ namespace AppDesktop
                     }
 
                     break;
-                case 7://Brands
+                case 8://Brands
                     if (radioButtonNewBrand.IsChecked == true)
                     {
                         if(cbbCountryNewBrand.SelectedIndex != -1 && tbNewBrand.Text.Trim().Length > 1)
@@ -341,6 +376,8 @@ namespace AppDesktop
                         }
                     }
                     break;
+                case 9://OUTCOME
+                    break;
 
             }
         }
@@ -367,15 +404,19 @@ namespace AppDesktop
 
                     break;
                 case 4:
+                    Fenetres.Item item = new Fenetres.Item();
+                    item.Owner = this;
+                    item.Show();
+
+
+                    break;
+                case 5:
                     Fenetres.Provider f = new Fenetres.Provider();
                     f.ShowDialog();
                     if (f.DialogResult == true)
                     {
                         btnOK.Background = System.Windows.Media.Brushes.Green;
                     }
-
-                    break;
-                case 5:
 
                     break;
                 case 6:
@@ -386,10 +427,13 @@ namespace AppDesktop
 
                     break;
                 case 8:
+                   
+
+                    break;
+                case 9:
                     Fenetres.Outcome outcome = new Fenetres.Outcome();
                     outcome.Owner = this;
                     outcome.Show();
-
                     break;
             }
         }
@@ -465,8 +509,86 @@ namespace AppDesktop
                 tbPayment.SetBinding(System.Windows.Controls.TextBox.TextProperty, b4);
                 System.Windows.Data.Binding b5 = new System.Windows.Data.Binding("DatePaiement");
             }
-        } 
+        }
         #endregion FIN ONGLET CREDIT
+
+        #region ONGLET CUSTOMER
+
+        #endregion FIN ONGLET CUSTOMER
+
+        #region ONGLET ITEM
+
+
+        private void CbGender_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            viewItem.Filter = FilterGender;
+        }
+
+        private void CbType_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            viewItem.Filter = FilterKindClothes;
+        }
+
+        private void CbColor_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            viewItem.Filter = FilterColor;
+        }
+
+        private void CbSize_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            viewItem.Filter = FilterSelling;
+        }
+
+        private void CbBrand_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            viewItem.Filter = FilterBrandItem;
+        }
+
+        private bool FilterGender(object o)
+        {
+            if (cbGender.SelectedItem is Classes.ReferencesSimples)
+            {
+                return (o as Classes.Items).GenderArticle == (int)cbGender.SelectedValue;
+            }
+            else { return false; }
+        }
+
+        private bool FilterKindClothes(object o)
+        {
+            if (cbType.SelectedItem is Classes.ReferencesSimples)
+            {
+                return (o as Classes.Items).TypeArticle == (int)cbType.SelectedValue;
+            }
+            else { return false; }
+        }
+
+        private bool FilterColor(object o)
+        {
+            if (cbColor.SelectedItem is Classes.ReferencesSimples)
+            {
+                return (o as Classes.Items).Color == (int)cbColor.SelectedValue;
+            }
+            else { return false; }
+        }
+
+        private bool FilterSize(object o)
+        {
+            if (cbSize.SelectedItem is Classes.ReferencesSimples)
+            {
+                return (o as Classes.Items).Size == (int)cbSize.SelectedValue;
+            }
+            else { return false; }
+        }
+
+        private bool FilterBrandItem(object o)
+        {
+            if (cbBrand.SelectedItem is Classes.ReferencesSimples)
+            {
+                return (o as Classes.Items).Brand == (int)cbBrand.SelectedValue;
+            }
+            else { return false; }
+        }
+        #endregion FIN ONGLET ITEM
 
         #region ONGLET PROVIDER
         private void DgProvider_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -528,16 +650,17 @@ namespace AppDesktop
 
         #endregion FIN ONGLET BRAND
 
-
-        private void CbOutcome_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e) { viewOutcome.Filter = FilterOutcome;}
+        #region ONGLET OUTCOME
+        private void CbOutcome_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e) { viewOutcome.Filter = FilterOutcome; }
 
         private bool FilterOutcome(object o)
         {
-            if(cbOutcome.SelectedItem is Classes.ReferencesSimples)
+            if (cbOutcome.SelectedItem is Classes.ReferencesSimples)
             {
                 return (o as Classes.Outcomes).CleTypeOutcome == (int)cbOutcome.SelectedValue;
             }
             else { return false; }
         }
+        #endregion FIN ONGLET OUTCOME
     }
 }

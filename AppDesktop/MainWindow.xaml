@@ -67,7 +67,9 @@
             <Button x:Name="btnDashBoard" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">DASHBOARD</Button>
             <Button x:Name="btnSellings" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">SALES</Button>
             <Button x:Name="btnCredits" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">CREDITS</Button>
+            
             <Button x:Name="btnCustomers" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">CUSTOMERS</Button>
+            <Button x:Name="btnItems" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">ITEMS</Button>
             <Button x:Name="btnStocks" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">STOCKS</Button>
             <Button x:Name="btnProvider" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">PROVIDERS</Button>
             <Button x:Name="btnBundles" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">BUNDLES</Button>
@@ -335,6 +337,72 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
              
+            </Grid>
+            <Grid x:Name="gridItem" Style="{StaticResource GridStandard}" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}">BRAND</Label>
+                <ComboBox x:Name="cbBrand" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Style="{DynamicResource ComboBoxStandard}" />
+                <Label Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}">SIZE</Label>
+                <ComboBox x:Name="cbSize" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Style="{DynamicResource ComboBoxStandard}" />
+                <Label Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}">GENDER</Label>
+                <ComboBox x:Name="cbGender" Grid.Row="0" Grid.Column="8" Grid.ColumnSpan="2" Style="{DynamicResource ComboBoxStandard}" />
+                <Label Grid.Row="0" Grid.Column="10" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}">COLOR</Label>
+                <ComboBox x:Name="cbColor" Grid.Row="0" Grid.Column="11" Grid.ColumnSpan="2" Style="{DynamicResource ComboBoxStandard}" />
+                <Label Grid.Row="0" Grid.Column="13" Grid.ColumnSpan="1" Style="{DynamicResource LabelStandard}">KIND</Label>
+                <ComboBox x:Name="cbType" Grid.Row="0" Grid.Column="14" Grid.ColumnSpan="2" Style="{DynamicResource ComboBoxStandard}"/>
+                <DataGrid x:Name="dgItem" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="22" Grid.RowSpan="22" AutoGenerateColumns="False"/>
+
             </Grid>
             <Grid x:Name="gridStocks" Style="{StaticResource GridStandard}" Visibility="Hidden">
                 <Grid.RowDefinitions>

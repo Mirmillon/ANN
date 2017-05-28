@@ -48,6 +48,7 @@ namespace AppDesktop.RDMS
             {
                 commande.CommandText = sql;
                 commande.CommandType = System.Data.CommandType.StoredProcedure;
+
                 try
                 {
                     conn.Open();
@@ -83,6 +84,32 @@ namespace AppDesktop.RDMS
                     System.Windows.Forms.MessageBox.Show(ex.ToString());
                     conn.Close();
                     return -1;
+                }
+            }
+        }
+
+        internal int   SetReferenceSimple(string sql,string name)
+        {
+            FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
+            using (FirebirdSql.Data.FirebirdClient.FbCommand commande = conn.CreateCommand())
+            {
+                commande.CommandText = sql;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                FirebirdSql.Data.FirebirdClient.FbParameterCollection pc = commande.Parameters;
+                pc.Add("CLE", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Direction = System.Data.ParameterDirection.Output;
+                pc.Add("LABEL", FirebirdSql.Data.FirebirdClient.FbDbType.VarChar, 30).Value = name;
+                try
+                {
+                    conn.Open();
+                    int cle = (System.Int32)commande.ExecuteScalar();
+                    conn.Close();
+                    return (int)cle;
+                }
+                catch (System.Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.ToString());
+                    conn.Close();
+                    return 0;
                 }
             }
         }

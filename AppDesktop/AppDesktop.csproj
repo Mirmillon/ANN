@@ -72,11 +72,17 @@
     <Compile Include="Classes\ReferencesSimples.cs" />
     <Compile Include="Classes\Sellings.cs" />
     <Compile Include="Classes\Stocks.cs" />
+    <Compile Include="Fenetres\Item.xaml.cs">
+      <DependentUpon>Item.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Fenetres\Outcome.xaml.cs">
       <DependentUpon>Outcome.xaml</DependentUpon>
     </Compile>
     <Compile Include="Fenetres\Provider.xaml.cs">
       <DependentUpon>Provider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fenetres\ReferenceSimple.xaml.cs">
+      <DependentUpon>ReferenceSimple.xaml</DependentUpon>
     </Compile>
     <Compile Include="Fenetres\Selling.xaml.cs">
       <DependentUpon>Selling.xaml</DependentUpon>
@@ -90,6 +96,7 @@
     <Compile Include="RDMS\Dashboard.cs" />
     <Compile Include="RDMS\Generic.cs" />
     <Compile Include="RDMS\Income.cs" />
+    <Compile Include="RDMS\Item.cs" />
     <Compile Include="RDMS\Outcome.cs" />
     <Compile Include="RDMS\Payment.cs" />
     <Compile Include="RDMS\Provider.cs" />
@@ -99,11 +106,19 @@
     <Compile Include="Utilitaires\GestionDateControls.cs" />
     <Compile Include="Utilitaires\GestionDgColumn.cs" />
     <Compile Include="Utilitaires\GestionGrille.cs" />
+    <Page Include="Fenetres\Item.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Fenetres\Outcome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Fenetres\Provider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Fenetres\ReferenceSimple.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
