@@ -7,13 +7,11 @@ namespace AppDesktop
     /// </summary>
     public partial class MainWindow : Window
     {
-
         System.Windows.Data.CollectionView viewBrand = null;
         System.Windows.Data.CollectionView viewSales = null;
         System.Windows.Data.CollectionView viewCustomer = null;
         System.Windows.Data.CollectionView viewOutcome = null;
         System.Windows.Data.CollectionView viewItem = null;
-
 
         public MainWindow()
         {
@@ -65,6 +63,14 @@ namespace AppDesktop
             new Utilitaires.GestionDgColumn().ColumnLabel(dgItem, "DESCRIPTION", "Description");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgItem, "PRICE", "Prix");
             viewItem = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(dgItem.ItemsSource);
+            //STOCKS
+            dgStock.ItemsSource = new RDMS.Stock().GetStocks();
+            new Utilitaires.GestionDgColumn().ColumnDate(dgStock, "BUY DATE", "DateAchat");
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgStock, "LABEL", "Label");
+            new Utilitaires.GestionDgColumn().ColumnBrand(dgStock, "CleBrand");
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgStock, "PRICE", "Prix");
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgStock, "NUMBER OF ITEMS", "NbItems");
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgStock, "COST ITEM", "PriceItems");
 
 
             //PROVIDER
@@ -143,6 +149,7 @@ namespace AppDesktop
             cbColor.SelectionChanged += CbColor_SelectionChanged;
             cbType.SelectionChanged += CbType_SelectionChanged;
             cbGender.SelectionChanged += CbGender_SelectionChanged;
+            dgItem.MouseDoubleClick += dg_MouseDoubleClick;
 
         }
 
@@ -307,7 +314,7 @@ namespace AppDesktop
                     Classes.Bundles b = dgProviderBundle.SelectedItem as Classes.Bundles;
                     if (b != null)
                     {
-                        int cleStock = new RDMS.Stock().SetBundleInStock(b.Cle,b.CleProvider);
+                        int cleStock = new RDMS.Stock().SetBundleInStock(b.Cle,b.CleProvider,b.DateAchat,System.Convert.ToDouble(b.Prix));
                         if (cleStock > 0)
                         {
                             btnOK.Background = System.Windows.Media.Brushes.Green;
@@ -517,6 +524,20 @@ namespace AppDesktop
         #endregion FIN ONGLET CUSTOMER
 
         #region ONGLET ITEM
+
+        private void dg_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (sender != null)
+            {
+                System.Windows.Controls.DataGrid grid = sender as System.Windows.Controls.DataGrid;
+                if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
+                {
+                    Classes.Items item = grid.SelectedItem as Classes.Items;
+                    Fenetres.Item f = new Fenetres.Item(item.Cle);
+                    f.Show();
+                }
+            }
+        }
 
 
         private void CbGender_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)

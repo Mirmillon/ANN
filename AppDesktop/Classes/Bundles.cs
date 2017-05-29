@@ -1,21 +1,23 @@
 ﻿
-
 namespace AppDesktop.Classes
 {
-    internal class Bundles
+    internal class Bundles : System.ComponentModel.INotifyPropertyChanged
     {
-        int cle;
-        int cleBrand;
-        int cleCountry;
-        int cleKind;
-        string label;
-        int weight;
-        string note;
-        int cleProvider;
-        double prix;
-        int cleStock;
-        int nbItems;
+        private int cle;
+        private int cleBrand;
+        private int cleCountry;
+        private int cleKind;
+        private string label;
+        private int weight;
+        private string note;
+        private int cleProvider;
+        private double prix;
+        private int cleStock;
+        private int nbItems;
+        private System.DateTime dateAchat = System.DateTime.Today;
+        private double priceItem;
 
+        public System.DateTime DateAchat { get => dateAchat; set => dateAchat = value; }
         public int Cle { get => cle; set => cle = value; }
         public int CleBrand { get => cleBrand; set => cleBrand = value; }
         public string Label { get => label; set => label = value; }
@@ -26,6 +28,47 @@ namespace AppDesktop.Classes
         public int CleProvider { get => cleProvider; set => cleProvider = value; }
         public double Prix { get => prix; set => prix = value; }
         public int CleStock { get => cleStock; set => cleStock = value; }
-        public int NbItems { get => nbItems; set => nbItems = value; }
+
+        public int NbItems
+        {
+            get => nbItems;
+            set
+            {
+                if (nbItems != value)
+                {
+                    nbItems = value;
+                    OnPropertyChanged("NbItems");
+                }
+            }
+        }
+      
+        public double PriceItem
+        {
+            get => priceItem;
+
+            set
+            {
+                if(nbItems > 0)
+                {
+                    priceItem = prix/nbItems;
+                    if(priceItem != value)
+                    {
+                        priceItem = value;
+                        OnPropertyChanged("PriceItem");
+                    }
+                }
+                
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string propName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propName));
+            }
+        }
     }
 }

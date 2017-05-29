@@ -33,7 +33,7 @@ namespace AppDesktop.RDMS
             return new Generic().SetReferenceSimple("SET_COLOR", label);
         }
 
-        internal int SetItem(string refArticle,int categorie, int typeArticle, int size, int genderArticle, int color,  int brand, string description, double prix)
+        internal int SetItem(string refArticle,int categorie, int typeArticle, int size, int genderArticle, int color,  int brand, string description, double prix, string image)
         {
             int cle = 0;
             FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
@@ -52,6 +52,7 @@ namespace AppDesktop.RDMS
                 pc.Add("BRAND", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = brand;
                 pc.Add("DESCRIPTION", FirebirdSql.Data.FirebirdClient.FbDbType.VarChar, 120).Value = description;
                 pc.Add("PRIX", FirebirdSql.Data.FirebirdClient.FbDbType.Double, 0).Value = prix;
+                pc.Add("IMAGE", FirebirdSql.Data.FirebirdClient.FbDbType.VarChar, 250).Value = image;
                 try
                 {
                     conn.Open();
@@ -122,6 +123,11 @@ namespace AppDesktop.RDMS
                             {
                                 b.Prix = (double)reader[9];
                             }
+
+                            if (!(reader[10] == System.DBNull.Value))
+                            {
+                                b.ImageSource = (string)reader[10];
+                            }
                             l.Add(b);
                         }
                         conn.Close();
@@ -137,10 +143,10 @@ namespace AppDesktop.RDMS
                     return null;
                 }
             }
-            return l;
+
         }
 
-        internal void  UpdItem(int cleArticle, string refArticle, int typeBundle,  int categorie, int size, int genderArticle, int color, int brand, string description, double prix)
+        internal void  UpdItem(int cleArticle, string refArticle, int typeBundle,  int categorie, int size, int genderArticle, int color, int brand, string description, double prix, string image)
         {
             FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
             using (FirebirdSql.Data.FirebirdClient.FbCommand commande = conn.CreateCommand())
@@ -158,6 +164,7 @@ namespace AppDesktop.RDMS
                 pc.Add("BRAND", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = brand;
                 pc.Add("DESCRIPTION", FirebirdSql.Data.FirebirdClient.FbDbType.VarChar, 120).Value = description;
                 pc.Add("PRIX", FirebirdSql.Data.FirebirdClient.FbDbType.Double, 0).Value = prix;
+                pc.Add("IMAGE", FirebirdSql.Data.FirebirdClient.FbDbType.VarChar, 250).Value = image;
                 try
                 {
                     conn.Open();
@@ -171,6 +178,85 @@ namespace AppDesktop.RDMS
                    
                 }
             }
+        }
+
+        internal Classes.Items GetItemsInStockByKey(int cle)
+        {
+            FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
+            Classes.Items b = new Classes.Items();
+            using (FirebirdSql.Data.FirebirdClient.FbCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = "get_items_in_stock_by_key";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                FirebirdSql.Data.FirebirdClient.FbParameterCollection pc = cmd.Parameters;
+                pc.Add("CLE", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cle;
+                try
+                {
+                    conn.Open();
+                    FirebirdSql.Data.FirebirdClient.FbDataReader reader = cmd.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            
+                            b.Cle = (int)reader[0];
+                            if (!(reader[1] == System.DBNull.Value))
+                            {
+                                b.RefArticle = (string)reader[1];
+                            }
+                            if (!(reader[2] == System.DBNull.Value))
+                            {
+                                b.Categorie = (int)reader[2];
+                            }
+                            if (!(reader[3] == System.DBNull.Value))
+                            {
+                                b.TypeArticle = (int)reader[3];
+                            }
+                            if (!(reader[4] == System.DBNull.Value))
+                            {
+                                b.Size = (int)reader[4];
+                            }
+                            if (!(reader[5] == System.DBNull.Value))
+                            {
+                                b.GenderArticle = (int)reader[5];
+                            }
+                            if (!(reader[6] == System.DBNull.Value))
+                            {
+                                b.Color = (int)reader[6];
+                            }
+                            if (!(reader[7] == System.DBNull.Value))
+                            {
+                                b.Brand = (int)reader[7];
+                            }
+                            if (!(reader[8] == System.DBNull.Value))
+                            {
+                                b.Description = (string)reader[8];
+                            }
+                            if (!(reader[9] == System.DBNull.Value))
+                            {
+                                b.Prix = (double)reader[9];
+                            }
+
+                            if (!(reader[10] == System.DBNull.Value))
+                            {
+                                b.ImageSource = (string)reader[10];
+                            }
+                            
+                        }
+                        conn.Close();
+                        return b;
+                    }
+                    conn.Close();
+                    return null;
+                }
+                catch (System.Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.ToString());
+                    conn.Close();
+                    return null;
+                }
+            }
+
         }
     }
 }

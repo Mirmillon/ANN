@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 
+
 namespace AppDesktop.Fenetres
 {
     /// <summary>
@@ -7,6 +8,8 @@ namespace AppDesktop.Fenetres
     /// </summary>
     public partial class Item : Window
     {
+        private Classes.Items article = null;
+
         public Item()
         {
             InitializeComponent();
@@ -17,32 +20,60 @@ namespace AppDesktop.Fenetres
             new Utilitaires.GestionComboBox().SetKindClothes(cbCategory);
             new Utilitaires.GestionComboBox().SetKindBundle(cbKindBundle);
             new Utilitaires.GestionComboBox().SetGender(cbGender);
+            article = new Classes.Items();
+            gridItem.DataContext = article;
 
-            Classes.Items item = new Classes.Items();
-            gridItem.DataContext = item;
-            
+
+
         }
+
+        public Item(int cle):this()
+        {
+            article = new RDMS.Item().GetItemsInStockByKey(cle);
+            gridItem.DataContext = null;
+            gridItem.DataContext = article;
+        }
+
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+            if (article != null && article.ImageSource != null)
+            {
+                System.Uri uri = new System.Uri(article.ImageSource);
+                System.Windows.Media.Imaging.BitmapImage bitmap = new System.Windows.Media.Imaging.BitmapImage(uri);
+                image.Source = bitmap;
+            }
         }
 
-        private void BtnClose_Click(object sender, RoutedEventArgs e) { Close(); }
-        private void BtnCancel_Click(object sender, RoutedEventArgs e) { }
+        private void BtnClose_Click(object sender, RoutedEventArgs e) {
+  
+            MainWindow f = Owner as MainWindow;
+            if(f!= null)
+            {
+                f.dgItem.ItemsSource = new RDMS.Item().GetItemsInStock();
+            }
+           
+            Close();
+
+        }
+        private void BtnCancel_Click(object sender, RoutedEventArgs e) {
+
+            MessageBox.Show(Owner.GetType().ToString());
+        }
 
         private void BtnValidate_Click(object sender, RoutedEventArgs e)
         {
             Classes.Items item = gridItem.DataContext as Classes.Items;
             if(item != null)
             {
-                if(item.CleArticle >0)
+                if(item.Cle == 0)
                 {
-                    new RDMS.Item().SetItem(item.RefArticle,item.Categorie, item.TypeArticle, item.Size, item.GenderArticle, item.Color, item.Brand, item.Description, item.Prix);
+                    new RDMS.Item().SetItem(item.RefArticle, item.Categorie, item.TypeArticle, item.Size, item.GenderArticle, item.Color, item.Brand, tbDescription.Text, System.Convert.ToDouble(tbPrix.Text),tbFileImage.Text);
+                  
                 }
                 else
                 {
-                    new RDMS.Item().UpdItem(item.CleArticle,item.RefArticle, item.Categorie, item.TypeArticle,item.Size,item.GenderArticle,item.Color,item.Brand,item.Description,item.Prix);
+                    new RDMS.Item().UpdItem(item.Cle, item.RefArticle, item.Categorie, item.TypeArticle, item.Size, item.GenderArticle, item.Color, item.Brand, tbDescription.Text, System.Convert.ToDouble(tbPrix.Text), tbFileImage.Text);
                 }
             }
         }
@@ -53,6 +84,16 @@ namespace AppDesktop.Fenetres
             int i = System.Windows.Controls.Grid.GetRow(b);
             switch(i)
             {
+                case 1://color
+                    ReferenceSimple brand = new ReferenceSimple();
+                    brand.lbTitre.Content = "NEW BRAND";
+                    brand.label.Content = "NEW BRAND";
+                    brand.lbox.ItemsSource = new RDMS.Brand().GetBrands();
+                    brand.lbox.DisplayMemberPath = "Label";
+                    brand.Owner = this;
+                    brand.Show();
+                    break;
+
                 case 4://color
                     ReferenceSimple color = new ReferenceSimple();
                     color.lbTitre.Content = "NEW COLOR";
@@ -61,8 +102,6 @@ namespace AppDesktop.Fenetres
                     color.lbox.DisplayMemberPath = "Label";
                     color.Owner = this;
                     color.Show();
-
-              
                     break;
                 case 6://categorie
                     ReferenceSimple categorie = new ReferenceSimple();
@@ -75,7 +114,19 @@ namespace AppDesktop.Fenetres
 
                     break;
                 case 9://picture
-              
+                    Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+                    openFileDialog.Filter = "Image files (*.png;*.jpg;*.bmp;*.tiff)|*.png;*.jpg;*.bmp;*.tiff|All files (*.*)|*.*";
+                    openFileDialog.InitialDirectory = @"B:\Images";
+                    if (openFileDialog.ShowDialog() == true)
+                    {
+                        // Open document
+                        string filename = openFileDialog.FileName;
+                        tbFileImage.Text = filename;
+                        System.Uri uri = new System.Uri(filename);
+                        System.Windows.Media.Imaging.BitmapImage bitmap = new System.Windows.Media.Imaging.BitmapImage(uri);
+                        image.Source = bitmap;
+                    }
+
                     break;
 
             }

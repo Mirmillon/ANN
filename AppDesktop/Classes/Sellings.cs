@@ -2,7 +2,7 @@
 
 namespace AppDesktop.Classes
 {
-    internal class Sellings : System.ComponentModel.INotifyPropertyChanged
+    public  class Sellings : System.ComponentModel.INotifyPropertyChanged
     {
         int cle;
         System.DateTime dateSelling = System.DateTime.Today;

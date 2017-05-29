@@ -164,7 +164,6 @@ namespace AppDesktop.RDMS
                 }
             }
 
-            return l;
         }
     }
 }

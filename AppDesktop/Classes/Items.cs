@@ -2,7 +2,7 @@
 
 namespace AppDesktop.Classes
 {
-    class Items:Sellings
+    public class Items:Sellings
     {
         int cleArticle;
         string refArticle;
@@ -14,6 +14,7 @@ namespace AppDesktop.Classes
         int brand;
         string description;
         double prix;
+        string imageSource = null;
        
 
         public int CleArticle { get => cleArticle; set => cleArticle = value; }
@@ -26,5 +27,6 @@ namespace AppDesktop.Classes
         public int Size { get => size; set => size = value; }
         public int Brand { get => brand; set => brand = value; }
         public int Categorie { get => categorie; set => categorie = value; }
+        public string ImageSource { get => imageSource; set => imageSource = value; }
     }
 }

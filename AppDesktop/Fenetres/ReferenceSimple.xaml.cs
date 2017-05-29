@@ -51,6 +51,18 @@ namespace AppDesktop.Fenetres
 
                     }
                     break;
+                case "NEW BRAND":
+                    if (r != null)
+                    {
+                        int cle = new RDMS.Brand().SetBrand(0,r.Label,null);
+                        if (cle > 0)
+                        {
+                            f.cbCategory.ItemsSource = new RDMS.Brand().GetBrands();
+                            btnValidate.IsEnabled = false;
+                        }
+
+                    }
+                    break;
             }
         }
 

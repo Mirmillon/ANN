@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppDesktop.Fenetres"
         mc:Ignorable="d"
-        Title="Item" Height="550" Width="550" WindowStartupLocation="CenterOwner" WindowStyle="None" Loaded="Window_Loaded">
+        Title="Item" Height="750" Width="1500" WindowStartupLocation="CenterOwner" WindowStyle="None" Loaded="Window_Loaded">
     <Grid  >
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -21,6 +21,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        
         <StackPanel Style="{StaticResource stackPanelHautSup}" IsEnabled="True">
             <Label Style="{DynamicResource LabelTitre}">NEW ITEM</Label>
         </StackPanel>
@@ -50,12 +51,25 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
 
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">REFERENCE</Label>
             <TextBox x:Name="tbReference" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="6" Style="{DynamicResource TextBoxStandard}" Text="{Binding RefArticle}"/>
             <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">BRAND</Label>
             <ComboBox x:Name="cbBrand" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="5" Style="{DynamicResource ComboBoxStandard}" SelectedValue="{Binding Brand}"/>
+            <Button Grid.Row="1" Grid.Column="9" Grid.ColumnSpan="2" Style="{DynamicResource buttonStandard}" Click="BtnAdd_Click">ADD...</Button>
             <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">SIZE</Label>
             <ComboBox x:Name="cbSize" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="5" Style="{DynamicResource ComboBoxStandard}" SelectedValue="{Binding Size}"/>
             <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">GENDER</Label>
@@ -72,8 +86,10 @@
             <TextBox x:Name="tbDescription" Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="7" Style="{DynamicResource TextBoxStandard}" Width="300" Text="{Binding Description}"/>
             <Label Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">PRICE</Label>
             <TextBox x:Name="tbPrix" Grid.Row="8" Grid.Column="3" Grid.ColumnSpan="5" Style="{DynamicResource TextBoxStandard}" Width="80" Text="{Binding Prix}"/>
-            <Label Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">PICTURE</Label>
-            <Button Grid.Row="9" Grid.Column="9" Grid.ColumnSpan="2" Style="{DynamicResource buttonStandard}" Click="BtnAdd_Click">ADD...</Button>
+            <TextBox x:Name="tbFileImage" Grid.Row="9" Grid.Column="3" Grid.ColumnSpan="9" Style="{DynamicResource TextBoxStandard}" Width="500" Text="{Binding ImageSource}"/>
+            <Label Grid.Row="9" Grid.Column="11" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">PICTURE</Label>
+            <Button Grid.Row="9" Grid.Column="14" Grid.ColumnSpan="2" Style="{DynamicResource buttonStandard}" Click="BtnAdd_Click">ADD...</Button>
+            <Image x:Name="image"  Grid.Column="11" Grid.ColumnSpan="13" Margin="5" Grid.RowSpan="9"></Image>
         </Grid>
         <StackPanel Grid.Row="11" x:Name="spBas" Style="{StaticResource stackPanelBas}">
             <Button x:Name="btnClose" Style="{StaticResource buttonStackPanelBas}" Click="BtnClose_Click">CLOSE</Button>
