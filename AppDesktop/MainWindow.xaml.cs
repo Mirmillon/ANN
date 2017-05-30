@@ -18,6 +18,8 @@ namespace AppDesktop
             InitializeComponent();
             //DASHBOARD
             SetDashboard();
+            SetCategories();
+
             //SELLING
             //SALES
             dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
@@ -75,14 +77,14 @@ namespace AppDesktop
 
             //PROVIDER
             dgProvider.ItemsSource = new RDMS.Provider().GetProviders();
-            new Utilitaires.GestionDgColumn().ColumnLabel(dgProvider,"PROVIDER", "FullName");
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgProvider, "PROVIDER", "FullName");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgProvider, "PHONE", "Phone");
             dgProviderBundle.ItemsSource = new RDMS.Bundle().GetProviderBundles();
             new Utilitaires.GestionDgColumn().ColumnBrand(dgProviderBundle, "CleBrand");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgProviderBundle, "DESCRIPTION", "Label");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgProviderBundle, "WEIGHT", "Weight");
             new Utilitaires.GestionDgColumn().ColumnCountry(dgProviderBundle, new RDMS.Country().GetCountries());
-            new Utilitaires.GestionDgColumn().ColumnCbKindItem(dgProviderBundle,"CleKind");
+            new Utilitaires.GestionDgColumn().ColumnCbKindItem(dgProviderBundle, "CleKind");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgProviderBundle, "PRICE", "Prix");
 
             new Utilitaires.GestionComboBox().SetKindBundle(cbbKindNewBundle);
@@ -112,19 +114,17 @@ namespace AppDesktop
 
             //OUTCOME
             dgOutcome.ItemsSource = new RDMS.Outcome().GetOutcome();
+            new Utilitaires.GestionDgColumn().ColumnDate(dgOutcome, "DATE", "DateOutcome");
+            new Utilitaires.GestionDgColumn().ColumnCbKindOutcome(dgOutcome);
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgOutcome, "AMOUNT", "Montant");
             viewOutcome = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(dgOutcome.ItemsSource);
             new Utilitaires.GestionComboBox().SetKindOutcome(cbOutcome);
-
-
         }
 
 
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
-
-
             cbbKindPayment.SelectionChanged += CbbKindPayment_SelectionChanged;
             dgSelling.SelectionChanged += DgSelling_SelectionChanged;
             dgCustomerSale.SelectionChanged += DgCustomerSale_SelectionChanged;
@@ -208,68 +208,87 @@ namespace AppDesktop
                 switch (bt.Content.ToString())
                 {
                     case "DASHBOARD":
-                        lbTitle.Content = "ANN'S BUSINESS - DASHBOARDS";
+                        lbTitle.Content =  SetTitre() +" - DASHBOARDS";
                         btnNew.Visibility = Visibility.Collapsed;
-                        btnValidate.IsEnabled = false;
+                        btnValidate.Visibility = Visibility.Collapsed;
+                        btnCancel.Visibility = Visibility.Collapsed;
                         btnValidate.Content = "VALIDATE";
                         SetDashboard();
                         break;
                     case "SALES":
-                        lbTitle.Content = "ANN'S BUSINESS - SALES MANAGEMENT";
+                        lbTitle.Content = SetTitre() + " - SALES MANAGEMENT";
                         btnNew.Visibility = Visibility.Visible;
+                        btnValidate.Visibility = Visibility.Visible;
+                        btnCancel.Visibility = Visibility.Visible;
                         btnNew.Content = "NEW SALE";
                         btnValidate.Content = "VALIDATE";
                         btnValidate.IsEnabled = false;
                         break;
                     case "CREDITS":
-                        lbTitle.Content = "ANN'S BUSINESS - CREDITS MANAGEMENT";
+                        lbTitle.Content = SetTitre() + " - CREDITS MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
+                        btnValidate.Visibility = Visibility.Visible;
+                        btnCancel.Visibility = Visibility.Visible;
                         btnValidate.IsEnabled = true;
                         btnValidate.Content = "VALIDATE";
                         dgCredit.ItemsSource = new RDMS.Credit().GetCredit();
                         break;
                     case "CUSTOMERS":
-                        lbTitle.Content = "ANN'S BUSINESS - CUSTOMERS MANAGEMENT";
+                        lbTitle.Content = SetTitre() + " - CUSTOMERS MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
+                        btnValidate.Visibility = Visibility.Visible;
+                        btnCancel.Visibility = Visibility.Visible;
                         btnValidate.IsEnabled = false;
                         btnValidate.Content = "VALIDATE";
                         break;
                     case "ITEMS":
-                        lbTitle.Content = "ANN'S BUSINESS - ITEMS MANAGEMENT";
+                        lbTitle.Content = SetTitre() + " - ITEMS MANAGEMENT";
                         btnNew.Visibility = Visibility.Visible;
+                        btnValidate.Visibility = Visibility.Visible;
+                        btnCancel.Visibility = Visibility.Visible;
                         btnNew.Content = "NEW ITEM";
                         btnValidate.IsEnabled = false;
                         btnValidate.Content = "VALIDATE";
                         break;
                     case "STOCKS":
-                        lbTitle.Content = "ANN'S BUSINESS - STOCKS MANAGEMENT";
+                        lbTitle.Content = SetTitre() + " - STOCKS MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
+                        btnValidate.Visibility = Visibility.Visible;
+                        btnCancel.Visibility = Visibility.Visible;
                         btnValidate.IsEnabled = true;
                         btnValidate.Content = "VALIDATE";
                         break;
                     case "PROVIDERS":
-                        lbTitle.Content = "ANN'S BUSINESS - PROVIDERS MANAGEMENT : SEE, MODIFY AND DELETE PROVIDER AND CHOOSE BUNDLES";
+                        lbTitle.Content = SetTitre() + " - PROVIDERS MANAGEMENT : SEE, MODIFY AND DELETE PROVIDER AND CHOOSE BUNDLES";
                         btnNew.Visibility = Visibility.Visible;
+                        btnValidate.Visibility = Visibility.Visible;
+                        btnCancel.Visibility = Visibility.Visible;
                         btnNew.Content = "NEW PROVIDER";
                         dgProviderBundle.ItemsSource = new RDMS.Bundle().GetProviderBundles();
                         btnValidate.Content = "BUY";
                         btnValidate.IsEnabled = true;
                         break;
                     case "BUNDLES":
-                        lbTitle.Content = "ANN'S BUSINESS - BUNDLES  MANAGEMENT";
+                        lbTitle.Content = SetTitre() + " - BUNDLES  MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
+                        btnValidate.Visibility = Visibility.Visible;
+                        btnCancel.Visibility = Visibility.Visible;
                         btnValidate.Content = "VALIDATE";
                         btnValidate.IsEnabled = true;
                         break;
                     case "BRANDS":
-                        lbTitle.Content = "ANN'S BUSINESS - BRANDS  MANAGEMENT";
+                        lbTitle.Content = SetTitre() + " - BRANDS  MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
+                        btnValidate.Visibility = Visibility.Visible;
+                        btnCancel.Visibility = Visibility.Visible;
                         btnValidate.IsEnabled = true;
                         btnValidate.Content = "VALIDATE";
                         break;
                     case "OUTCOMES":
-                        lbTitle.Content = "ANN'S BUSINESS - OUTCOME  MANAGEMENT";
+                        lbTitle.Content = SetTitre() + " - OUTCOME  MANAGEMENT";
                         btnNew.Visibility = Visibility.Visible;
+                        btnValidate.Visibility = Visibility.Visible;
+                        btnCancel.Visibility = Visibility.Visible;
                         btnNew.Content = "NEW OUTCOME";
                         btnValidate.Content = "VALIDATE";
                         btnValidate.IsEnabled = false;
@@ -279,7 +298,7 @@ namespace AppDesktop
             new Personnes.Classes.Utilitaires.GestionGrille().GridVisibilty(gridCentre, stackPanelGauche.Children.IndexOf((UIElement)sender));
         }
 
-        private void BtnClose_Click(object sender, RoutedEventArgs e )  {Close();}
+        private void BtnClose_Click(object sender, RoutedEventArgs e) { Close(); }
 
         private void BtnValidate_Click(object sender, RoutedEventArgs e)
         {
@@ -314,7 +333,7 @@ namespace AppDesktop
                     Classes.Bundles b = dgProviderBundle.SelectedItem as Classes.Bundles;
                     if (b != null)
                     {
-                        int cleStock = new RDMS.Stock().SetBundleInStock(b.Cle,b.CleProvider,b.DateAchat,System.Convert.ToDouble(b.Prix));
+                        int cleStock = new RDMS.Stock().SetBundleInStock(b.Cle, b.CleProvider, b.DateAchat, System.Convert.ToDouble(b.Prix));
                         if (cleStock > 0)
                         {
                             btnOK.Background = System.Windows.Media.Brushes.Green;
@@ -331,7 +350,7 @@ namespace AppDesktop
                         if (cbbBrandNewBundle.SelectedIndex != -1 && tbNewBundle.Text.Trim().Length > 1 && tbWeightNewBundle.Text.Trim().Length > 1)
                         {
                             Classes.Brands c = cbbBrandNewBundle.SelectedItem as Classes.Brands;
-                            int cleBundle = new RDMS.Bundle().SetBundle(c.Cle, (int)cbbKindNewBundle.SelectedValue,(int)cbbCountryNewBundle.SelectedValue, tbNewBundle.Text, System.Convert.ToInt32(tbWeightNewBundle.Text), tbNoteNewBundle.Text);
+                            int cleBundle = new RDMS.Bundle().SetBundle(c.Cle, (int)cbbKindNewBundle.SelectedValue, (int)cbbCountryNewBundle.SelectedValue, tbNewBundle.Text, System.Convert.ToInt32(tbWeightNewBundle.Text), tbNoteNewBundle.Text);
                             if (cleBundle > 0)
                             {
                                 btnOK.Background = System.Windows.Media.Brushes.Green;
@@ -350,7 +369,7 @@ namespace AppDesktop
                     }
                     else
                     {
-                       
+
 
                     }
 
@@ -358,11 +377,11 @@ namespace AppDesktop
                 case 8://Brands
                     if (radioButtonNewBrand.IsChecked == true)
                     {
-                        if(cbbCountryNewBrand.SelectedIndex != -1 && tbNewBrand.Text.Trim().Length > 1)
+                        if (cbbCountryNewBrand.SelectedIndex != -1 && tbNewBrand.Text.Trim().Length > 1)
                         {
-                            Classes.Countries c = cbbCountryNewBrand.SelectedItem as Classes.Countries; 
-                            int cleBrand = new RDMS.Brand().SetBrand(c.Cle, tbNewBrand.Text,tbNoteNewBrand.Text);
-                            if(cleBrand > 0)
+                            Classes.Countries c = cbbCountryNewBrand.SelectedItem as Classes.Countries;
+                            int cleBrand = new RDMS.Brand().SetBrand(c.Cle, tbNewBrand.Text, tbNoteNewBrand.Text);
+                            if (cleBrand > 0)
                             {
                                 btnOK.Background = System.Windows.Media.Brushes.Green;
                                 dgBrand.ItemsSource = null;
@@ -377,7 +396,7 @@ namespace AppDesktop
                     else
                     {
                         Classes.Brands brand = gbModifyBrand.DataContext as Classes.Brands;
-                        if(brand != null)
+                        if (brand != null)
                         {
                             new RDMS.Brand().UpdBrand(brand.Cle, brand.Label, brand.Note);
                         }
@@ -389,7 +408,7 @@ namespace AppDesktop
             }
         }
 
-        private void BtnDelete_Click(object sender, RoutedEventArgs e){}
+        private void BtnDelete_Click(object sender, RoutedEventArgs e) { }
 
         private void BtnNew_Click(object sender, RoutedEventArgs e)
         {
@@ -434,7 +453,7 @@ namespace AppDesktop
 
                     break;
                 case 8:
-                   
+
 
                     break;
                 case 9:
@@ -445,13 +464,70 @@ namespace AppDesktop
             }
         }
 
-        private void BtnCancel_Click(object sender, RoutedEventArgs e){}
+        private void BtnCancel_Click(object sender, RoutedEventArgs e) { }
 
         #region ONGLET DASHBOARD
         private void SetDashboard()
         {
-            lbIncome.Content = new RDMS.Dashboard().GetIncome();
-            lbNbItems.Content = new RDMS.Dashboard().GetNbItems();
+            lbTitle.Content = SetTitre();
+            lbInvestment.Content = SetMontant(new RDMS.Outcome().GetOutcome2017());
+            lbSumOutcome.Content =  SetMontant((SetDouble(lbInvestment.Content) + SetDouble(lbOperatingCost.Content)));
+            lbToTotal.Content = SetMontant(new RDMS.Selling().GetTurnOverCurrentYear());
+            lbCash.Content = SetMontant(new RDMS.Income().GetCashCurrentYear());
+            lbCredit.Content = SetMontant(new RDMS.Credit().GetCreditCurrentYear());
+            lbCreditNY.Content = SetMontant(new RDMS.Credit().GetCreditNextYear());
+            lbSum.Content = SetMontant((SetDouble(lbCash.Content) + SetDouble(lbCredit.Content) + SetDouble(lbCreditNY.Content)));
+            lbDelta.Content = SetMontant((SetDouble(lbToTotal.Content) - SetDouble(lbSum.Content)));
+            lbCurrentBalance.Content = SetMontant(SetDouble(lbCash.Content) -(SetDouble(lbSumOutcome.Content) ));
+            lbYearBalance.Content = SetMontant(((SetDouble(lbCash.Content) + SetDouble(lbCreditNY.Content)) - SetDouble(lbSumOutcome.Content)));
+            lbFutureBalance.Content = SetMontant((SetDouble(lbSum.Content) -SetDouble(lbSumOutcome.Content)));
+        }
+
+        private void SetCategories()
+        {
+            System.Collections.Generic.List<Classes.ReferencesSimples> liste = new RDMS.Item().GetCategories();
+            int col = 0;
+            int compteur = 11;
+            int row = 0;
+            for (int i = 0; i <liste.Count;++i)
+            {
+                System.Windows.Controls.Label label = new System.Windows.Controls.Label();
+                label.Content = liste[i].Label.ToString().ToUpper();
+                //label.Style = (Style)FindResource("LabelDashboard");
+                label.SetResourceReference(StyleProperty, "LabelDashboard");
+                System.Windows.Controls.Grid.SetColumn(label, col);
+                System.Windows.Controls.Grid.SetRow(label, row);
+                col += 1;
+                gridStockDashboard.Children.Add(label);
+                if (i> 0 && i % compteur == 0)
+                {
+                    row += 2;
+                    compteur += 11;
+                    col = 0;    
+                }    
+            }
+        }
+
+        private string SetTitre()
+        {
+            return "ANN'S BUSINESS " + System.DateTime.Today.ToLongDateString().ToUpper();
+        }
+
+        private string SetMontant(double d)
+        {
+            return d.ToString() + " PHP";
+        }
+
+        private double SetDouble(object o)
+        {
+            if(o != null)
+            {
+                string s = o.ToString();
+                s = s.Remove(s.Length - 3);
+                return System.Convert.ToDouble(s);
+            }
+            else { return 0.0; }
+            
         }
         #endregion FIN ONGLET DASHBOARD
 
@@ -533,7 +609,7 @@ namespace AppDesktop
                 if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
                 {
                     Classes.Items item = grid.SelectedItem as Classes.Items;
-                    Fenetres.Item f = new Fenetres.Item(item.Cle);
+                    Fenetres.Item f = new Fenetres.Item(item.CleArticle);
                     f.Show();
                 }
             }

@@ -60,7 +60,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Style="{DynamicResource stackPanelHautSup}" Grid.ColumnSpan="24">
-            <Label x:Name="lbTitle" Style="{StaticResource LabelTitre}">ANN'S BUSINESS</Label>
+            <Label x:Name="lbTitle" Style="{StaticResource LabelTitre}"></Label>
             <Button x:Name="btnOK" Style="{StaticResource buttonStackPanelBas}"></Button>
         </StackPanel>
         <StackPanel x:Name="stackPanelGauche" Style="{DynamicResource stackPanelVerticalgauche}" Grid.ColumnSpan="2" Grid.RowSpan="22">
@@ -108,28 +108,155 @@
     
                 </Grid.ColumnDefinitions>
                 <StackPanel Style="{DynamicResource stackPanelHautSup}">
-                    
+                    <Label x:Name="lbFinance" Style="{DynamicResource LabelTitre}">FINANCE</Label>
                 </StackPanel>
-                <StackPanel Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="3" Background="Bisque">
-                    
-                </StackPanel>
-                <StackPanel  Grid.Row="2" Grid.RowSpan="3" Grid.Column="4" Grid.ColumnSpan="3" Background="White">
-                    <Label x:Name="lbIncome" Background="Aqua" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26"></Label>
-                </StackPanel>
+                <Grid Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="12" x:Name="gridFinance" ShowGridLines="False">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0"  Grid.Column="0"  Style="{DynamicResource LabelDashboard}" >TURNOVER 01</Label>
+                    <Label Grid.Row="1"  Grid.Column="0"  Style="{DynamicResource LabelDashboard}" >TURNOVER 02</Label>
+                    <Label Grid.Row="2"  Grid.Column="0"  Style="{DynamicResource LabelDashboard}" >TURNOVER 03</Label>
+                    <Label Grid.Row="3"  Grid.Column="0"  Style="{DynamicResource LabelDashboard}" >TURNOVER 04</Label>
+                    <Label Grid.Row="4"  Grid.Column="0"  Style="{DynamicResource LabelDashboard}" >TURNOVER 05</Label>
+                    <Label Grid.Row="5"  Grid.Column="0"  Style="{DynamicResource LabelDashboard}" >TURNOVER 06</Label>
+                    <Label x:Name="lbTo01" Grid.Row="0"  Grid.Column="1"  Style="{DynamicResource LabelDashboard}" ></Label>
+                    <Label x:Name="lbTo02" Grid.Row="1"  Grid.Column="1"  Style="{DynamicResource LabelDashboard}" ></Label>
+                    <Label x:Name="lbTo03" Grid.Row="2"  Grid.Column="1"  Style="{DynamicResource LabelDashboard}" ></Label>
+                    <Label x:Name="lbTo04" Grid.Row="3"  Grid.Column="1"  Style="{DynamicResource LabelDashboard}" ></Label>
+                    <Label x:Name="lbTo05" Grid.Row="4"  Grid.Column="1"  Style="{DynamicResource LabelDashboard}" ></Label>
+                    <Label x:Name="lbTo06" Grid.Row="5"  Grid.Column="1"  Style="{DynamicResource LabelDashboard}" ></Label>
+                    <Label Grid.Row="0"  Grid.Column="2"  Style="{DynamicResource LabelDashboard}" >TURNOVER 07</Label>
+                    <Label Grid.Row="1"  Grid.Column="2"  Style="{DynamicResource LabelDashboard}" >TURNOVER 08</Label>
+                    <Label Grid.Row="2"  Grid.Column="2"  Style="{DynamicResource LabelDashboard}" >TURNOVER 09</Label>
+                    <Label Grid.Row="3"  Grid.Column="2"  Style="{DynamicResource LabelDashboard}" >TURNOVER 10</Label>
+                    <Label Grid.Row="4"  Grid.Column="2"  Style="{DynamicResource LabelDashboard}" >TURNOVER 11</Label>
+                    <Label Grid.Row="5"  Grid.Column="2"  Style="{DynamicResource LabelDashboard}" >TURNOVER 12</Label>
+                    <Label x:Name="lbTo07" Grid.Row="0"  Grid.Column="3"  Style="{DynamicResource LabelDashboard}" ></Label>
+                    <Label x:Name="lbTo08" Grid.Row="1"  Grid.Column="3"  Style="{DynamicResource LabelDashboard}" ></Label>
+                    <Label x:Name="lbTo09" Grid.Row="2"  Grid.Column="3"  Style="{DynamicResource LabelDashboard}" ></Label>
+                    <Label x:Name="lbTo10" Grid.Row="3"  Grid.Column="3"  Style="{DynamicResource LabelDashboard}" ></Label>
+                    <Label x:Name="lbTo11" Grid.Row="4"  Grid.Column="3"  Style="{DynamicResource LabelDashboard}" ></Label>
+                    <Label x:Name="lbTo12" Grid.Row="5"  Grid.Column="3"  Style="{DynamicResource LabelDashboard}" ></Label>
+                    <Label Grid.Row="0"  Grid.Column="4"  Style="{DynamicResource LabelDashboard}" >TURNOVER TOTAL</Label>
+                    <Label Grid.Row="1"  Grid.Column="4"  Style="{DynamicResource LabelDashboard}" >CASH </Label>
+                    <Label Grid.Row="2"  Grid.Column="4"  Style="{DynamicResource LabelDashboard}" >CREDIT 2017 </Label>
+                    <Label Grid.Row="3"  Grid.Column="4"  Style="{DynamicResource LabelDashboard}" >CREDIT 2018</Label>
+                    <Label Grid.Row="4"  Grid.Column="4"  Style="{DynamicResource LabelDashboard}" >SUM TOTAL</Label>
+                    <Label Grid.Row="5"  Grid.Column="4"  Style="{DynamicResource LabelDashboard}" >DELTA</Label>
+                    <Label x:Name="lbToTotal" Grid.Row="0"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
+                    <Label x:Name="lbCash" Grid.Row="1"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
+                    <Label x:Name="lbCredit" Grid.Row="2"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
+                    <Label x:Name="lbCreditNY" Grid.Row="3"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
+                    <Label x:Name="lbSum" Grid.Row="4"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
+                    <Label x:Name="lbDelta" Grid.Row="5"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
+                    <Label Grid.Row="0"  Grid.Column="6"  Style="{DynamicResource LabelDashboard}"  >INVESTMENT</Label>
+                    <Label Grid.Row="1"  Grid.Column="6"  Style="{DynamicResource LabelDashboard}"  >OPERATING COST</Label>
+                    <Label Grid.Row="5"  Grid.Column="6"  Style="{DynamicResource LabelDashboard}" >SUM TOTAL </Label>
+                    <Label x:Name="lbInvestment" Grid.Row="0"  Grid.Column="7"  Style="{DynamicResource LabelDashboard}" Foreground="Red"/>
+                    <Label x:Name="lbOperatingCost" Grid.Row="1"  Grid.Column="7"  Style="{DynamicResource LabelDashboard}" Foreground="Red"/>
+                    <Label x:Name="lbSumOutcome" Grid.Row="5"  Grid.Column="7"  Style="{DynamicResource LabelDashboard}" Foreground="Red"/>
+                    <Label Grid.Row="0"  Grid.Column="8"  Style="{DynamicResource LabelDashboard}" FontSize="16" Padding="0,3" Margin="0,3">CURRENT BALANCE </Label>
+                    <Label Grid.Row="1"  Grid.Column="8"  Style="{DynamicResource LabelDashboard}" FontSize="16" >YEAR BALANCE</Label>
+                    <Label Grid.Row="2"  Grid.Column="8"  Style="{DynamicResource LabelDashboard}" FontSize="16">FUTURE BALANCE</Label>
+                    <Label x:Name="lbCurrentBalance" Grid.Row="0"  Grid.Column="9"  Style="{DynamicResource LabelDashboard}" FontSize="16" Foreground="BlueViolet"></Label>
+                    <Label x:Name="lbYearBalance" Grid.Row="1"  Grid.Column="9"  Style="{DynamicResource LabelDashboard}" FontSize="16" Foreground="BlueViolet"></Label>
+                    <Label x:Name="lbFutureBalance" Grid.Row="2"  Grid.Column="9"  Style="{DynamicResource LabelDashboard}" FontSize="16" Foreground="BlueViolet"></Label>
+                </Grid>
+
                 <StackPanel  Grid.Row="4" Style="{DynamicResource stackPanelHautSup}">
-
-
-
+                    <Label x:Name="lbSales" Style="{DynamicResource LabelTitre}">SALES - ITEMS</Label>
                 </StackPanel>
-                <StackPanel Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="3" Background="Bisque">
+                <Grid x:Name="gridSaleDashboard" Grid.Row="5" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="12" ShowGridLines="False">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+         
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >SALES 06</Label>
+                    <Label Grid.Row="0" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >SALES 07</Label>
+                    <Label Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >SALES 08</Label>
+                    <Label Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >SALES 09</Label>
+                    <Label Grid.Row="0" Grid.RowSpan="1" Grid.Column="4" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >SALES 10</Label>
+                    <Label Grid.Row="0" Grid.RowSpan="1" Grid.Column="5" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >SALES 11</Label>
+                    <Label Grid.Row="0" Grid.RowSpan="1" Grid.Column="6" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >SALES 12</Label>
+                    <Label Grid.Row="0" Grid.RowSpan="1" Grid.Column="7" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >SUM SALES 2017</Label>
 
-                </StackPanel>
-                <StackPanel  Grid.Row="6" Grid.RowSpan="3" Grid.Column="4" Grid.ColumnSpan="3" Background="White">
-                    <Label x:Name="lbNbItems" Background="Aqua" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26"></Label>
-                </StackPanel>
+                    <Label Grid.Row="2" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >ITEMS 06</Label>
+                    <Label Grid.Row="2" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >ITEMS 07</Label>
+                    <Label Grid.Row="2" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >ITEMS 08</Label>
+                    <Label Grid.Row="2" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >ITEMS 09</Label>
+                    <Label Grid.Row="2" Grid.RowSpan="1" Grid.Column="4" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >ITEMS 10</Label>
+                    <Label Grid.Row="2" Grid.RowSpan="1" Grid.Column="5" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >ITEMS 11</Label>
+                    <Label Grid.Row="2" Grid.RowSpan="1" Grid.Column="6" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >ITEMS 12</Label>
+                    <Label Grid.Row="2" Grid.RowSpan="1" Grid.Column="7" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >SUM ITEMS 2017</Label>
+
+
+                </Grid>
+
                 <StackPanel  Grid.Row="8" Style="{DynamicResource stackPanelHautSup}">
-
+                    <Label x:Name="lbStock" Style="{DynamicResource LabelTitre}">STOCK</Label>
                 </StackPanel>
+                <Grid x:Name="gridStockDashboard" Grid.Row="9" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="12" ShowGridLines="False">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                </Grid>
             </Grid>
             <Grid x:Name="gridSelling" Style="{StaticResource GridStandard}" Visibility="Hidden">
                 <Grid.RowDefinitions>
@@ -869,16 +996,16 @@
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.Column="1"  Grid.ColumnSpan="3" Style="{DynamicResource LabelSousTitre}">OUTCOMES LIST</Label>
                 <ComboBox x:Name="cbOutcome" Grid.Row="0" Grid.Column="4"  Grid.ColumnSpan="3" Style="{DynamicResource ComboBoxStandard}"/>
-                <DataGrid x:Name="dgOutcome" Grid.Row="1" Grid.Column="1" Grid.RowSpan="15" Grid.ColumnSpan="22" AutoGenerateColumns="True" Margin="5,10">
+                <DataGrid x:Name="dgOutcome" Grid.Row="1" Grid.Column="1" Grid.RowSpan="15" Grid.ColumnSpan="22" AutoGenerateColumns="False" Margin="5,10">
                 </DataGrid>
             </Grid>
         </Grid>
         <StackPanel Style="{DynamicResource stackPanelBas}" Grid.Row="23"  Grid.ColumnSpan="24">
             <Button x:Name="btnClose" Style="{StaticResource buttonStackPanelBas}" Click="BtnClose_Click">CLOSE</Button>
-            <Button x:Name="btnValidate" Style="{StaticResource buttonStackPanelBas}" Click="BtnValidate_Click" >VALIDATE</Button>
+            <Button x:Name="btnValidate" Style="{StaticResource buttonStackPanelBas}" Click="BtnValidate_Click" Visibility="Collapsed">VALIDATE</Button>
             <Button x:Name="btnDelete" Style="{StaticResource buttonStackPanelBas}" Click="BtnDelete_Click" Visibility="Collapsed">DELETE</Button>
             <Button x:Name="btnNew" Style="{StaticResource buttonStackPanelBas}" Click="BtnNew_Click" Visibility="Collapsed">NEW</Button>
-            <Button x:Name="btnCancel" Style="{StaticResource buttonStackPanelBas}" Click="BtnCancel_Click" >CANCEL</Button>
+            <Button x:Name="btnCancel" Style="{StaticResource buttonStackPanelBas}" Click="BtnCancel_Click" Visibility="Collapsed">CANCEL</Button>
         </StackPanel>
     </Grid>
 </Window>

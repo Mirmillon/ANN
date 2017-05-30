@@ -52,9 +52,14 @@ namespace AppDesktop.RDMS
                 try
                 {
                     conn.Open();
-                    double income = (double)commande.ExecuteScalar();
+                    object income = commande.ExecuteScalar();
                     conn.Close();
-                    return income;
+                    if (!(income == System.DBNull.Value))
+                    {
+                        return System.Convert.ToDouble(income);
+                    }
+                    else{ return 0; }
+                    
                 }
                 catch (System.Exception ex)
                 {

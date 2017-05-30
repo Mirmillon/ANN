@@ -6,6 +6,9 @@ namespace AppDesktop.RDMS
 {
     internal class Income
     {
+
+        internal double GetCashCurrentYear() { return new Generic().GetDouble("GET_CASH_CURRENT_YEAR"); }
+
         internal int SetIncome(int cleVente, double argent, System.DateTime d)
         {
             int cle = 0;

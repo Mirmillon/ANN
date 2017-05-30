@@ -86,7 +86,7 @@ namespace AppDesktop.RDMS
                         while (reader.Read())
                         {
                             Classes.Items b = new Classes.Items();
-                            b.Cle = (int)reader[0];
+                            b.CleArticle = (int)reader[0];
                             if (!(reader[1] == System.DBNull.Value))
                             {
                                 b.RefArticle = (string)reader[1];
@@ -199,7 +199,7 @@ namespace AppDesktop.RDMS
                         while (reader.Read())
                         {
                             
-                            b.Cle = (int)reader[0];
+                            b.CleArticle = (int)reader[0];
                             if (!(reader[1] == System.DBNull.Value))
                             {
                                 b.RefArticle = (string)reader[1];

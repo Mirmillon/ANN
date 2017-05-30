@@ -2,7 +2,7 @@
 
 namespace AppDesktop.Classes
 {
-    public class Items:Sellings
+    public class Items
     {
         int cleArticle;
         string refArticle;

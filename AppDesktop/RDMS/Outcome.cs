@@ -3,15 +3,12 @@ namespace AppDesktop.RDMS
 {
     class Outcome
     {
-        internal System.Collections.Generic.List<Classes.ReferencesSimples> GetKindOutcome()
-        {
-            return new Generic().GetReferencesSimples("GET_OUTCOME_KINDS");
-        }
+        internal System.Collections.Generic.List<Classes.ReferencesSimples> GetKindOutcome()   {   return new Generic().GetReferencesSimples("GET_OUTCOME_KINDS"); }
+        internal double  GetOutcome2017()   { return new Generic().GetDouble("get_Outcome2017"); }
 
 
         internal int SetOutcome(System.DateTime d, int c, double m , string note)
         {
-
             int cle = 0;
             FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
             using (FirebirdSql.Data.FirebirdClient.FbCommand commande = conn.CreateCommand())
@@ -24,8 +21,6 @@ namespace AppDesktop.RDMS
                 pc.Add("OUTCOME", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = c;
                 pc.Add("MONTANT", FirebirdSql.Data.FirebirdClient.FbDbType.Double, 0).Value = m;
                 pc.Add("NOTE", FirebirdSql.Data.FirebirdClient.FbDbType.VarChar, 300).Value = note;
-                
-
                 try
                 {
                     conn.Open();

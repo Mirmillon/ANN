@@ -3,6 +3,10 @@ namespace AppDesktop.RDMS
 {
     internal class Credit
     {
+        internal double GetCreditCurrentYear() { return new Generic().GetDouble("GET_SUM_CREDIT"); }
+
+        internal double GetCreditNextYear() { return new Generic().GetDouble("GET_SUM_CREDIT_NY"); }
+
         internal int SetCredit(int cleClient, int cleSelling, System.DateTime dateDue,double montant)
         {
             int cle = 0;

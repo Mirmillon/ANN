@@ -66,14 +66,14 @@ namespace AppDesktop.Fenetres
             Classes.Items item = gridItem.DataContext as Classes.Items;
             if(item != null)
             {
-                if(item.Cle == 0)
+                if(item.CleArticle == 0)
                 {
                     new RDMS.Item().SetItem(item.RefArticle, item.Categorie, item.TypeArticle, item.Size, item.GenderArticle, item.Color, item.Brand, tbDescription.Text, System.Convert.ToDouble(tbPrix.Text),tbFileImage.Text);
                   
                 }
                 else
                 {
-                    new RDMS.Item().UpdItem(item.Cle, item.RefArticle, item.Categorie, item.TypeArticle, item.Size, item.GenderArticle, item.Color, item.Brand, tbDescription.Text, System.Convert.ToDouble(tbPrix.Text), tbFileImage.Text);
+                    new RDMS.Item().UpdItem(item.CleArticle, item.RefArticle, item.Categorie, item.TypeArticle, item.Size, item.GenderArticle, item.Color, item.Brand, tbDescription.Text, System.Convert.ToDouble(tbPrix.Text), tbFileImage.Text);
                 }
             }
         }
