@@ -13,18 +13,28 @@ namespace AppDesktop.Fenetres
             cbbTypePayment.SelectionChanged += CbbTypePayment_SelectionChanged;
             tbCash.TextChanged += TbCash_TextChanged;
             gridItems.ItemsSource = GetListeSimple();
-            new Utilitaires.GestionDgColumn().ColumnCbKindItem(gridItems, "TypeArticle");
+            //new Utilitaires.GestionDgColumn().ColumnCbKindItem(gridItems, "TypeArticle");
+            new Utilitaires.GestionDgColumn().ColumnPriceItems(gridItems);
             new Utilitaires.GestionDgColumn().ColumnLabel(gridItems, "NOMBRE" , "Nombre");
-            gridItems.Columns[0].IsReadOnly = true;
-            gridItems.RowEditEnding += GridItems_RowEditEnding;
+            new Utilitaires.GestionDgColumn().ColumnLabel(gridItems, "SUM", "Cout");
 
+            gridItems.Columns[0].IsReadOnly = true;
+            //gridItems.RowEditEnding += GridItems_RowEditEnding;
+
+            btnDone.Click += BtnDone_Click;
+
+        }
+
+        private void BtnDone_Click(object sender, RoutedEventArgs e)
+        {
+            SetResultat();
         }
 
         private void GridItems_RowEditEnding(object sender, System.Windows.Controls.DataGridRowEditEndingEventArgs e)
         {
             if (e.EditAction == System.Windows.Controls.DataGridEditAction.Commit)
             {
-                SetNombre();
+                SetResultat();
             }
         }
 
@@ -158,7 +168,7 @@ namespace AppDesktop.Fenetres
 
             if (r != null)
             {
-                SetNombre();
+                SetResultat();
                 switch (r.Label)
                 {
                     case "CASH":
@@ -183,11 +193,12 @@ namespace AppDesktop.Fenetres
         private System.Collections.Generic.List<Classes.ItemsSale> GetListeSimple()
         {
             System.Collections.Generic.List<Classes.ItemsSale> l = new System.Collections.Generic.List<Classes.ItemsSale>();
-            System.Collections.Generic.List<Classes.ReferencesSimples> type = new RDMS.Bundle().GetKindBundles();
+            System.Collections.Generic.List<Classes.Price> type = new RDMS.Stock().GetPrices();
             for (int i = 0; i < type.Count; ++i)
             {
                 Classes.ItemsSale s = new Classes.ItemsSale();
-                s.TypeArticle = type[i].Cle;
+                s.Code = type[i].Code;
+                s.Prix = type[i].Prix;
                 l.Add(s);
             }
             return l;
@@ -205,10 +216,38 @@ namespace AppDesktop.Fenetres
             return nombre;
         }
 
-        private void SetNombre()
+        private double GetTotal()
+        {
+            double total = 0;
+            System.Collections.Generic.List<Classes.ItemsSale> liste = GetListeItems();
+            for (int i = 0; i < liste.Count; ++i)
+            {
+                total += liste[i].Cout;
+            }
+
+            return total;
+        }
+
+        private void SetResultat()
         {
             tbNbItem.Text = System.String.Empty;
             tbNbItem.Text = GetNombre().ToString();
+            tbAmount.Text = System.String.Empty;
+            tbAmount.Text = GetTotal().ToString();
+            gridItems.ItemsSource = GetCoutByCode();
+
+
+        }
+
+        private System.Collections.Generic.List<Classes.ItemsSale> GetCoutByCode()
+        {
+            System.Collections.Generic.List<Classes.ItemsSale> liste = GetListeItems();
+            foreach(Classes.ItemsSale s in liste)
+            {
+                s.Cout = s.Nombre * s.Prix;
+            }
+            return liste;
+            
         }
 
         private System.Collections.Generic.List<Classes.ItemsSale>  GetListeItems()

@@ -59,6 +59,7 @@
                                        Mode=TwoWay,
                                        TargetNullValue={x:Static System:DateTime.Now}}"
             ></DatePicker>
+            <Button x:Name="btnDone" Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="2" Style="{DynamicResource buttonStandard}">FINISH</Button>
             <Label Grid.Row="5" Grid.Column="7" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}">ITEMS NUMBER</Label>
             <TextBox x:Name="tbNbItem" Grid.Row="5" Grid.Column="9" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxBusiness}" Text="{Binding NbItems}" />
             <Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}">SUM TOTAL</Label>
@@ -68,31 +69,7 @@
             <Label Grid.Row="6" Grid.Column="7" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}">CASH</Label>
             <TextBox x:Name="tbCash" Grid.Row="6" Grid.Column="9" Grid.ColumnSpan="2" Style="{DynamicResource TextBoxBusiness}" Text="{Binding Amount}" />
             <DataGrid  x:Name="gridItems" Grid.ColumnSpan="9" Grid.Column="1" HorizontalAlignment="Left" Height="206" Margin="10,0,0,0" Grid.Row="1" Grid.RowSpan="4" VerticalAlignment="Top" Width="720" AutoGenerateColumns="False"></DataGrid>
-            <!--<Grid x:Name="gridItems" Grid.ColumnSpan="9" Grid.Column="1" HorizontalAlignment="Left" Height="206" Margin="10,0,0,0" Grid.Row="1" Grid.RowSpan="4" VerticalAlignment="Top" Width="720">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Label Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2"  Style="{DynamicResource LabelStandard}" ></Label>
-                <TextBox Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxBusiness}" Margin="22,5,3,5"  TextChanged="TextBoxNombre_Changed"/>
-                <Label Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"  Style="{DynamicResource LabelStandard}"></Label>
-                <TextBox Grid.Row="1" Grid.Column="7" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxBusiness}" Margin="22,5,3,5" TextChanged="TextBoxNombre_Changed"/>
-                <Label Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"  Style="{DynamicResource LabelStandard}"></Label>
-                <TextBox Grid.Row="2" Grid.Column="7" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxBusiness}" Margin="22,5,3,5" TextChanged="TextBoxNombre_Changed"/>
-                <Label Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="2"  Style="{DynamicResource LabelStandard}"></Label>
-                <TextBox Grid.Row="3" Grid.Column="7" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxBusiness}" Margin="22,5,3,5" TextChanged="TextBoxNombre_Changed"/>
-            </Grid>-->
+        
 
         </Grid>
         <Grid x:Name="dgCredit" Grid.Row="8" Grid.RowSpan="1" IsEnabled="False">

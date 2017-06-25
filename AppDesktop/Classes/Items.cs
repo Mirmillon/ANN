@@ -2,7 +2,7 @@
 
 namespace AppDesktop.Classes
 {
-    public class Items
+    public class Items : System.ComponentModel.INotifyPropertyChanged
     {
         int cleArticle;
         string refArticle;
@@ -15,6 +15,8 @@ namespace AppDesktop.Classes
         string description;
         double prix;
         string imageSource = null;
+        string code;
+
        
 
         public int CleArticle { get => cleArticle; set => cleArticle = value; }
@@ -28,5 +30,17 @@ namespace AppDesktop.Classes
         public int Brand { get => brand; set => brand = value; }
         public int Categorie { get => categorie; set => categorie = value; }
         public string ImageSource { get => imageSource; set => imageSource = value; }
+        public string Code { get => code; set => code = value; }
+
+
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string propName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propName));
+            }
+        }
     }
 }

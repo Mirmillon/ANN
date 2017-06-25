@@ -72,7 +72,24 @@ namespace AppDesktop
             new Utilitaires.GestionDgColumn().ColumnBrand(dgStock, "CleBrand");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgStock, "PRICE", "Prix");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgStock, "NUMBER OF ITEMS", "NbItems");
-            new Utilitaires.GestionDgColumn().ColumnLabel(dgStock, "COST ITEM", "PriceItems");
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgStock, "COST ITEM", "CostItems");
+
+
+
+            dgValuesBundle.ItemsSource = new RDMS.Stock().GetValeurs();
+            new Utilitaires.GestionDgColumn().ColumnCodeItems(dgValuesBundle);
+            new Utilitaires.GestionDgColumn().ColumnPriceItems(dgValuesBundle);
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgValuesBundle, "ITEMS", "NbItems");
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgValuesBundle, "VALUES", "Valeur");
+
+
+            System.Collections.Generic.List<Classes.Valeurs> l = new RDMS.Stock().GetValeursTotal();
+            dgValuesTotal.ItemsSource = l;
+            lblValeurStock.Content = new RDMS.Stock().GetNombreItemsInStock().ToString() + " ITEMS VALUE IN STOCK : " + GetValeurStock(l).ToString() + " PHP";
+            new Utilitaires.GestionDgColumn().ColumnCodeItems(dgValuesTotal);
+            new Utilitaires.GestionDgColumn().ColumnPriceItems(dgValuesTotal);
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgValuesTotal, "ITEMS", "NbItems");
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgValuesTotal, "VALUES", "Valeur");
 
 
             //PROVIDER
@@ -487,24 +504,25 @@ namespace AppDesktop
         {
             System.Collections.Generic.List<Classes.ReferencesSimples> liste = new RDMS.Item().GetCategories();
             int col = 0;
-            int compteur = 11;
+            int compteur = 6;
             int row = 0;
             for (int i = 0; i <liste.Count;++i)
             {
                 System.Windows.Controls.Label label = new System.Windows.Controls.Label();
                 label.Content = liste[i].Label.ToString().ToUpper();
-                //label.Style = (Style)FindResource("LabelDashboard");
+                label.HorizontalAlignment = HorizontalAlignment.Left;
+                label.HorizontalContentAlignment = HorizontalAlignment.Left;
                 label.SetResourceReference(StyleProperty, "LabelDashboard");
                 System.Windows.Controls.Grid.SetColumn(label, col);
                 System.Windows.Controls.Grid.SetRow(label, row);
-                col += 1;
+                row += 1;
                 gridStockDashboard.Children.Add(label);
-                if (i> 0 && i % compteur == 0)
+                if (i> 0 && (i+1) % compteur == 0)
                 {
-                    row += 2;
-                    compteur += 11;
-                    col = 0;    
-                }    
+                    row = 0;
+                    compteur += 6;
+                    col += 2;    
+                }
             }
         }
 
@@ -759,5 +777,15 @@ namespace AppDesktop
             else { return false; }
         }
         #endregion FIN ONGLET OUTCOME
+
+        private double GetValeurStock(System.Collections.Generic.List<Classes.Valeurs> l )
+        {
+            double valeur = 0;
+            foreach(Classes.Valeurs v in l)
+            {
+                valeur += v.Valeur;
+            }
+            return valeur;
+        }
     }
 }

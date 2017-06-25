@@ -234,7 +234,7 @@
                 <StackPanel  Grid.Row="8" Style="{DynamicResource stackPanelHautSup}">
                     <Label x:Name="lbStock" Style="{DynamicResource LabelTitre}">STOCK</Label>
                 </StackPanel>
-                <Grid x:Name="gridStockDashboard" Grid.Row="9" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="12" ShowGridLines="False">
+                <Grid x:Name="gridStockDashboard" Grid.Row="9" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="12" ShowGridLines="True">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -248,8 +248,11 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
+
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -584,14 +587,18 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="1"  Grid.ColumnSpan="3" Style="{DynamicResource LabelSousTitre}">BUNDLES IN STOCK</Label>
-                <DataGrid x:Name="dgStock" Grid.Row="1" Grid.Column="1"  Grid.ColumnSpan="21" Grid.RowSpan="9" AutoGenerateColumns="False">
+                <Label Grid.Row="0" Grid.Column="1"  Grid.ColumnSpan="4" Style="{DynamicResource LabelSousTitre}">BUNDLES IN STOCK</Label>
+                <DataGrid x:Name="dgStock" Grid.Row="1" Grid.Column="1"  Grid.ColumnSpan="21" Grid.RowSpan="7" AutoGenerateColumns="False">
 
                 </DataGrid>
 
-                <Label Grid.Row="10" Grid.Column="1"  Grid.ColumnSpan="3" Style="{DynamicResource LabelSousTitre}">ITEMS IN STOCK</Label>
-                <DataGrid Grid.Row="11" Grid.Column="1"  Grid.ColumnSpan="21" Grid.RowSpan="12">
+                <Label Grid.Row="9" Grid.Column="1"  Grid.ColumnSpan="4" Style="{DynamicResource LabelSousTitre}">ITEMS VALUE BY BUNDLE</Label>
+                <DataGrid x:Name="dgValuesBundle" Grid.Row="10" Grid.Column="1"  Grid.ColumnSpan="21" Grid.RowSpan="4" AutoGenerateColumns="False">
                     
+                </DataGrid>
+                <Label x:Name="lblValeurStock" Grid.Row="14" Grid.Column="1"  Grid.ColumnSpan="8" Style="{DynamicResource LabelSousTitre}">ITEMS VALUE IN STOCK</Label>
+                <DataGrid x:Name="dgValuesTotal" Grid.Row="15" Grid.Column="1"  Grid.ColumnSpan="21" Grid.RowSpan="4" AutoGenerateColumns="False">
+
                 </DataGrid>
             </Grid>
             <Grid x:Name="gridProvider" Style="{StaticResource GridStandard}" Visibility="Hidden">

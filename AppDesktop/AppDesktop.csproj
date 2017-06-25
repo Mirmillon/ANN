@@ -68,10 +68,12 @@
     <Compile Include="Classes\KindBundles.cs" />
     <Compile Include="Classes\Outcomes.cs" />
     <Compile Include="Classes\Payments.cs" />
+    <Compile Include="Classes\Price.cs" />
     <Compile Include="Classes\Providers.cs" />
     <Compile Include="Classes\ReferencesSimples.cs" />
     <Compile Include="Classes\Sellings.cs" />
     <Compile Include="Classes\Stocks.cs" />
+    <Compile Include="Classes\Valeurs.cs" />
     <Compile Include="Fenetres\Item.xaml.cs">
       <DependentUpon>Item.xaml</DependentUpon>
     </Compile>
