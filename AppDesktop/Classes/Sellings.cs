@@ -13,6 +13,7 @@ namespace AppDesktop.Classes
         double credit;
         int customer;
         System.DateTime dateDue = System.DateTime.Today.AddDays(1);
+        int cleCredit;
 
 
 
@@ -64,6 +65,7 @@ namespace AppDesktop.Classes
         }
         public System.DateTime DateDue { get => dateDue; set => dateDue = value; }
         public int CleClient { get => customer; set => customer = value; }
+        public int CleCredit { get => cleCredit; set => cleCredit = value; }
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 

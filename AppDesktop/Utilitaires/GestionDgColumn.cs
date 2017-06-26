@@ -157,11 +157,13 @@ namespace AppDesktop.Utilitaires
 
         internal System.Windows.Controls.DataGridComboBoxColumn ColumnCodeItem(System.Windows.Controls.DataGrid dg)
         {
-            System.Windows.Controls.DataGridComboBoxColumn d = new System.Windows.Controls.DataGridComboBoxColumn();         
+            System.Windows.Controls.DataGridComboBoxColumn d = new System.Windows.Controls.DataGridComboBoxColumn();
+            System.Windows.Data.Binding b = new System.Windows.Data.Binding("ClePrix");
             //Set the properties on the new column
             d.ItemsSource = new RDMS.Stock().GetPrices();
-            d.SelectedValuePath = "Cle";
+            d.SelectedValuePath = "ClePrix";
             d.DisplayMemberPath = "Prix";
+            d.SelectedValueBinding = b;
             d.Header = "PRICE";
             //Add the column to the DataGrid
             dg.Columns.Add(d);
@@ -171,10 +173,10 @@ namespace AppDesktop.Utilitaires
         internal System.Windows.Controls.DataGridComboBoxColumn ColumnPriceItems(System.Windows.Controls.DataGrid dg)
         {
             System.Windows.Controls.DataGridComboBoxColumn d = new System.Windows.Controls.DataGridComboBoxColumn();
-            System.Windows.Data.Binding b = new System.Windows.Data.Binding("Cle");
+            System.Windows.Data.Binding b = new System.Windows.Data.Binding("ClePrix");
             //Set the properties on the new column
             d.ItemsSource = new RDMS.Stock().GetPrices();
-            d.SelectedValuePath = "Cle";
+            d.SelectedValuePath = "ClePrix";
             d.DisplayMemberPath = "Prix";
             d.SelectedValueBinding = b;
             d.Header = "PRICE";

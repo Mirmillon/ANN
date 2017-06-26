@@ -7,18 +7,20 @@ namespace AppDesktop.Fenetres
     /// </summary>
     public partial class Selling : Window
     {
+        private System.Collections.Generic.List<Classes.ItemsSale> liste = null;
+
         public Selling()
         {
             InitializeComponent();
             cbbTypePayment.SelectionChanged += CbbTypePayment_SelectionChanged;
             tbCash.TextChanged += TbCash_TextChanged;
+
             gridItems.ItemsSource = GetListeSimple();
             //new Utilitaires.GestionDgColumn().ColumnCbKindItem(gridItems, "TypeArticle");
-            new Utilitaires.GestionDgColumn().ColumnPriceItems(gridItems);
+            new Utilitaires.GestionDgColumn().ColumnCodeItem(gridItems);
             new Utilitaires.GestionDgColumn().ColumnLabel(gridItems, "NOMBRE" , "Nombre");
             new Utilitaires.GestionDgColumn().ColumnLabel(gridItems, "SUM", "Cout");
 
-            gridItems.Columns[0].IsReadOnly = false;
             //gridItems.RowEditEnding += GridItems_RowEditEnding;
 
             btnDone.Click += BtnDone_Click;
@@ -27,7 +29,8 @@ namespace AppDesktop.Fenetres
 
         private void BtnDone_Click(object sender, RoutedEventArgs e)
         {
-            SetResultat();
+            MessageBox.Show(gridItems.Items[0].GetType().ToString());
+           //SetResultat();
         }
 
         //private void GridItems_RowEditEnding(object sender, System.Windows.Controls.DataGridRowEditEndingEventArgs e)
@@ -197,13 +200,13 @@ namespace AppDesktop.Fenetres
             for (int i = 0; i < type.Count; ++i)
             {
                 Classes.ItemsSale s = new Classes.ItemsSale();
-                s.Code = type[i].Code;
+                s.ClePrix= type[i].ClePrix;
                 s.Prix = type[i].Prix;
                 l.Add(s);
             }
             return l;
-        } 
-        
+        }
+
         private int GetNombre()
         {
             int nombre = 0;

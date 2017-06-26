@@ -90,15 +90,15 @@ namespace AppDesktop
             new Utilitaires.GestionDgColumn().ColumnLabel(dgValuesTotal, "ITEMS", "NbItems");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgValuesTotal, "VALUES", "Valeur");
 
-            System.Collections.Generic.List<Classes.ItemsSale> l1 = new RDMS.Stock().GetItemsSaleByCode();
-            dgSoldItemsTotal.ItemsSource = GetListeSimple();
-            new Utilitaires.GestionDgColumn().ColumnLabel(dgSoldItemsTotal, "ITEMS", "NbItems");
+            //System.Collections.Generic.List<Classes.ItemsSale> l1 = new RDMS.Stock().GetItemsSaleByCode();
+            //dgSoldItemsTotal.ItemsSource = GetListeSimple();
+            //new Utilitaires.GestionDgColumn().ColumnLabel(dgSoldItemsTotal, "ITEMS", "NbItems");
 
 
-            dgRemainingItems.ItemsSource = new RDMS.Stock().GetItemsStocks();
-            new Utilitaires.GestionDgColumn().ColumnPriceItems(dgRemainingItems);
-            new Utilitaires.GestionDgColumn().ColumnLabel(dgRemainingItems, "ITEMS", "NbItems");
-            new Utilitaires.GestionDgColumn().ColumnLabel(dgRemainingItems, "VALUES", "Valeur");
+            //dgRemainingItems.ItemsSource = new RDMS.Stock().GetItemsStocks();
+            //new Utilitaires.GestionDgColumn().ColumnPriceItems(dgRemainingItems);
+            //new Utilitaires.GestionDgColumn().ColumnLabel(dgRemainingItems, "ITEMS", "NbItems");
+            //new Utilitaires.GestionDgColumn().ColumnLabel(dgRemainingItems, "VALUES", "Valeur");
 
             //PROVIDER
             dgProvider.ItemsSource = new RDMS.Provider().GetProviders();
@@ -282,6 +282,7 @@ namespace AppDesktop
                         btnCancel.Visibility = Visibility.Visible;
                         btnValidate.IsEnabled = true;
                         btnValidate.Content = "VALIDATE";
+                        dgValuesTotal.ItemsSource = new RDMS.Stock().GetValeursTotal();
                         break;
                     case "PROVIDERS":
                         lbTitle.Content = SetTitre() + " - PROVIDERS MANAGEMENT : SEE, MODIFY AND DELETE PROVIDER AND CHOOSE BUNDLES";

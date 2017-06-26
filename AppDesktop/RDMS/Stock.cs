@@ -97,7 +97,7 @@ namespace AppDesktop.RDMS
                         while (reader.Read())
                         {
                             Classes.Price b = new Classes.Price();
-                            b.Cle = (int)reader[0];
+                            b.ClePrix = (int)reader[0];
                             if (!(reader[1] == System.DBNull.Value))
                             {
                                 b.Code = (string)reader[1];
@@ -231,7 +231,7 @@ namespace AppDesktop.RDMS
                         while (reader.Read())
                         {
                             Classes.Valeurs b = new Classes.Valeurs();
-                            b.Cle = (int)reader[0];
+                            b.ClePrix = (int)reader[0];
                             b.NbItems = (int)reader[1];
                             b.Prix = (double)reader[2];
                             l.Add(b);
@@ -312,49 +312,49 @@ namespace AppDesktop.RDMS
             }
         }
 
-        //Nbs items en stock après les ventes
-        internal System.Collections.Generic.List<Classes.Valeurs> GetItemsStocks()
-        {
-            System.Collections.Generic.List<Classes.Valeurs> l = new System.Collections.Generic.List<Classes.Valeurs>();
+        ////Nbs items en stock après les ventes
+        //internal System.Collections.Generic.List<Classes.Valeurs> GetItemsStocks()
+        //{
+        //    System.Collections.Generic.List<Classes.Valeurs> l = new System.Collections.Generic.List<Classes.Valeurs>();
 
-            //Récupération de liste des items par code prix dans les bundles (base du calcul)
-            System.Collections.Generic.List<Classes.Valeurs> listeItemsInAllBundles = GetValeursTotal();
-            //Récupération de liste des items vendus par code
-            System.Collections.Generic.List<Classes.ItemsSale> listeItemsSoldByCodePrix = GetItemsSaleByCode();
-            //Création d'une nouvelle liste
+        //    //Récupération de liste des items par code prix dans les bundles (base du calcul)
+        //    System.Collections.Generic.List<Classes.Valeurs> listeItemsInAllBundles = GetValeursTotal();
+        //    //Récupération de liste des items vendus par code
+        //    System.Collections.Generic.List<Classes.ItemsSale> listeItemsSoldByCodePrix = GetItemsSaleByCode();
+        //    //Création d'une nouvelle liste
 
-            foreach(Classes.Valeurs v in listeItemsInAllBundles)
-            {
-                Classes.Valeurs valeur = new Classes.Valeurs();
-                if(listeItemsSoldByCodePrix.Count >0)
-                {
-                    foreach (Classes.ItemsSale item in listeItemsSoldByCodePrix)
-                    {
+        //    foreach(Classes.Valeurs v in listeItemsInAllBundles)
+        //    {
+        //        Classes.Valeurs valeur = new Classes.Valeurs();
+        //        if(listeItemsSoldByCodePrix.Count >0)
+        //        {
+        //            foreach (Classes.ItemsSale item in listeItemsSoldByCodePrix)
+        //            {
 
-                        if (v.Code == item.Code)
-                        {
+        //                if (v.Code == item.Code)
+        //                {
 
-                            valeur.Code = item.Code;
-                            valeur.Prix = item.Prix;
-                            valeur.NbItems = v.NbItems - item.Nombre;
-                            l.Add(valeur);
-                        }
-                        else
-                        {
-                            valeur.Code = v.Code;
-                            valeur.Prix = v.Prix;
-                            valeur.NbItems = v.NbItems;
-                            l.Add(valeur);
-                        }
-                    }
-                }
-                else { return listeItemsInAllBundles; }
+        //                    valeur.Code = item.Code;
+        //                    valeur.Prix = item.Prix;
+        //                    valeur.NbItems = v.NbItems - item.Nombre;
+        //                    l.Add(valeur);
+        //                }
+        //                else
+        //                {
+        //                    valeur.Code = v.Code;
+        //                    valeur.Prix = v.Prix;
+        //                    valeur.NbItems = v.NbItems;
+        //                    l.Add(valeur);
+        //                }
+        //            }
+        //        }
+        //        else { return listeItemsInAllBundles; }
               
-            }
+        //    }
 
 
-            return l;
-        }
+        //    return l;
+        //}
 
 
 

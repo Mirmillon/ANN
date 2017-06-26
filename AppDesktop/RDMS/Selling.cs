@@ -98,7 +98,7 @@ namespace AppDesktop.RDMS
             FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
             using (FirebirdSql.Data.FirebirdClient.FbCommand commande = conn.CreateCommand())
             {
-                commande.CommandText = "SET_ITEM_SALE";
+                commande.CommandText = "SET_ITEM_SALE_1";
                 commande.CommandType = System.Data.CommandType.StoredProcedure;
                 FirebirdSql.Data.FirebirdClient.FbParameterCollection pc = commande.Parameters;
                 pc.Add("CLE_VENTE", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cleVente;
