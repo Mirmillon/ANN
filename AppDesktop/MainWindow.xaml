@@ -588,17 +588,20 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.Column="1"  Grid.ColumnSpan="4" Style="{DynamicResource LabelSousTitre}">BUNDLES IN STOCK</Label>
-                <DataGrid x:Name="dgStock" Grid.Row="1" Grid.Column="1"  Grid.ColumnSpan="21" Grid.RowSpan="7" AutoGenerateColumns="False">
-
+                <DataGrid x:Name="dgStock" Grid.Row="1" Grid.Column="1"  Grid.ColumnSpan="21" Grid.RowSpan="5" AutoGenerateColumns="False">
                 </DataGrid>
-
-                <Label Grid.Row="9" Grid.Column="1"  Grid.ColumnSpan="4" Style="{DynamicResource LabelSousTitre}">ITEMS VALUE BY BUNDLE</Label>
-                <DataGrid x:Name="dgValuesBundle" Grid.Row="10" Grid.Column="1"  Grid.ColumnSpan="21" Grid.RowSpan="4" AutoGenerateColumns="False">
-                    
+                <!--<Label Grid.Row="6" Grid.Column="1"  Grid.ColumnSpan="4" Style="{DynamicResource LabelSousTitre}">ITEMS VALUE BY BUNDLE</Label>
+                <DataGrid x:Name="dgValuesBundle" Grid.Row="7" Grid.Column="1"  Grid.ColumnSpan="21" Grid.RowSpan="3" AutoGenerateColumns="False">
+                </DataGrid>-->
+                
+                <Label x:Name="lblValeurStock" Grid.Row="6" Grid.Column="1"  Grid.ColumnSpan="8" Style="{DynamicResource LabelSousTitre}">ITEMS VALUE IN STOCK</Label>
+                <DataGrid x:Name="dgValuesTotal" Grid.Row="7" Grid.Column="1"  Grid.ColumnSpan="21" Grid.RowSpan="7" AutoGenerateColumns="False">
                 </DataGrid>
-                <Label x:Name="lblValeurStock" Grid.Row="14" Grid.Column="1"  Grid.ColumnSpan="8" Style="{DynamicResource LabelSousTitre}">ITEMS VALUE IN STOCK</Label>
-                <DataGrid x:Name="dgValuesTotal" Grid.Row="15" Grid.Column="1"  Grid.ColumnSpan="21" Grid.RowSpan="4" AutoGenerateColumns="False">
-
+                <Label  Grid.Row="14" Grid.Column="1"  Grid.ColumnSpan="8" Style="{DynamicResource LabelSousTitre}">SOLD ITEMS BY CODE</Label>
+                <DataGrid x:Name="dgSoldItemsTotal"  Grid.Row="15" Grid.Column="1"  Grid.ColumnSpan="21" Grid.RowSpan="3" AutoGenerateColumns="False">
+                </DataGrid>
+                <Label  Grid.Row="18" Grid.Column="1"  Grid.ColumnSpan="8" Style="{DynamicResource LabelSousTitre}">UPDATE ITEMS VALUE IN STOCK</Label>
+                <DataGrid  x:Name="dgRemainingItems"  Grid.Row="19" Grid.Column="1"  Grid.ColumnSpan="21" Grid.RowSpan="3" AutoGenerateColumns="False">
                 </DataGrid>
             </Grid>
             <Grid x:Name="gridProvider" Style="{StaticResource GridStandard}" Visibility="Hidden">

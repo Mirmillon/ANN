@@ -18,7 +18,7 @@ namespace AppDesktop.Fenetres
             new Utilitaires.GestionDgColumn().ColumnLabel(gridItems, "NOMBRE" , "Nombre");
             new Utilitaires.GestionDgColumn().ColumnLabel(gridItems, "SUM", "Cout");
 
-            gridItems.Columns[0].IsReadOnly = true;
+            gridItems.Columns[0].IsReadOnly = false;
             //gridItems.RowEditEnding += GridItems_RowEditEnding;
 
             btnDone.Click += BtnDone_Click;
@@ -30,13 +30,13 @@ namespace AppDesktop.Fenetres
             SetResultat();
         }
 
-        private void GridItems_RowEditEnding(object sender, System.Windows.Controls.DataGridRowEditEndingEventArgs e)
-        {
-            if (e.EditAction == System.Windows.Controls.DataGridEditAction.Commit)
-            {
-                SetResultat();
-            }
-        }
+        //private void GridItems_RowEditEnding(object sender, System.Windows.Controls.DataGridRowEditEndingEventArgs e)
+        //{
+        //    if (e.EditAction == System.Windows.Controls.DataGridEditAction.Commit)
+        //    {
+        //        SetResultat();
+        //    }
+        //}
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -269,7 +269,7 @@ namespace AppDesktop.Fenetres
             {
                 if(item.Nombre > 0)
                 {
-                    new RDMS.Selling().SetItemSale(cleVente, item.TypeArticle, item.Nombre);
+                    new RDMS.Selling().SetItemSale(cleVente,  item.Nombre,item.ClePrix);
                 }
             }
         }

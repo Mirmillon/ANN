@@ -140,29 +140,29 @@ namespace AppDesktop.Utilitaires
             return d;
         }
 
-        internal System.Windows.Controls.DataGridComboBoxColumn ColumnCodeItems(System.Windows.Controls.DataGrid dg)
-        {
-            System.Windows.Controls.DataGridComboBoxColumn d = new System.Windows.Controls.DataGridComboBoxColumn();
-            System.Windows.Data.Binding b = new System.Windows.Data.Binding("Code");
-            //Set the properties on the new column
-            d.ItemsSource = new RDMS.Stock().GetPrices();
-            d.SelectedValuePath = "Code";
-            d.DisplayMemberPath = "Code";
-            d.SelectedValueBinding = b;
-            d.Header = "CODE";
-            //Add the column to the DataGrid
-            dg.Columns.Add(d);
-            return d;
-        }
+        //internal System.Windows.Controls.DataGridComboBoxColumn ColumnCodeItems(System.Windows.Controls.DataGrid dg)
+        //{
+        //    System.Windows.Controls.DataGridComboBoxColumn d = new System.Windows.Controls.DataGridComboBoxColumn();
+        //    System.Windows.Data.Binding b = new System.Windows.Data.Binding("Cle");
+        //    //Set the properties on the new column
+        //    d.ItemsSource = new RDMS.Stock().GetPrices();
+        //    d.SelectedValuePath = "Cle";
+        //    d.DisplayMemberPath = "Code";
+        //    d.SelectedValueBinding = b;
+        //    d.Header = "CODE";
+        //    //Add the column to the DataGrid
+        //    dg.Columns.Add(d);
+        //    return d;
+        //}
 
         internal System.Windows.Controls.DataGridComboBoxColumn ColumnCodeItem(System.Windows.Controls.DataGrid dg)
         {
             System.Windows.Controls.DataGridComboBoxColumn d = new System.Windows.Controls.DataGridComboBoxColumn();         
             //Set the properties on the new column
             d.ItemsSource = new RDMS.Stock().GetPrices();
-            d.SelectedValuePath = "Code";
+            d.SelectedValuePath = "Cle";
             d.DisplayMemberPath = "Prix";
-            d.Header = "CODE";
+            d.Header = "PRICE";
             //Add the column to the DataGrid
             dg.Columns.Add(d);
             return d;
@@ -171,10 +171,10 @@ namespace AppDesktop.Utilitaires
         internal System.Windows.Controls.DataGridComboBoxColumn ColumnPriceItems(System.Windows.Controls.DataGrid dg)
         {
             System.Windows.Controls.DataGridComboBoxColumn d = new System.Windows.Controls.DataGridComboBoxColumn();
-            System.Windows.Data.Binding b = new System.Windows.Data.Binding("Code");
+            System.Windows.Data.Binding b = new System.Windows.Data.Binding("Cle");
             //Set the properties on the new column
             d.ItemsSource = new RDMS.Stock().GetPrices();
-            d.SelectedValuePath = "Code";
+            d.SelectedValuePath = "Cle";
             d.DisplayMemberPath = "Prix";
             d.SelectedValueBinding = b;
             d.Header = "PRICE";

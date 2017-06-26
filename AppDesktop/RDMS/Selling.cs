@@ -93,7 +93,7 @@ namespace AppDesktop.RDMS
             }
         }
 
-        internal void SetItemSale(int cleVente, int cleType, int nombre)
+        internal void SetItemSale(int cleVente, int nombre, int clePrix)
         {
             FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
             using (FirebirdSql.Data.FirebirdClient.FbCommand commande = conn.CreateCommand())
@@ -102,8 +102,9 @@ namespace AppDesktop.RDMS
                 commande.CommandType = System.Data.CommandType.StoredProcedure;
                 FirebirdSql.Data.FirebirdClient.FbParameterCollection pc = commande.Parameters;
                 pc.Add("CLE_VENTE", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cleVente;
-                pc.Add("CLE_TYPE", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cleType;
+                //pc.Add("CLE_TYPE", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cleType;
                 pc.Add("NUMBER", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = nombre;
+                pc.Add("CODE", FirebirdSql.Data.FirebirdClient.FbDbType.VarChar, 0).Value = clePrix;
 
                 try
                 {

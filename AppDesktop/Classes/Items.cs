@@ -16,6 +16,7 @@ namespace AppDesktop.Classes
         double prix;
         string imageSource = null;
         string code;
+        int clePrix;
 
        
 
@@ -31,7 +32,7 @@ namespace AppDesktop.Classes
         public int Categorie { get => categorie; set => categorie = value; }
         public string ImageSource { get => imageSource; set => imageSource = value; }
         public string Code { get => code; set => code = value; }
-
+        public int ClePrix { get => clePrix; set => clePrix = value; }
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 

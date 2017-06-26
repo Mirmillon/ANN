@@ -97,8 +97,12 @@ namespace AppDesktop.RDMS
                         while (reader.Read())
                         {
                             Classes.Price b = new Classes.Price();
-                            b.Code = (string)reader[0];
-                            b.Prix = (double)reader[1];
+                            b.Cle = (int)reader[0];
+                            if (!(reader[1] == System.DBNull.Value))
+                            {
+                                b.Code = (string)reader[1];
+                            } 
+                            b.Prix = (double)reader[2];
                             l.Add(b);
                         }
                         conn.Close();
@@ -116,43 +120,43 @@ namespace AppDesktop.RDMS
             }
         }
 
-        internal System.Collections.Generic.List<Classes.Valeurs> GetValeurs()
-        {
-            System.Collections.Generic.List<Classes.Valeurs> l = new System.Collections.Generic.List<Classes.Valeurs>();
-            FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
-            using (FirebirdSql.Data.FirebirdClient.FbCommand cmd = conn.CreateCommand())
-            {
-                cmd.CommandText = "GET_VALUES";
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                try
-                {
-                    conn.Open();
-                    FirebirdSql.Data.FirebirdClient.FbDataReader reader = cmd.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-                            Classes.Valeurs b = new Classes.Valeurs();
-                            b.CleBundle = (int)reader[0];
-                            b.Code = (string)reader[1];
-                            b.Prix = GetPrix(b.Code);
-                            b.NbItems = (int)reader[2];
-                            l.Add(b);
-                        }
-                        conn.Close();
-                        return l;
-                    }
-                    conn.Close();
-                    return null;
-                }
-                catch (System.Exception ex)
-                {
-                    System.Windows.Forms.MessageBox.Show(ex.ToString());
-                    conn.Close();
-                    return null;
-                }
-            }
-        }
+        //internal System.Collections.Generic.List<Classes.Valeurs> GetValeurs()
+        //{
+        //    System.Collections.Generic.List<Classes.Valeurs> l = new System.Collections.Generic.List<Classes.Valeurs>();
+        //    FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
+        //    using (FirebirdSql.Data.FirebirdClient.FbCommand cmd = conn.CreateCommand())
+        //    {
+        //        cmd.CommandText = "GET_VALUES";
+        //        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        //        try
+        //        {
+        //            conn.Open();
+        //            FirebirdSql.Data.FirebirdClient.FbDataReader reader = cmd.ExecuteReader();
+        //            if (reader.HasRows)
+        //            {
+        //                while (reader.Read())
+        //                {
+        //                    Classes.Valeurs b = new Classes.Valeurs();
+        //                    b.CleBundle = (int)reader[0];
+        //                    b.Code = (string)reader[1];
+                          
+        //                    b.NbItems = (int)reader[2];
+        //                    l.Add(b);
+        //                }
+        //                conn.Close();
+        //                return l;
+        //            }
+        //            conn.Close();
+        //            return null;
+        //        }
+        //        catch (System.Exception ex)
+        //        {
+        //            System.Windows.Forms.MessageBox.Show(ex.ToString());
+        //            conn.Close();
+        //            return null;
+        //        }
+        //    }
+        //}
 
         internal int  SetValeurs(int cleBundle, string codePrix, int nombreItems)
         {
@@ -227,9 +231,9 @@ namespace AppDesktop.RDMS
                         while (reader.Read())
                         {
                             Classes.Valeurs b = new Classes.Valeurs();
-                            b.Code = (string)reader[0];
+                            b.Cle = (int)reader[0];
                             b.NbItems = (int)reader[1];
-                            b.Prix = GetPrix(b.Code);
+                            b.Prix = (double)reader[2];
                             l.Add(b);
                         }
                         conn.Close();
@@ -272,27 +276,89 @@ namespace AppDesktop.RDMS
         }
 
 
-        private double GetPrix(string code)
+        internal System.Collections.Generic.List<Classes.ItemsSale> GetItemsSaleByCode()
         {
-            double prix;
-            switch (code)
+            System.Collections.Generic.List<Classes.ItemsSale> l = new System.Collections.Generic.List<Classes.ItemsSale>();
+            FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
+            using (FirebirdSql.Data.FirebirdClient.FbCommand cmd = conn.CreateCommand())
             {
-                case "A":
-                    prix =  150;
-                    return prix;
-             
-                case "B":
-                    prix = 75;
-                    return prix;
-                
-                case "C":
-                    prix = 50;
-                    return prix;
-                  
-
+                cmd.CommandText = "GET_ITEM_CODE_SALE_TOTAL";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                try
+                {
+                    conn.Open();
+                    FirebirdSql.Data.FirebirdClient.FbDataReader reader = cmd.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            Classes.ItemsSale b = new Classes.ItemsSale();
+                            b.Code = (string)reader[0];
+                            b.Nombre = (int)reader[1];
+                            l.Add(b);
+                        }
+                        conn.Close();
+                        return l;
+                    }
+                    conn.Close();
+                    return null;
+                }
+                catch (System.Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.ToString());
+                    conn.Close();
+                    return null;
+                }
             }
-            return 0;
         }
+
+        //Nbs items en stock après les ventes
+        internal System.Collections.Generic.List<Classes.Valeurs> GetItemsStocks()
+        {
+            System.Collections.Generic.List<Classes.Valeurs> l = new System.Collections.Generic.List<Classes.Valeurs>();
+
+            //Récupération de liste des items par code prix dans les bundles (base du calcul)
+            System.Collections.Generic.List<Classes.Valeurs> listeItemsInAllBundles = GetValeursTotal();
+            //Récupération de liste des items vendus par code
+            System.Collections.Generic.List<Classes.ItemsSale> listeItemsSoldByCodePrix = GetItemsSaleByCode();
+            //Création d'une nouvelle liste
+
+            foreach(Classes.Valeurs v in listeItemsInAllBundles)
+            {
+                Classes.Valeurs valeur = new Classes.Valeurs();
+                if(listeItemsSoldByCodePrix.Count >0)
+                {
+                    foreach (Classes.ItemsSale item in listeItemsSoldByCodePrix)
+                    {
+
+                        if (v.Code == item.Code)
+                        {
+
+                            valeur.Code = item.Code;
+                            valeur.Prix = item.Prix;
+                            valeur.NbItems = v.NbItems - item.Nombre;
+                            l.Add(valeur);
+                        }
+                        else
+                        {
+                            valeur.Code = v.Code;
+                            valeur.Prix = v.Prix;
+                            valeur.NbItems = v.NbItems;
+                            l.Add(valeur);
+                        }
+                    }
+                }
+                else { return listeItemsInAllBundles; }
+              
+            }
+
+
+            return l;
+        }
+
+
+
+
 
 
 

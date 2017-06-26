@@ -76,21 +76,29 @@ namespace AppDesktop
 
 
 
-            dgValuesBundle.ItemsSource = new RDMS.Stock().GetValeurs();
-            new Utilitaires.GestionDgColumn().ColumnCodeItems(dgValuesBundle);
-            new Utilitaires.GestionDgColumn().ColumnPriceItems(dgValuesBundle);
-            new Utilitaires.GestionDgColumn().ColumnLabel(dgValuesBundle, "ITEMS", "NbItems");
-            new Utilitaires.GestionDgColumn().ColumnLabel(dgValuesBundle, "VALUES", "Valeur");
+            //dgValuesBundle.ItemsSource = new RDMS.Stock().GetValeurs();
+            //new Utilitaires.GestionDgColumn().ColumnCodeItems(dgValuesBundle);
+            //new Utilitaires.GestionDgColumn().ColumnPriceItems(dgValuesBundle);
+            //new Utilitaires.GestionDgColumn().ColumnLabel(dgValuesBundle, "ITEMS", "NbItems");
+            //new Utilitaires.GestionDgColumn().ColumnLabel(dgValuesBundle, "VALUES", "Valeur");
 
 
             System.Collections.Generic.List<Classes.Valeurs> l = new RDMS.Stock().GetValeursTotal();
             dgValuesTotal.ItemsSource = l;
             lblValeurStock.Content = new RDMS.Stock().GetNombreItemsInStock().ToString() + " ITEMS VALUE IN STOCK : " + GetValeurStock(l).ToString() + " PHP";
-            new Utilitaires.GestionDgColumn().ColumnCodeItems(dgValuesTotal);
             new Utilitaires.GestionDgColumn().ColumnPriceItems(dgValuesTotal);
             new Utilitaires.GestionDgColumn().ColumnLabel(dgValuesTotal, "ITEMS", "NbItems");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgValuesTotal, "VALUES", "Valeur");
 
+            System.Collections.Generic.List<Classes.ItemsSale> l1 = new RDMS.Stock().GetItemsSaleByCode();
+            dgSoldItemsTotal.ItemsSource = GetListeSimple();
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgSoldItemsTotal, "ITEMS", "NbItems");
+
+
+            dgRemainingItems.ItemsSource = new RDMS.Stock().GetItemsStocks();
+            new Utilitaires.GestionDgColumn().ColumnPriceItems(dgRemainingItems);
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgRemainingItems, "ITEMS", "NbItems");
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgRemainingItems, "VALUES", "Valeur");
 
             //PROVIDER
             dgProvider.ItemsSource = new RDMS.Provider().GetProviders();
@@ -786,6 +794,21 @@ namespace AppDesktop
                 valeur += v.Valeur;
             }
             return valeur;
+        }
+
+        private System.Collections.Generic.List<Classes.ItemsSale> GetListeSimple()
+        {
+            System.Collections.Generic.List<Classes.ItemsSale> l = new System.Collections.Generic.List<Classes.ItemsSale>();
+            System.Collections.Generic.List<Classes.Price> type = new RDMS.Stock().GetPrices();
+            for (int i = 0; i < type.Count; ++i)
+            {
+                Classes.ItemsSale s = new Classes.ItemsSale();
+                s.Code = type[i].Code;
+                s.Prix = type[i].Prix;
+                l.Add(s);
+               
+            }
+            return l;
         }
     }
 }
