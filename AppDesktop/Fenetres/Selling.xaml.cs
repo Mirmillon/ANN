@@ -20,17 +20,19 @@ namespace AppDesktop.Fenetres
             new Utilitaires.GestionDgColumn().ColumnCodeItem(gridItems);
             new Utilitaires.GestionDgColumn().ColumnLabel(gridItems, "NOMBRE" , "Nombre");
             new Utilitaires.GestionDgColumn().ColumnLabel(gridItems, "SUM", "Cout");
+            new Utilitaires.GestionDgColumn().ColumnLabel(gridItems, "LABEL", "Label");
 
             //gridItems.RowEditEnding += GridItems_RowEditEnding;
 
             btnDone.Click += BtnDone_Click;
+            btnValidate.IsEnabled = false;
 
         }
 
         private void BtnDone_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(gridItems.Items[0].GetType().ToString());
-           //SetResultat();
+           // MessageBox.Show(gridItems.Items[0].GetType().ToString());
+           SetResultat();
         }
 
         //private void GridItems_RowEditEnding(object sender, System.Windows.Controls.DataGridRowEditEndingEventArgs e)
@@ -63,7 +65,6 @@ namespace AppDesktop.Fenetres
 
             if (r != null)
             {
-
                 int cleSale = 0;
                 int cleCustomer = 0;
                 int cleCredit = 0;
@@ -156,9 +157,8 @@ namespace AppDesktop.Fenetres
         {
             int cle = 0;
             if (s != null)
-            {
-
-                    cle = new RDMS.Income().SetIncome(s.Cle, System.Convert.ToDouble(tbCash.Text),s.DateSelling);
+            { 
+                cle = new RDMS.Income().SetIncome(s.Cle, System.Convert.ToDouble(tbCash.Text),s.DateSelling);
             }
             return cle;
         }
@@ -171,6 +171,7 @@ namespace AppDesktop.Fenetres
 
             if (r != null)
             {
+                btnValidate.IsEnabled = true;
                 SetResultat();
                 switch (r.Label)
                 {
@@ -202,6 +203,7 @@ namespace AppDesktop.Fenetres
                 Classes.ItemsSale s = new Classes.ItemsSale();
                 s.ClePrix= type[i].ClePrix;
                 s.Prix = type[i].Prix;
+                s.Label = type[i].Label;
                 l.Add(s);
             }
             return l;
@@ -267,12 +269,20 @@ namespace AppDesktop.Fenetres
 
         private void  SetListeItems(int cleVente)
         {
+           
             System.Collections.Generic.List<Classes.ItemsSale> liste = GetListeItems();
             foreach(Classes.ItemsSale item in liste)
             {
                 if(item.Nombre > 0)
                 {
-                    new RDMS.Selling().SetItemSale(cleVente,  item.Nombre,item.ClePrix);
+                    if (item.ClePrix == 11 || item.ClePrix == 12 || item.ClePrix == 13)
+                    {
+                        new RDMS.Selling().SetSaleOther(cleVente, item.ClePrix, item.Nombre);
+                    }
+                    else 
+                    {
+                        new RDMS.Selling().SetSaleClothes(cleVente, item.ClePrix, item.Nombre);
+                    }
                 }
             }
         }

@@ -71,6 +71,7 @@
     <Compile Include="Classes\Price.cs" />
     <Compile Include="Classes\Providers.cs" />
     <Compile Include="Classes\ReferencesSimples.cs" />
+    <Compile Include="Classes\Sales.cs" />
     <Compile Include="Classes\Sellings.cs" />
     <Compile Include="Classes\Stocks.cs" />
     <Compile Include="Classes\Valeurs.cs" />

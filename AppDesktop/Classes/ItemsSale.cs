@@ -6,6 +6,7 @@ namespace AppDesktop.Classes
     {
         int nombre;
         double cout;
+        string label;
 
         public int Nombre
         {
@@ -32,5 +33,7 @@ namespace AppDesktop.Classes
             }
 
             set => cout = value; }
+
+        public string Label { get => label; set => label = value; }
     }
 }

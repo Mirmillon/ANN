@@ -18,7 +18,9 @@ namespace AppDesktop
             InitializeComponent();
             //DASHBOARD
             SetDashboard();
-            SetCategories();
+            //SetCategories();
+            SetVentesMois();
+
 
             //SELLING
             //SALES
@@ -239,6 +241,7 @@ namespace AppDesktop
                         btnCancel.Visibility = Visibility.Collapsed;
                         btnValidate.Content = "VALIDATE";
                         SetDashboard();
+                        SetVentesMois();
                         break;
                     case "SALES":
                         lbTitle.Content = SetTitre() + " - SALES MANAGEMENT";
@@ -496,43 +499,43 @@ namespace AppDesktop
         private void SetDashboard()
         {
             lbTitle.Content = SetTitre();
-            lbInvestment.Content = SetMontant(new RDMS.Outcome().GetOutcome2017());
-            lbSumOutcome.Content =  SetMontant((SetDouble(lbInvestment.Content) + SetDouble(lbOperatingCost.Content)));
-            lbToTotal.Content = SetMontant(new RDMS.Selling().GetTurnOverCurrentYear());
-            lbCash.Content = SetMontant(new RDMS.Income().GetCashCurrentYear());
-            lbCredit.Content = SetMontant(new RDMS.Credit().GetCreditCurrentYear());
-            lbCreditNY.Content = SetMontant(new RDMS.Credit().GetCreditNextYear());
-            lbSum.Content = SetMontant((SetDouble(lbCash.Content) + SetDouble(lbCredit.Content) + SetDouble(lbCreditNY.Content)));
-            lbDelta.Content = SetMontant((SetDouble(lbToTotal.Content) - SetDouble(lbSum.Content)));
-            lbCurrentBalance.Content = SetMontant(SetDouble(lbCash.Content) -(SetDouble(lbSumOutcome.Content) ));
-            lbYearBalance.Content = SetMontant(((SetDouble(lbCash.Content) + SetDouble(lbCreditNY.Content)) - SetDouble(lbSumOutcome.Content)));
-            lbFutureBalance.Content = SetMontant((SetDouble(lbSum.Content) -SetDouble(lbSumOutcome.Content)));
+            //lbInvestment.Content = SetMontant(new RDMS.Outcome().GetOutcome2017());
+            //lbSumOutcome.Content =  SetMontant((SetDouble(lbInvestment.Content) + SetDouble(lbOperatingCost.Content)));
+            //lbToTotal.Content = SetMontant(new RDMS.Selling().GetTurnOverCurrentYear());
+            //lbCash.Content = SetMontant(new RDMS.Income().GetCashCurrentYear());
+            //lbCredit.Content = SetMontant(new RDMS.Credit().GetCreditCurrentYear());
+            //lbCreditNY.Content = SetMontant(new RDMS.Credit().GetCreditNextYear());
+            //lbSum.Content = SetMontant((SetDouble(lbCash.Content) + SetDouble(lbCredit.Content) + SetDouble(lbCreditNY.Content)));
+            //lbDelta.Content = SetMontant((SetDouble(lbToTotal.Content) - SetDouble(lbSum.Content)));
+            //lbCurrentBalance.Content = SetMontant(SetDouble(lbCash.Content) -(SetDouble(lbSumOutcome.Content) ));
+            //lbYearBalance.Content = SetMontant(((SetDouble(lbCash.Content) + SetDouble(lbCreditNY.Content)) - SetDouble(lbSumOutcome.Content)));
+            //lbFutureBalance.Content = SetMontant((SetDouble(lbSum.Content) -SetDouble(lbSumOutcome.Content)));
         }
 
         private void SetCategories()
         {
-            System.Collections.Generic.List<Classes.ReferencesSimples> liste = new RDMS.Item().GetCategories();
-            int col = 0;
-            int compteur = 6;
-            int row = 0;
-            for (int i = 0; i <liste.Count;++i)
-            {
-                System.Windows.Controls.Label label = new System.Windows.Controls.Label();
-                label.Content = liste[i].Label.ToString().ToUpper();
-                label.HorizontalAlignment = HorizontalAlignment.Left;
-                label.HorizontalContentAlignment = HorizontalAlignment.Left;
-                label.SetResourceReference(StyleProperty, "LabelDashboard");
-                System.Windows.Controls.Grid.SetColumn(label, col);
-                System.Windows.Controls.Grid.SetRow(label, row);
-                row += 1;
-                gridStockDashboard.Children.Add(label);
-                if (i> 0 && (i+1) % compteur == 0)
-                {
-                    row = 0;
-                    compteur += 6;
-                    col += 2;    
-                }
-            }
+            //System.Collections.Generic.List<Classes.ReferencesSimples> liste = new RDMS.Item().GetCategories();
+            //int col = 0;
+            //int compteur = 6;
+            //int row = 0;
+            //for (int i = 0; i <liste.Count;++i)
+            //{
+            //    System.Windows.Controls.Label label = new System.Windows.Controls.Label();
+            //    label.Content = liste[i].Label.ToString().ToUpper();
+            //    label.HorizontalAlignment = HorizontalAlignment.Left;
+            //    label.HorizontalContentAlignment = HorizontalAlignment.Left;
+            //    label.SetResourceReference(StyleProperty, "LabelDashboard");
+            //    System.Windows.Controls.Grid.SetColumn(label, col);
+            //    System.Windows.Controls.Grid.SetRow(label, row);
+            //    row += 1;
+            //    gridStockDashboard.Children.Add(label);
+            //    if (i> 0 && (i+1) % compteur == 0)
+            //    {
+            //        row = 0;
+            //        compteur += 6;
+            //        col += 2;    
+            //    }
+            //}
         }
 
         private string SetTitre()
@@ -810,6 +813,69 @@ namespace AppDesktop
                
             }
             return l;
+        }
+
+
+        private void SetVentesMois()
+        {
+            //Récupération des ventes par mois selon le type de vente (load, clothe, beauty).
+            System.Collections.Generic.List<Classes.Sales> venteClothes = new RDMS.Selling().GetSalesClothesMonth();
+            System.Collections.Generic.List<Classes.Sales> venteBeauty = new RDMS.Selling().GetSalesBeautyMonth();
+            System.Collections.Generic.List<Classes.Sales> venteLoad = new RDMS.Selling().GetSalesLoadMonth();
+            //Verification que la liste des ventes de vetement n'est pas vide.
+            //if(venteClothes.Count > 0)
+            //{
+            //    if(venteClothes[6] != null)
+            //    {
+            //        lblClo07.Content = SetMontant(venteClothes[6].Amount);
+            //    }
+            //    else
+            //    {
+            //        SetLabelContent0PHP(lblClo07);
+            //    } 
+            //}
+            //else
+            //{
+            //    SetLabelContent0PHP(lblClo07);
+            //}
+
+            //if (venteBeauty.Count > 0)
+            //{
+            //    if (venteBeauty[6] != null)
+            //    {
+            //        lblBea07.Content = SetMontant(venteBeauty[6].Amount);
+            //    }
+            //    else
+            //    {
+            //        SetLabelContent0PHP(lblBea07);
+            //    }
+            //}
+            //else
+            //{
+            //    SetLabelContent0PHP(lblBea07);
+            //}
+
+            //if (venteLoad.Count > 0)
+            //{
+            //    if (venteLoad[6] != null)
+            //    {
+            //        lblLoa07.Content = SetMontant(venteLoad[6].Amount);
+            //    }
+            //    else
+            //    {
+            //        SetLabelContent0PHP(lblLoa07);
+            //    }
+            //}
+            //else
+            //{
+            //    SetLabelContent0PHP(lblLoa07);
+            //}
+        }
+
+
+        private void SetLabelContent0PHP(System.Windows.Controls.Label l)
+        {
+            l.Content = "0 PHP";
         }
     }
 }

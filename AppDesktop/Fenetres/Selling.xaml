@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AppDesktop.Fenetres"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Selling" Height="625" Width="900" WindowStartupLocation="CenterOwner" WindowStyle="None" Loaded="Window_Loaded">
+        Title="Selling" Height="725" Width="900" WindowStartupLocation="CenterOwner" WindowStyle="None" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -68,7 +68,7 @@
             <ComboBox x:Name="cbbTypePayment" Grid.Row="6" Grid.Column="5" Grid.ColumnSpan="3"  Style="{DynamicResource ComboBoxStandard}" SelectedValue="{Binding TypePayment}"/>
             <Label Grid.Row="6" Grid.Column="7" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}">CASH</Label>
             <TextBox x:Name="tbCash" Grid.Row="6" Grid.Column="9" Grid.ColumnSpan="2" Style="{DynamicResource TextBoxBusiness}" Text="{Binding Amount}" />
-            <DataGrid  x:Name="gridItems" Grid.ColumnSpan="9" Grid.Column="1" HorizontalAlignment="Left" Height="206" Margin="10,0,0,0" Grid.Row="1" Grid.RowSpan="4" VerticalAlignment="Top" Width="720" AutoGenerateColumns="False"></DataGrid>
+            <DataGrid  x:Name="gridItems" Grid.ColumnSpan="9" Grid.Column="1" HorizontalAlignment="Left" Height="290" Margin="10,-10,0,-10" Grid.Row="1" Grid.RowSpan="4" VerticalAlignment="Top" Width="720" AutoGenerateColumns="False"></DataGrid>
         
 
         </Grid>

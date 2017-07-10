@@ -103,6 +103,7 @@ namespace AppDesktop.RDMS
                                 b.Code = (string)reader[1];
                             } 
                             b.Prix = (double)reader[2];
+                            b.Label = (string)reader[3];
                             l.Add(b);
                         }
                         conn.Close();

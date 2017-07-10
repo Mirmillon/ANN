@@ -11,9 +11,11 @@ namespace AppDesktop.Classes
         int cle;
         string code;
         double prix;
+        string label;
 
         public string Code { get => code; set => code = value; }
         public double Prix { get => prix; set => prix = value; }
         public int ClePrix { get => cle; set => cle = value; }
+        public string Label { get => label; set => label = value; }
     }
 }
