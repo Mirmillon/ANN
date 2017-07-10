@@ -16,10 +16,7 @@ namespace AppDesktop
         public MainWindow()
         {
             InitializeComponent();
-            //DASHBOARD
-            SetDashboard();
-            //SetCategories();
-            SetVentesMois();
+           
 
 
             //SELLING
@@ -152,6 +149,11 @@ namespace AppDesktop
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            //DASHBOARD
+            SetDashboard();
+            //SetCategories();
+            SetVentesMois();
+
             cbbKindPayment.SelectionChanged += CbbKindPayment_SelectionChanged;
             dgSelling.SelectionChanged += DgSelling_SelectionChanged;
             dgCustomerSale.SelectionChanged += DgCustomerSale_SelectionChanged;
@@ -365,11 +367,11 @@ namespace AppDesktop
                         int cleStock = new RDMS.Stock().SetBundleInStock(b.Cle, b.CleProvider, b.DateAchat, System.Convert.ToDouble(b.Prix));
                         if (cleStock > 0)
                         {
-                            btnOK.Background = System.Windows.Media.Brushes.Green;
+                            //btnOK.Background = System.Windows.Media.Brushes.Green;
                         }
                         else
                         {
-                            btnOK.Background = System.Windows.Media.Brushes.Red;
+                            //btnOK.Background = System.Windows.Media.Brushes.Red;
                         }
                     }
                     break;
@@ -382,13 +384,13 @@ namespace AppDesktop
                             int cleBundle = new RDMS.Bundle().SetBundle(c.Cle, (int)cbbKindNewBundle.SelectedValue, (int)cbbCountryNewBundle.SelectedValue, tbNewBundle.Text, System.Convert.ToInt32(tbWeightNewBundle.Text), tbNoteNewBundle.Text);
                             if (cleBundle > 0)
                             {
-                                btnOK.Background = System.Windows.Media.Brushes.Green;
+                                //btnOK.Background = System.Windows.Media.Brushes.Green;
                                 dgBundle.ItemsSource = null;
                                 dgBundle.ItemsSource = new RDMS.Bundle().GetBundles();
                             }
                             else
                             {
-                                btnOK.Background = System.Windows.Media.Brushes.Red;
+                                //btnOK.Background = System.Windows.Media.Brushes.Red;
                             }
                             if (cbbProviderNewBundle.SelectedIndex != -1)
                             {
@@ -412,13 +414,13 @@ namespace AppDesktop
                             int cleBrand = new RDMS.Brand().SetBrand(c.Cle, tbNewBrand.Text, tbNoteNewBrand.Text);
                             if (cleBrand > 0)
                             {
-                                btnOK.Background = System.Windows.Media.Brushes.Green;
+                                //btnOK.Background = System.Windows.Media.Brushes.Green;
                                 dgBrand.ItemsSource = null;
                                 dgBrand.ItemsSource = new RDMS.Brand().GetBrands();
                             }
                             else
                             {
-                                btnOK.Background = System.Windows.Media.Brushes.Red;
+                                //btnOK.Background = System.Windows.Media.Brushes.Red;
                             }
                         }
                     }
@@ -470,7 +472,7 @@ namespace AppDesktop
                     f.ShowDialog();
                     if (f.DialogResult == true)
                     {
-                        btnOK.Background = System.Windows.Media.Brushes.Green;
+                        //btnOK.Background = System.Windows.Media.Brushes.Green;
                     }
 
                     break;
@@ -498,18 +500,18 @@ namespace AppDesktop
         #region ONGLET DASHBOARD
         private void SetDashboard()
         {
-            lbTitle.Content = SetTitre();
-            //lbInvestment.Content = SetMontant(new RDMS.Outcome().GetOutcome2017());
-            //lbSumOutcome.Content =  SetMontant((SetDouble(lbInvestment.Content) + SetDouble(lbOperatingCost.Content)));
-            //lbToTotal.Content = SetMontant(new RDMS.Selling().GetTurnOverCurrentYear());
-            //lbCash.Content = SetMontant(new RDMS.Income().GetCashCurrentYear());
-            //lbCredit.Content = SetMontant(new RDMS.Credit().GetCreditCurrentYear());
-            //lbCreditNY.Content = SetMontant(new RDMS.Credit().GetCreditNextYear());
-            //lbSum.Content = SetMontant((SetDouble(lbCash.Content) + SetDouble(lbCredit.Content) + SetDouble(lbCreditNY.Content)));
+            lbTitle.Content = SetTitre() + SetCount();
+            lbInvestment.Content = SetMontant(new RDMS.Outcome().GetOutcome2017());
+            lbSumOutcome.Content = SetMontant((SetDouble(lbInvestment.Content) + SetDouble(lbOperatingCost.Content)));
+            lbToTotal.Content = SetMontant(new RDMS.Selling().GetTurnOverCurrentYear());
+            lbCash.Content = SetMontant(new RDMS.Income().GetCashCurrentYear());
+            lbCredit.Content = SetMontant(new RDMS.Credit().GetCreditCurrentYear());
+            lbCreditNY.Content = SetMontant(new RDMS.Credit().GetCreditNextYear());
+            lbSum.Content = SetMontant((SetDouble(lbCash.Content) + SetDouble(lbCredit.Content) + SetDouble(lbCreditNY.Content)));
             //lbDelta.Content = SetMontant((SetDouble(lbToTotal.Content) - SetDouble(lbSum.Content)));
-            //lbCurrentBalance.Content = SetMontant(SetDouble(lbCash.Content) -(SetDouble(lbSumOutcome.Content) ));
-            //lbYearBalance.Content = SetMontant(((SetDouble(lbCash.Content) + SetDouble(lbCreditNY.Content)) - SetDouble(lbSumOutcome.Content)));
-            //lbFutureBalance.Content = SetMontant((SetDouble(lbSum.Content) -SetDouble(lbSumOutcome.Content)));
+            lbCurrentBalance.Content = SetMontant(SetDouble(lbCash.Content) - (SetDouble(lbSumOutcome.Content)));
+            lbYearBalance.Content = SetMontant(((SetDouble(lbCash.Content) + SetDouble(lbCreditNY.Content)) - SetDouble(lbSumOutcome.Content)));
+            lbFutureBalance.Content = SetMontant((SetDouble(lbSum.Content) - SetDouble(lbSumOutcome.Content)));
         }
 
         private void SetCategories()
@@ -545,7 +547,23 @@ namespace AppDesktop
 
         private string SetMontant(double d)
         {
+
             return d.ToString() + " PHP";
+        }
+
+        private void SetMontant(System.Windows.Controls.Label l ,double d)
+        {
+             l.Content = d.ToString() + " PHP";
+            if (d > 10500)
+            {
+                l.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.LawnGreen);
+            }
+            else
+            {
+                l.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Orange);
+            }
+
+
         }
 
         private double SetDouble(object o)
@@ -822,60 +840,143 @@ namespace AppDesktop
             System.Collections.Generic.List<Classes.Sales> venteClothes = new RDMS.Selling().GetSalesClothesMonth();
             System.Collections.Generic.List<Classes.Sales> venteBeauty = new RDMS.Selling().GetSalesBeautyMonth();
             System.Collections.Generic.List<Classes.Sales> venteLoad = new RDMS.Selling().GetSalesLoadMonth();
+            System.Collections.Generic.List<Classes.Sales> venteTotal = new RDMS.Selling().GetSalesAllMonth();
+            System.Collections.Generic.List<Classes.Sales> venteAnnee = new RDMS.Selling().GetSalesAllYear();
+
             //Verification que la liste des ventes de vetement n'est pas vide.
-            //if(venteClothes.Count > 0)
-            //{
-            //    if(venteClothes[6] != null)
-            //    {
-            //        lblClo07.Content = SetMontant(venteClothes[6].Amount);
-            //    }
-            //    else
-            //    {
-            //        SetLabelContent0PHP(lblClo07);
-            //    } 
-            //}
-            //else
-            //{
-            //    SetLabelContent0PHP(lblClo07);
-            //}
+            if (venteClothes.Count > 0)
+            {
+                if (venteClothes[0] != null)
+                {
+                    lblClo07.Content = SetMontant(venteClothes[0].Amount);
+                }
+                else
+                {
+                    SetLabelContent0PHP(lblClo07);
+                }
+            }
+            else
+            {
+                SetLabelContent0PHP(lblClo07);
+            }
 
-            //if (venteBeauty.Count > 0)
-            //{
-            //    if (venteBeauty[6] != null)
-            //    {
-            //        lblBea07.Content = SetMontant(venteBeauty[6].Amount);
-            //    }
-            //    else
-            //    {
-            //        SetLabelContent0PHP(lblBea07);
-            //    }
-            //}
-            //else
-            //{
-            //    SetLabelContent0PHP(lblBea07);
-            //}
+            if (venteBeauty.Count > 0)
+            {
+                if (venteBeauty[0] != null)
+                {
+                    lblBea07.Content = SetMontant(venteBeauty[0].Amount);
+                }
+                else
+                {
+                    SetLabelContent0PHP(lblBea07);
+                }
+            }
+            else
+            {
+                SetLabelContent0PHP(lblBea07);
+            }
 
-            //if (venteLoad.Count > 0)
-            //{
-            //    if (venteLoad[6] != null)
-            //    {
-            //        lblLoa07.Content = SetMontant(venteLoad[6].Amount);
-            //    }
-            //    else
-            //    {
-            //        SetLabelContent0PHP(lblLoa07);
-            //    }
-            //}
-            //else
-            //{
-            //    SetLabelContent0PHP(lblLoa07);
-            //}
+            if (venteLoad.Count > 0)
+            {
+                if (venteLoad[0] != null)
+                {
+                    lblLoa07.Content = SetMontant(venteLoad[0].Amount);
+                }
+                else
+                {
+                    SetLabelContent0PHP(lblLoa07);
+                }
+            }
+            else
+            {
+                SetLabelContent0PHP(lblLoa07);
+            }
+
+            if (venteTotal.Count > 0)
+            {
+                if (venteTotal[0] != null)
+                {
+                    SetMontant(lbTo07,venteTotal[0].Amount);
+                }
+                else
+                {
+                    SetLabelContent0PHP(lbTo07);
+                }
+            }
+            else
+            {
+                SetLabelContent0PHP(lbTo07);
+            }
+
+            if (venteAnnee.Count > 0)
+            {
+                if (venteAnnee[0] != null)
+                {
+                    SetMontant(lbToBea, venteAnnee[0].Amount);
+                }
+                else
+                {
+                    SetLabelContent0PHP(lbToBea);
+                }
+
+                if (venteAnnee[1] != null)
+                {
+                    SetMontant(lbToClo, venteAnnee[1].Amount);
+                }
+                else
+                {
+                    SetLabelContent0PHP(lbToClo);
+                }
+
+                if (venteAnnee[2] != null)
+                {
+                    SetMontant(lbToLoa, venteAnnee[2].Amount);
+                }
+                else
+                {
+                    SetLabelContent0PHP(lbToLoa);
+                }
+            }
+            else
+            {
+                SetLabelContent0PHP(lbToLoa);
+                SetLabelContent0PHP(lbToClo);
+                SetLabelContent0PHP(lbToBea);
+            }
         }
 
 
         private void SetLabelContent0PHP(System.Windows.Controls.Label l)
         {
             l.Content = "0 PHP";
+            l.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Red);
+        }
+
+        private string SetLabelContent0PHP(double d)
+        {
+            return d.ToString() + " 0 PHP";
+           
+        }
+
+        private string SetCount()
+        {
+            //Date ouverture du business
+            System.DateTime dateStartBusiness = new System.DateTime(2017, 7, 09);
+            //Date aujourd'hui
+            System.DateTime dateCeJour = System.DateTime.Today;
+            //Calcul nombre de jours entre ces deux dates
+            double nbJoursOuverture = (dateCeJour - dateStartBusiness).TotalDays;
+            //Date fin business 
+            System.DateTime dateFinBusiness = new System.DateTime(2018, 7, 08);
+            //Calcul nombre de jours restant
+            double nbJoursRestant = (dateFinBusiness - dateCeJour).TotalDays;
+            //Calcul income par jour souhaitable aorès verification de l'existance d'un content O PHP est le content par défaut si la liste des ventes est vide
+            double incomeSouhaitable = new RDMS.Outcome().GetOutcome2017() / nbJoursRestant;
+            //Calcul income par jour realisé
+            double incomeRealise = new RDMS.Selling().GetTurnOverCurrentYear() / nbJoursOuverture;
+            //Conversion sous forme lisible
+            return " Number of days since opening : " + nbJoursOuverture.ToString() + " Objectif : " + System.Math.Round(incomeSouhaitable).ToString() + " PHP" + " Real : " + System.Math.Round(incomeRealise).ToString() + " PHP";
+
         }
     }
 }

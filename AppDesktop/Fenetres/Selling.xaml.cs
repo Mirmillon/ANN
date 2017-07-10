@@ -7,7 +7,7 @@ namespace AppDesktop.Fenetres
     /// </summary>
     public partial class Selling : Window
     {
-        private System.Collections.Generic.List<Classes.ItemsSale> liste = null;
+        //private System.Collections.Generic.List<Classes.ItemsSale> liste = null;
 
         public Selling()
         {

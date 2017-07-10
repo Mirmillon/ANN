@@ -219,6 +219,42 @@ namespace AppDesktop.RDMS
             }
         }
 
+        internal System.Collections.Generic.List<Classes.Sales> GetSalesAllMonth()
+        {
+            System.Collections.Generic.List<Classes.Sales> l = new System.Collections.Generic.List<Classes.Sales>();
+            FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
+            using (FirebirdSql.Data.FirebirdClient.FbCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = "GET_SALES_ALL_MONTH";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                try
+                {
+                    conn.Open();
+                    FirebirdSql.Data.FirebirdClient.FbDataReader reader = cmd.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            Classes.Sales b = new Classes.Sales();
+                            b.MoisVente = (int)reader[0];
+                            b.Amount = (double)reader[1];
+                            l.Add(b);
+                        }
+                        conn.Close();
+                        return l;
+                    }
+                    conn.Close();
+                    return null;
+                }
+                catch (System.Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.ToString());
+                    conn.Close();
+                    return null;
+                }
+            }
+        }
+
         internal System.Collections.Generic.List<Classes.Sales> GetSalesLoadMonth()
         {
             System.Collections.Generic.List<Classes.Sales> l = new System.Collections.Generic.List<Classes.Sales>();
@@ -273,6 +309,42 @@ namespace AppDesktop.RDMS
                         {
                             Classes.Sales b = new Classes.Sales();
                             b.MoisVente = (int)reader[0];
+                            b.Amount = (double)reader[1];
+                            l.Add(b);
+                        }
+                        conn.Close();
+                        return l;
+                    }
+                    conn.Close();
+                    return null;
+                }
+                catch (System.Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.ToString());
+                    conn.Close();
+                    return null;
+                }
+            }
+        }
+
+        internal System.Collections.Generic.List<Classes.Sales> GetSalesAllYear()
+        {
+            System.Collections.Generic.List<Classes.Sales> l = new System.Collections.Generic.List<Classes.Sales>();
+            FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
+            using (FirebirdSql.Data.FirebirdClient.FbCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = "GET_SALES_ALL_YEAR";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                try
+                {
+                    conn.Open();
+                    FirebirdSql.Data.FirebirdClient.FbDataReader reader = cmd.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            Classes.Sales b = new Classes.Sales();
+                            b.Categorie = (string)reader[0];
                             b.Amount = (double)reader[1];
                             l.Add(b);
                         }

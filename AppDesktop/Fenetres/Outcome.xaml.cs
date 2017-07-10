@@ -25,12 +25,12 @@ namespace AppDesktop.Fenetres
             {
                 int c = new RDMS.Outcome().SetOutcome(outcome.DateOutcome, outcome.CleTypeOutcome, outcome.Montant, outcome.Note);
                 MainWindow f = (MainWindow)Owner;
-                if (c>0)
-                {
+                //if (c>0)
+                //{
                    
-                    f.btnOK.Background = System.Windows.Media.Brushes.Green;
-                }
-                else { f.btnOK.Background = System.Windows.Media.Brushes.Red; }
+                //    f.btnOK.Background = System.Windows.Media.Brushes.Green;
+                //}
+                //else { f.btnOK.Background = System.Windows.Media.Brushes.Red; }
 
             }
         }
