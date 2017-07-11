@@ -350,12 +350,80 @@ namespace AppDesktop.RDMS
         //            }
         //        }
         //        else { return listeItemsInAllBundles; }
-              
+
         //    }
 
 
         //    return l;
         //}
+
+        internal System.Collections.Generic.List<Classes.Price> GetPricesClothes()
+        {
+            System.Collections.Generic.List<Classes.Price> l = new System.Collections.Generic.List<Classes.Price>();
+            FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
+            using (FirebirdSql.Data.FirebirdClient.FbCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = "GET_PRICES_CLOTHES";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                try
+                {
+                    conn.Open();
+                    FirebirdSql.Data.FirebirdClient.FbDataReader reader = cmd.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            Classes.Price b = new Classes.Price();
+                            b.ClePrix = (int)reader[0];
+                            if (!(reader[1] == System.DBNull.Value))
+                            {
+                                b.Code = (string)reader[1];
+                            }
+                            b.Prix = (double)reader[2];
+                            b.Label = (string)reader[3];
+                            l.Add(b);
+                        }
+                        conn.Close();
+                        return l;
+                    }
+                    conn.Close();
+                    return null;
+                }
+                catch (System.Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.ToString());
+                    conn.Close();
+                    return null;
+                }
+            }
+        }
+
+        internal void UptadeStock(int cle,  int nombreItems)
+        {
+           
+            FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
+            using (FirebirdSql.Data.FirebirdClient.FbCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = "UPD_STOCK";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                FirebirdSql.Data.FirebirdClient.FbParameterCollection pc = cmd.Parameters;
+                pc.Add("CLE", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cle;
+                pc.Add("NB", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = nombreItems;
+
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteScalar();
+
+                }
+                catch (System.Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.ToString());
+                    conn.Close();
+                   
+                }
+            }
+        }
 
 
 

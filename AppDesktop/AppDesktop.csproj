@@ -65,6 +65,7 @@
     <Compile Include="Classes\Customers.cs" />
     <Compile Include="Classes\Items.cs" />
     <Compile Include="Classes\ItemsSale.cs" />
+    <Compile Include="Classes\ItemStock.cs" />
     <Compile Include="Classes\KindBundles.cs" />
     <Compile Include="Classes\Outcomes.cs" />
     <Compile Include="Classes\Payments.cs" />
@@ -89,6 +90,9 @@
     </Compile>
     <Compile Include="Fenetres\Selling.xaml.cs">
       <DependentUpon>Selling.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fenetres\Stock.xaml.cs">
+      <DependentUpon>Stock.xaml</DependentUpon>
     </Compile>
     <Compile Include="RDMS\Brand.cs" />
     <Compile Include="RDMS\Bundle.cs" />
@@ -126,6 +130,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Fenetres\Selling.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Fenetres\Stock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

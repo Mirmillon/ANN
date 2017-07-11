@@ -36,6 +36,11 @@ namespace AppDesktop.Utilitaires
             SetCbReferenceSimple(cb).ItemsSource = new RDMS.Outcome().GetKindOutcome();
         }
 
+        internal void SetCategoriesOutcome(System.Windows.Controls.ComboBox cb)
+        {
+            SetCbReferenceSimple(cb).ItemsSource = new RDMS.Outcome().GetCatagoriesOutcome();
+        }
+
         internal void SetCustomer(System.Windows.Controls.ComboBox cb)
         {
             cb.ItemsSource = new RDMS.Customer().GetCustomers();

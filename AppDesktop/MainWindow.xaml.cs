@@ -16,10 +16,8 @@ namespace AppDesktop
         public MainWindow()
         {
             InitializeComponent();
-           
-
-
             //SELLING
+
             //SALES
             dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
             dgCustomerSale.ItemsSource = new RDMS.Customer().GetCustomers();
@@ -43,9 +41,7 @@ namespace AppDesktop
             new Utilitaires.GestionDgColumn().ColumnLabel(dgCredit, "PHONE NUMBER", "Phone");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgCredit, "BALANCE", "MontantDu");
             new Utilitaires.GestionDgColumn().ColumnDate(dgCredit, "DUE DATE", "DateDue");
-
             new Utilitaires.GestionComboBox().SetCustomer(cbFullName);
-
             //ITEMS
             new Utilitaires.GestionComboBox().SetBrand(cbBrand);
             new Utilitaires.GestionComboBox().SetSize(cbSize);
@@ -73,14 +69,11 @@ namespace AppDesktop
             new Utilitaires.GestionDgColumn().ColumnLabel(dgStock, "NUMBER OF ITEMS", "NbItems");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgStock, "COST ITEM", "CostItems");
 
-
-
             //dgValuesBundle.ItemsSource = new RDMS.Stock().GetValeurs();
             //new Utilitaires.GestionDgColumn().ColumnCodeItems(dgValuesBundle);
             //new Utilitaires.GestionDgColumn().ColumnPriceItems(dgValuesBundle);
             //new Utilitaires.GestionDgColumn().ColumnLabel(dgValuesBundle, "ITEMS", "NbItems");
             //new Utilitaires.GestionDgColumn().ColumnLabel(dgValuesBundle, "VALUES", "Valeur");
-
 
             System.Collections.Generic.List<Classes.Valeurs> l = new RDMS.Stock().GetValeursTotal();
             dgValuesTotal.ItemsSource = l;
@@ -92,7 +85,6 @@ namespace AppDesktop
             //System.Collections.Generic.List<Classes.ItemsSale> l1 = new RDMS.Stock().GetItemsSaleByCode();
             //dgSoldItemsTotal.ItemsSource = GetListeSimple();
             //new Utilitaires.GestionDgColumn().ColumnLabel(dgSoldItemsTotal, "ITEMS", "NbItems");
-
 
             //dgRemainingItems.ItemsSource = new RDMS.Stock().GetItemsStocks();
             //new Utilitaires.GestionDgColumn().ColumnPriceItems(dgRemainingItems);
@@ -110,21 +102,17 @@ namespace AppDesktop
             new Utilitaires.GestionDgColumn().ColumnCountry(dgProviderBundle, new RDMS.Country().GetCountries());
             new Utilitaires.GestionDgColumn().ColumnCbKindItem(dgProviderBundle, "CleKind");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgProviderBundle, "PRICE", "Prix");
-
             new Utilitaires.GestionComboBox().SetKindBundle(cbbKindNewBundle);
             new Utilitaires.GestionComboBox().SetProvider(cbbProviderNewBundle);
             new Utilitaires.GestionComboBox().SetCountry(cbbCountryNewBundle);
-
             //BUNDLES
             new Utilitaires.GestionComboBox().SetBrand(cbbBrandNewBundle);
             new Utilitaires.GestionComboBox().SetBrand(cbbBrandModifyBundle);
-
             dgBundle.ItemsSource = new RDMS.Bundle().GetBundles();
             new Utilitaires.GestionDgColumn().ColumnLabel(dgBundle, "LABEL");
             new Utilitaires.GestionDgColumn().ColumnBrand(dgBundle, "CleBrand");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgBundle, "WEIGHT", "Weight");
             new Utilitaires.GestionDgColumn().ColumnLabelNote(dgBundle);
-
             //BRAND
             //Set up cbb countries
             new Utilitaires.GestionComboBox().SetCountry(cbbCountryBrand);
@@ -135,17 +123,17 @@ namespace AppDesktop
             viewBrand = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(dgBrand.ItemsSource);
             new Utilitaires.GestionDgColumn().ColumnLabel(dgBrand, "BRAND");
             new Utilitaires.GestionDgColumn().ColumnCountry(dgBrand, new RDMS.Country().GetCountries());
-
             //OUTCOME
             dgOutcome.ItemsSource = new RDMS.Outcome().GetOutcome();
             new Utilitaires.GestionDgColumn().ColumnDate(dgOutcome, "DATE", "DateOutcome");
             new Utilitaires.GestionDgColumn().ColumnCbKindOutcome(dgOutcome);
             new Utilitaires.GestionDgColumn().ColumnLabel(dgOutcome, "AMOUNT", "Montant");
+            new Utilitaires.GestionDgColumn().ColumnCbCategorieOutcome(dgOutcome);
+
             viewOutcome = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(dgOutcome.ItemsSource);
             new Utilitaires.GestionComboBox().SetKindOutcome(cbOutcome);
+            new Utilitaires.GestionComboBox().SetCategoriesOutcome(cbCategorie);
         }
-
-
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -153,7 +141,6 @@ namespace AppDesktop
             SetDashboard();
             //SetCategories();
             SetVentesMois();
-
             cbbKindPayment.SelectionChanged += CbbKindPayment_SelectionChanged;
             dgSelling.SelectionChanged += DgSelling_SelectionChanged;
             dgCustomerSale.SelectionChanged += DgCustomerSale_SelectionChanged;
@@ -172,6 +159,7 @@ namespace AppDesktop
             dgProvider.SelectionChanged += DgProvider_SelectionChanged;
             //OUTCOME
             cbOutcome.SelectionChanged += CbOutcome_SelectionChanged;
+            cbCategorie.SelectionChanged += CbCategorie_SelectionChanged;
             //ITEM
             cbBrand.SelectionChanged += CbBrand_SelectionChanged;
             cbSize.SelectionChanged += CbSize_SelectionChanged;
@@ -181,6 +169,7 @@ namespace AppDesktop
             dgItem.MouseDoubleClick += dg_MouseDoubleClick;
 
         }
+
 
 
         private void RadioModify_Checked(object sender, RoutedEventArgs e)
@@ -241,6 +230,7 @@ namespace AppDesktop
                         btnNew.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Collapsed;
                         btnCancel.Visibility = Visibility.Collapsed;
+                        btnAddStock.Visibility = Visibility.Collapsed;
                         btnValidate.Content = "VALIDATE";
                         SetDashboard();
                         SetVentesMois();
@@ -250,6 +240,7 @@ namespace AppDesktop
                         btnNew.Visibility = Visibility.Visible;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
+                        btnAddStock.Visibility = Visibility.Collapsed;
                         btnNew.Content = "NEW SALE";
                         btnValidate.Content = "VALIDATE";
                         btnValidate.IsEnabled = false;
@@ -259,6 +250,7 @@ namespace AppDesktop
                         btnNew.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
+                        btnAddStock.Visibility = Visibility.Collapsed;
                         btnValidate.IsEnabled = true;
                         btnValidate.Content = "VALIDATE";
                         dgCredit.ItemsSource = new RDMS.Credit().GetCredit();
@@ -268,6 +260,7 @@ namespace AppDesktop
                         btnNew.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
+                        btnAddStock.Visibility = Visibility.Collapsed;
                         btnValidate.IsEnabled = false;
                         btnValidate.Content = "VALIDATE";
                         break;
@@ -276,6 +269,7 @@ namespace AppDesktop
                         btnNew.Visibility = Visibility.Visible;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
+                        btnAddStock.Visibility = Visibility.Collapsed;
                         btnNew.Content = "NEW ITEM";
                         btnValidate.IsEnabled = false;
                         btnValidate.Content = "VALIDATE";
@@ -285,6 +279,7 @@ namespace AppDesktop
                         btnNew.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
+                        btnAddStock.Visibility = Visibility.Visible;
                         btnValidate.IsEnabled = true;
                         btnValidate.Content = "VALIDATE";
                         dgValuesTotal.ItemsSource = new RDMS.Stock().GetValeursTotal();
@@ -294,6 +289,7 @@ namespace AppDesktop
                         btnNew.Visibility = Visibility.Visible;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
+                        btnAddStock.Visibility = Visibility.Collapsed;
                         btnNew.Content = "NEW PROVIDER";
                         dgProviderBundle.ItemsSource = new RDMS.Bundle().GetProviderBundles();
                         btnValidate.Content = "BUY";
@@ -304,6 +300,7 @@ namespace AppDesktop
                         btnNew.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
+                        btnAddStock.Visibility = Visibility.Collapsed;
                         btnValidate.Content = "VALIDATE";
                         btnValidate.IsEnabled = true;
                         break;
@@ -312,6 +309,7 @@ namespace AppDesktop
                         btnNew.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
+                        btnAddStock.Visibility = Visibility.Collapsed;
                         btnValidate.IsEnabled = true;
                         btnValidate.Content = "VALIDATE";
                         break;
@@ -320,6 +318,7 @@ namespace AppDesktop
                         btnNew.Visibility = Visibility.Visible;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
+                        btnAddStock.Visibility = Visibility.Collapsed;
                         btnNew.Content = "NEW OUTCOME";
                         btnValidate.Content = "VALIDATE";
                         btnValidate.IsEnabled = false;
@@ -500,18 +499,12 @@ namespace AppDesktop
         #region ONGLET DASHBOARD
         private void SetDashboard()
         {
-            lbTitle.Content = SetTitre() + SetCount();
-            lbInvestment.Content = SetMontant(new RDMS.Outcome().GetOutcome2017());
+            lbTitle.Content = SetTitre();// + SetCount();
+            //TODO A remplacer par une ps parametre
+            //lbInvestment.Content = SetMontant(new RDMS.Outcome().GetOutcome2017());
             lbSumOutcome.Content = SetMontant((SetDouble(lbInvestment.Content) + SetDouble(lbOperatingCost.Content)));
             lbToTotal.Content = SetMontant(new RDMS.Selling().GetTurnOverCurrentYear());
-            lbCash.Content = SetMontant(new RDMS.Income().GetCashCurrentYear());
-            lbCredit.Content = SetMontant(new RDMS.Credit().GetCreditCurrentYear());
-            lbCreditNY.Content = SetMontant(new RDMS.Credit().GetCreditNextYear());
-            lbSum.Content = SetMontant((SetDouble(lbCash.Content) + SetDouble(lbCredit.Content) + SetDouble(lbCreditNY.Content)));
-            //lbDelta.Content = SetMontant((SetDouble(lbToTotal.Content) - SetDouble(lbSum.Content)));
-            lbCurrentBalance.Content = SetMontant(SetDouble(lbCash.Content) - (SetDouble(lbSumOutcome.Content)));
-            lbYearBalance.Content = SetMontant(((SetDouble(lbCash.Content) + SetDouble(lbCreditNY.Content)) - SetDouble(lbSumOutcome.Content)));
-            lbFutureBalance.Content = SetMontant((SetDouble(lbSum.Content) - SetDouble(lbSumOutcome.Content)));
+            lbCurrentBalance.Content = SetMontant(SetDouble(lbCash.Content) - (SetDouble(lbSumOutcome.Content)));     
         }
 
         private void SetCategories()
@@ -647,7 +640,17 @@ namespace AppDesktop
 
         #endregion FIN ONGLET CUSTOMER
 
+        #region ONGLET STOCK
+        private void BtnAddStock_Click(object sender, RoutedEventArgs e)
+        {
+            Fenetres.Stock f = new Fenetres.Stock();
+            f.Owner = this;
+            f.Show();
+        }
+        #endregion FIN ONGLET STOCK
+
         #region ONGLET ITEM
+
 
         private void dg_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -797,12 +800,24 @@ namespace AppDesktop
 
         #region ONGLET OUTCOME
         private void CbOutcome_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e) { viewOutcome.Filter = FilterOutcome; }
-
+        private void CbCategorie_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            viewOutcome.Filter = FilterCategorie;
+        }
         private bool FilterOutcome(object o)
         {
             if (cbOutcome.SelectedItem is Classes.ReferencesSimples)
             {
                 return (o as Classes.Outcomes).CleTypeOutcome == (int)cbOutcome.SelectedValue;
+            }
+            else { return false; }
+        }
+
+        private bool FilterCategorie(object o)
+        {
+            if (cbCategorie.SelectedItem is Classes.ReferencesSimples)
+            {
+                return (o as Classes.Outcomes).Categorie == (int)cbCategorie.SelectedValue;
             }
             else { return false; }
         }
@@ -928,14 +943,14 @@ namespace AppDesktop
                     SetLabelContent0PHP(lbToClo);
                 }
 
-                if (venteAnnee[2] != null)
-                {
-                    SetMontant(lbToLoa, venteAnnee[2].Amount);
-                }
-                else
-                {
-                    SetLabelContent0PHP(lbToLoa);
-                }
+                //if (venteAnnee[2] != null)
+                //{
+                //    SetMontant(lbToLoa, venteAnnee[2].Amount);
+                //}
+                //else
+                //{
+                //    SetLabelContent0PHP(lbToLoa);
+                //}
             }
             else
             {
@@ -958,25 +973,28 @@ namespace AppDesktop
            
         }
 
-        private string SetCount()
-        {
-            //Date ouverture du business
-            System.DateTime dateStartBusiness = new System.DateTime(2017, 7, 09);
-            //Date aujourd'hui
-            System.DateTime dateCeJour = System.DateTime.Today;
-            //Calcul nombre de jours entre ces deux dates
-            double nbJoursOuverture = (dateCeJour - dateStartBusiness).TotalDays;
-            //Date fin business 
-            System.DateTime dateFinBusiness = new System.DateTime(2018, 7, 08);
-            //Calcul nombre de jours restant
-            double nbJoursRestant = (dateFinBusiness - dateCeJour).TotalDays;
-            //Calcul income par jour souhaitable aorès verification de l'existance d'un content O PHP est le content par défaut si la liste des ventes est vide
-            double incomeSouhaitable = new RDMS.Outcome().GetOutcome2017() / nbJoursRestant;
-            //Calcul income par jour realisé
-            double incomeRealise = new RDMS.Selling().GetTurnOverCurrentYear() / nbJoursOuverture;
-            //Conversion sous forme lisible
-            return " Number of days since opening : " + nbJoursOuverture.ToString() + " Objectif : " + System.Math.Round(incomeSouhaitable).ToString() + " PHP" + " Real : " + System.Math.Round(incomeRealise).ToString() + " PHP";
 
-        }
+
+        //private string SetCount()
+        //{
+        //    //Date ouverture du business
+        //    System.DateTime dateStartBusiness = new System.DateTime(2017, 7, 09);
+        //    //Date aujourd'hui
+        //    System.DateTime dateCeJour = System.DateTime.Today;
+        //    //Calcul nombre de jours entre ces deux dates
+        //    double nbJoursOuverture = (dateCeJour - dateStartBusiness).TotalDays;
+        //    //Date fin business 
+        //    System.DateTime dateFinBusiness = new System.DateTime(2018, 7, 08);
+        //    //Calcul nombre de jours restant
+        //    double nbJoursRestant = (dateFinBusiness - dateCeJour).TotalDays;
+        //    //Calcul income par jour souhaitable aorès verification de l'existance d'un content O PHP est le content par défaut si la liste des ventes est vide
+        //    //TODO Remplacer GetOutcome2017()
+        //    //double incomeSouhaitable = new RDMS.Outcome().GetOutcome2017() / nbJoursRestant;
+        //    //Calcul income par jour realisé
+        //    double incomeRealise = new RDMS.Selling().GetTurnOverCurrentYear() / nbJoursOuverture;
+        //    //Conversion sous forme lisible
+        //    return " Number of days since opening : " + nbJoursOuverture.ToString() + " Objectif : " + (System.Math.Round(incomeSouhaitable) * 2).ToString() + " PHP" + " Real : " + System.Math.Round(incomeRealise).ToString() + " PHP";
+
+        //}
     }
 }
