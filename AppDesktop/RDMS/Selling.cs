@@ -60,7 +60,10 @@ namespace AppDesktop.RDMS
             }
         }
 
-        internal double GetTurnOverCurrentYear() { return new Generic().GetDouble("GET_TURNOVER_CURRENT_YEAR"); }
+        internal double GetTurnOverCurrentYear() {
+            double d = new Generic().GetDouble("GET_TURNOVER_CURRENT_YEAR");
+            return d;
+        }
 
         internal int SetSale(int cleKindPayment, System.DateTime dateSale, int n, double amount, double cash)
         {

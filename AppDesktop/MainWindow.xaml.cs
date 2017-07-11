@@ -16,6 +16,10 @@ namespace AppDesktop
         public MainWindow()
         {
             InitializeComponent();
+            //DASHBOARD
+            SetDashboard();
+            //SetCategories();
+            SetVentesMois();
             //SELLING
 
             //SALES
@@ -137,10 +141,7 @@ namespace AppDesktop
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //DASHBOARD
-            SetDashboard();
-            //SetCategories();
-            SetVentesMois();
+
             cbbKindPayment.SelectionChanged += CbbKindPayment_SelectionChanged;
             dgSelling.SelectionChanged += DgSelling_SelectionChanged;
             dgCustomerSale.SelectionChanged += DgCustomerSale_SelectionChanged;
@@ -499,12 +500,13 @@ namespace AppDesktop
         #region ONGLET DASHBOARD
         private void SetDashboard()
         {
-            lbTitle.Content = SetTitre();// + SetCount();
-            //TODO A remplacer par une ps parametre
-            //lbInvestment.Content = SetMontant(new RDMS.Outcome().GetOutcome2017());
-            lbSumOutcome.Content = SetMontant((SetDouble(lbInvestment.Content) + SetDouble(lbOperatingCost.Content)));
+            lbTitle.Content = SetTitre() + SetCount();
+            lbInvestment.Content = SetMontant(new RDMS.Outcome().GetInvestmentCurrentYear());
+            lbOperatingCost.Content = SetMontant(new RDMS.Outcome().GetOperatingCurrentYear());
+            lbSumOutcome.Content = SetMontant(new RDMS.Outcome().GetOutcomeCurrentYear());
             lbToTotal.Content = SetMontant(new RDMS.Selling().GetTurnOverCurrentYear());
-            lbCurrentBalance.Content = SetMontant(SetDouble(lbCash.Content) - (SetDouble(lbSumOutcome.Content)));     
+            lbCurrentBalance.Content = SetMontant(-SetDouble(lbSumOutcome.Content) + (SetDouble(lbToTotal.Content)));
+            
         }
 
         private void SetCategories()
@@ -975,26 +977,26 @@ namespace AppDesktop
 
 
 
-        //private string SetCount()
-        //{
-        //    //Date ouverture du business
-        //    System.DateTime dateStartBusiness = new System.DateTime(2017, 7, 09);
-        //    //Date aujourd'hui
-        //    System.DateTime dateCeJour = System.DateTime.Today;
-        //    //Calcul nombre de jours entre ces deux dates
-        //    double nbJoursOuverture = (dateCeJour - dateStartBusiness).TotalDays;
-        //    //Date fin business 
-        //    System.DateTime dateFinBusiness = new System.DateTime(2018, 7, 08);
-        //    //Calcul nombre de jours restant
-        //    double nbJoursRestant = (dateFinBusiness - dateCeJour).TotalDays;
-        //    //Calcul income par jour souhaitable aorès verification de l'existance d'un content O PHP est le content par défaut si la liste des ventes est vide
-        //    //TODO Remplacer GetOutcome2017()
-        //    //double incomeSouhaitable = new RDMS.Outcome().GetOutcome2017() / nbJoursRestant;
-        //    //Calcul income par jour realisé
-        //    double incomeRealise = new RDMS.Selling().GetTurnOverCurrentYear() / nbJoursOuverture;
-        //    //Conversion sous forme lisible
-        //    return " Number of days since opening : " + nbJoursOuverture.ToString() + " Objectif : " + (System.Math.Round(incomeSouhaitable) * 2).ToString() + " PHP" + " Real : " + System.Math.Round(incomeRealise).ToString() + " PHP";
+        private string SetCount()
+        {
+            //Date ouverture du business
+            System.DateTime dateStartBusiness = new System.DateTime(2017, 7, 09);
+            //Date aujourd'hui
+            System.DateTime dateCeJour = System.DateTime.Today;
+            //Calcul nombre de jours entre ces deux dates
+            double nbJoursOuverture = (dateCeJour - dateStartBusiness).TotalDays;
+            //Date fin business 
+            System.DateTime dateFinBusiness = new System.DateTime(2018, 7, 08);
+            //Calcul nombre de jours restant
+            double nbJoursRestant = (dateFinBusiness - dateCeJour).TotalDays;
+            //Calcul income par jour souhaitable aorès verification de l'existance d'un content O PHP est le content par défaut si la liste des ventes est vide
+            //TODO Remplacer GetOutcome2017()
+            double incomeSouhaitable = new RDMS.Outcome().GetOutcomeCurrentYear() / nbJoursRestant;
+            //Calcul income par jour realisé
+            double incomeRealise = new RDMS.Selling().GetTurnOverCurrentYear() / nbJoursOuverture;
+            //Conversion sous forme lisible
+            return " Number of days since opening : " + nbJoursOuverture.ToString() + " Objectif : " + (System.Math.Round(incomeSouhaitable)).ToString() + " PHP" + " Real : " + System.Math.Round(incomeRealise).ToString() + " PHP";
 
-        //}
+        }
     }
 }

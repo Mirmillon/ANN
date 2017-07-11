@@ -7,8 +7,11 @@ namespace AppDesktop.RDMS
 
         internal System.Collections.Generic.List<Classes.ReferencesSimples> GetCatagoriesOutcome() { return new Generic().GetReferencesSimples("GET_OUTCOME_CATEGORIES"); }
 
-        //internal double  GetOutcome2017()   { return new Generic().GetDouble("get_Outcome2017"); }
+        internal double  GetOutcomeCurrentYear()   { return new Generic().GetDouble("GET_OUTCOMES_CURRENT_YEAR"); }
 
+        internal double GetInvestmentCurrentYear() { return new Generic().GetDouble("GET_INVESMENT_CURRENT_YEAR"); }
+
+        internal double GetOperatingCurrentYear() { return new Generic().GetDouble("GET_OPERATING_CURRENT_YEAR"); }
 
         internal int SetOutcome(System.DateTime d, int c, double m , string note, int categorie)
         {

@@ -61,7 +61,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Style="{DynamicResource stackPanelHautSup}" Grid.ColumnSpan="24">
             <Label x:Name="lbTitle" Style="{StaticResource LabelTitre}" Margin="10,0"></Label>
-            <!--<Button x:Name="btnOK" Style="{StaticResource buttonStackPanelBas}"></Button>-->
+          
         </StackPanel>
         <StackPanel x:Name="stackPanelGauche" Style="{DynamicResource stackPanelVerticalgauche}" Grid.ColumnSpan="2" Grid.RowSpan="22">
             <Button x:Name="btnDashBoard" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">DASHBOARD</Button>
@@ -133,7 +133,7 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Rectangle Grid.Row="0" Grid.RowSpan="6" Grid.Column="0" Grid.ColumnSpan="8" Fill="#47b0bf"/>
+                    <Rectangle Grid.Row="0" Grid.RowSpan="6" Grid.Column="0" Grid.ColumnSpan="10" Fill="#47b0bf"/>
                     <Label Grid.Row="0"  Grid.Column="0"  Style="{DynamicResource LabelDashboard}" >TURNOVER 01</Label>
                     <Label Grid.Row="1"  Grid.Column="0"  Style="{DynamicResource LabelDashboard}" >TURNOVER 02</Label>
                     <Label Grid.Row="2"  Grid.Column="0"  Style="{DynamicResource LabelDashboard}" >TURNOVER 03</Label>
@@ -144,7 +144,7 @@
                     <Label x:Name="lbTo02" Grid.Row="1"  Grid.Column="1"  Style="{DynamicResource LabelDashboard}" ></Label>
                     <Label x:Name="lbTo03" Grid.Row="2"  Grid.Column="1"  Style="{DynamicResource LabelDashboard}" ></Label>
                     <Label x:Name="lbTo04" Grid.Row="3"  Grid.Column="1"  Style="{DynamicResource LabelDashboard}" ></Label>
-                    <Label x:Name="lbTo05" Grid.Row="4"  Grid.Column="1"  Style="{DynamicResource LabelDashboard}" ></Label>
+                    <!--<Label x:Name="lbTo05" Grid.Row="4"  Grid.Column="1"  Style="{DynamicResource LabelDashboard}" ></Label>-->
                     <Label x:Name="lbTo06" Grid.Row="5"  Grid.Column="1"  Style="{DynamicResource LabelDashboard}" ></Label>
                     <Label Grid.Row="0"  Grid.Column="2"  Style="{DynamicResource LabelDashboard}" >TURNOVER 07</Label>
                     <Label Grid.Row="1"  Grid.Column="2"  Style="{DynamicResource LabelDashboard}" >TURNOVER 08</Label>
@@ -167,31 +167,20 @@
                     <Label x:Name="lbToClo" Grid.Row="2"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
                     <Label x:Name="lbToLoa" Grid.Row="3"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
 
-                    <!--<Label Grid.Row="0"  Grid.Column="6"  Style="{DynamicResource LabelDashboard}" >CASH </Label>
-                    <Label Grid.Row="1"  Grid.Column="6"  Style="{DynamicResource LabelDashboard}" >CREDIT 2017 </Label>
-                    <Label Grid.Row="2"  Grid.Column="6"  Style="{DynamicResource LabelDashboard}" >CREDIT 2018</Label>
-                    <Label Grid.Row="3"  Grid.Column="6"  Style="{DynamicResource LabelDashboard}" >SUM TOTAL</Label>-->
-                    <!--<Label Grid.Row="4"  Grid.Column="6"  Style="{DynamicResource LabelDashboard}" >DELTA</Label>-->
                    
-                    <Label x:Name="lbCash" Grid.Row="0"  Grid.Column="7"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
-                    <!--<Label x:Name="lbCredit" Grid.Row="1"  Grid.Column="7"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
-                    <Label x:Name="lbCreditNY" Grid.Row="2"  Grid.Column="7"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
-                    <Label x:Name="lbSum" Grid.Row="3"  Grid.Column="7"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>-->
-                    <!--<Label x:Name="lbDelta" Grid.Row="5"  Grid.Column="7"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>-->
+                    <!--<Label x:Name="lbCash" Grid.Row="0"  Grid.Column="7"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>-->
 
-                    <Rectangle Grid.Row="0" Grid.RowSpan="6" Grid.Column="8" Grid.ColumnSpan="4" Fill="#b86479"/>
-                    <Label Grid.Row="0"  Grid.Column="8"  Style="{DynamicResource LabelDashboard}"  >INVESTMENT</Label>
-                    <Label Grid.Row="1"  Grid.Column="8"  Style="{DynamicResource LabelDashboard}"  >OPERATING COST</Label>
-                    <Label Grid.Row="5"  Grid.Column="8"  Style="{DynamicResource LabelDashboard}" >SUM TOTAL </Label>
-                    <Label x:Name="lbInvestment" Grid.Row="0"  Grid.Column="9"  Style="{DynamicResource LabelDashboard}"/>
-                    <Label x:Name="lbOperatingCost" Grid.Row="1"  Grid.Column="9"  Style="{DynamicResource LabelDashboard}"/>
-                    <Label x:Name="lbSumOutcome" Grid.Row="5"  Grid.Column="9"  Style="{DynamicResource LabelDashboard}" />
-                    <Label Grid.Row="0"  Grid.Column="10"  Style="{DynamicResource LabelDashboard}"  Padding="0,3" Margin="0,3">CURRENT BALANCE </Label>
-                    <!--<Label Grid.Row="1"  Grid.Column="10"  Style="{DynamicResource LabelDashboard}"  >YEAR BALANCE</Label>
-                    <Label Grid.Row="2"  Grid.Column="10"  Style="{DynamicResource LabelDashboard}" >FUTURE BALANCE</Label>-->
-                    <Label x:Name="lbCurrentBalance" Grid.Row="0"  Grid.Column="11"  Style="{DynamicResource LabelDashboard}" ></Label>
-                    <!--<Label x:Name="lbYearBalance" Grid.Row="1"  Grid.Column="11"  Style="{DynamicResource LabelDashboard}" ></Label>
-                    <Label x:Name="lbFutureBalance" Grid.Row="2"  Grid.Column="11"  Style="{DynamicResource LabelDashboard}" ></Label>-->
+
+                    <Rectangle Grid.Row="0" Grid.RowSpan="6" Grid.Column="10" Grid.ColumnSpan="2" Fill="#b86479"/>
+                    <Label Grid.Row="0"  Grid.Column="10"  Style="{DynamicResource LabelDashboard}"  >INVESTMENT</Label>
+                    <Label Grid.Row="1"  Grid.Column="10"  Style="{DynamicResource LabelDashboard}"  >OPERATING COST</Label>
+                    <Label Grid.Row="2"  Grid.Column="10"  Style="{DynamicResource LabelDashboard}" >SUM TOTAL </Label>
+                    <Label x:Name="lbInvestment" Grid.Row="0"  Grid.Column="11"  Style="{DynamicResource LabelDashboard}"/>
+                    <Label x:Name="lbOperatingCost" Grid.Row="1"  Grid.Column="11"  Style="{DynamicResource LabelDashboard}"/>
+                    <Label x:Name="lbSumOutcome" Grid.Row="2"  Grid.Column="11"  Style="{DynamicResource LabelDashboard}" />
+                    <Label Grid.Row="5"  Grid.Column="10"  Style="{DynamicResource LabelDashboard}"  Padding="0,3" Margin="0,3">CURRENT BALANCE</Label>
+                    <Label x:Name="lbCurrentBalance" Grid.Row="5"  Grid.Column="11"  Style="{DynamicResource LabelDashboard}" ></Label>
+  
                 </Grid>
 
                 <StackPanel  Grid.Row="4" Style="{DynamicResource stackPanelHautSup}">

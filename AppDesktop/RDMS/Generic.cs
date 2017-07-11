@@ -43,6 +43,7 @@ namespace AppDesktop.RDMS
 
         internal double GetDouble(string sql)
         {
+            double d;
             FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
             using (FirebirdSql.Data.FirebirdClient.FbCommand commande = conn.CreateCommand())
             {
@@ -52,13 +53,9 @@ namespace AppDesktop.RDMS
                 try
                 {
                     conn.Open();
-                    object income = commande.ExecuteScalar();
+                    d = (double)commande.ExecuteScalar();
                     conn.Close();
-                    if (!(income == System.DBNull.Value))
-                    {
-                        return System.Convert.ToDouble(income);
-                    }
-                    else{ return 0; }
+                    return d;
                     
                 }
                 catch (System.Exception ex)
