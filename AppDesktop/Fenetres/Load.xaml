@@ -1,0 +1,63 @@
+﻿<Window x:Class="AppDesktop.Fenetres.Load"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AppDesktop.Fenetres"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Load" Height="450" Width="450"  WindowStartupLocation="CenterOwner" WindowStyle="None">
+    <Grid x:Name="gridMain">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Style="{DynamicResource stackPanelHautSup}">
+            <Label Style="{DynamicResource LabelTitre}">NEW LOAD</Label>
+        </StackPanel>
+        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">DATE</Label>
+        <DatePicker x:Name="dpDateOutcome" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="5" Style="{DynamicResource DateTimeStandard}" 
+                       SelectedDate="{Binding
+                                       Path=DateSelling,
+                                       Mode=TwoWay,
+                                       TargetNullValue={x:Static System:DateTime.Now}}"></DatePicker>
+        <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">CASH</Label>
+        <TextBox x:Name="tbMontant" Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxStandard}" Text="{Binding Cash}" Width="100"/>
+        <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Style="{DynamicResource LabelStandard}">PROVIDER</Label>
+        <GroupBox x:Name="gbProvider" Grid.Row="3" Grid.RowSpan="2" Grid.Column="4" Grid.ColumnSpan="6">
+            <WrapPanel>
+                <RadioButton x:Name="rbGlobe" Margin="15" IsChecked="True">Globe</RadioButton>
+                <RadioButton x:Name="rbSmart"  Margin="15">Smart</RadioButton>
+            </WrapPanel>
+        </GroupBox>
+        <StackPanel Style="{DynamicResource stackPanelBas}">
+            <Button x:Name="btnClose" Style="{StaticResource buttonStackPanelBas}" Click="BtnClose_Click">CLOSE</Button>
+            <Button x:Name="btnValidate" Style="{StaticResource buttonStackPanelBas}" Click="BtnValidate_Click" >VALIDATE</Button>
+        </StackPanel>
+
+
+    </Grid>
+</Window>

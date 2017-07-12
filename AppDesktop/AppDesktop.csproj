@@ -79,6 +79,9 @@
     <Compile Include="Fenetres\Item.xaml.cs">
       <DependentUpon>Item.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Fenetres\Load.xaml.cs">
+      <DependentUpon>Load.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Fenetres\Outcome.xaml.cs">
       <DependentUpon>Outcome.xaml</DependentUpon>
     </Compile>
@@ -114,6 +117,10 @@
     <Compile Include="Utilitaires\GestionDgColumn.cs" />
     <Compile Include="Utilitaires\GestionGrille.cs" />
     <Page Include="Fenetres\Item.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Fenetres\Load.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

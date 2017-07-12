@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:AppDesktop"
         mc:Ignorable="d"
         Title="Ann's Business" Height="1000" Width="1500" WindowState="Maximized" Loaded="Window_Loaded" WindowStyle="None">
@@ -162,12 +163,15 @@
                     <Label Grid.Row="1"  Grid.Column="4"  Style="{DynamicResource LabelDashboard}" >BEAUTY</Label>
                     <Label Grid.Row="2"  Grid.Column="4"  Style="{DynamicResource LabelDashboard}" >CLOTHES</Label>
                     <Label Grid.Row="3"  Grid.Column="4"  Style="{DynamicResource LabelDashboard}" >LOAD</Label>
+
+                    <Label Grid.Row="5"  Grid.Column="4"  Style="{DynamicResource LabelDashboard}" >TURNOVER TODAY</Label>
                     <Label x:Name="lbToTotal" Grid.Row="0"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
                     <Label x:Name="lbToBea" Grid.Row="1"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
                     <Label x:Name="lbToClo" Grid.Row="2"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
                     <Label x:Name="lbToLoa" Grid.Row="3"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
+                    <Label x:Name="lbToToday" Grid.Row="5"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
 
-                   
+
                     <!--<Label x:Name="lbCash" Grid.Row="0"  Grid.Column="7"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>-->
 
 
@@ -337,10 +341,11 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource LabelStandard}">KIND OF CLOTHES</Label>
-                <ComboBox x:Name="cbbKindItems" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="3" Style="{StaticResource ComboBoxStandard}"></ComboBox>
-                <Label Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="2" Style="{StaticResource LabelStandard}">KIND OF PAYMENT</Label>
-                <ComboBox x:Name="cbbKindPayment" Grid.Row="0" Grid.Column="8" Grid.ColumnSpan="3" Style="{StaticResource ComboBoxStandard}"></ComboBox>
+                <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource LabelStandard}">DATE</Label>
+                <DatePicker x:Name="dpDateVente" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" 
+                            Style="{DynamicResource DateTimeStandard}" ></DatePicker>
+                <Label Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Style="{StaticResource LabelStandard}">CATEGORY</Label>
+                <ComboBox x:Name="cbCategorieVente" Grid.Row="0" Grid.Column="8" Grid.ColumnSpan="3" Style="{StaticResource ComboBoxStandard}"></ComboBox>
                 <DataGrid x:Name="dgSelling" Grid.Row="1" Grid.Column="1" Grid.RowSpan="20" Grid.ColumnSpan="22" AutoGenerateColumns="False" Margin="5,10">
                 </DataGrid>
                 <DataGrid x:Name="dgCustomerSale" Grid.Row="21" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="22" AutoGenerateColumns="False" Margin="5,10">
@@ -1040,7 +1045,9 @@
             <Button x:Name="btnAddStock" Style="{StaticResource buttonStackPanelBas}" Click="BtnAddStock_Click" Visibility="Collapsed">ADD STOCKS</Button>
             <Button x:Name="btnDelete" Style="{StaticResource buttonStackPanelBas}" Click="BtnDelete_Click" Visibility="Collapsed">DELETE</Button>
             <Button x:Name="btnNew" Style="{StaticResource buttonStackPanelBas}" Click="BtnNew_Click" Visibility="Collapsed">NEW</Button>
+            <Button x:Name="btnNewLoad" Style="{StaticResource buttonStackPanelBas}" Click="BtnNewLoad_Click" Visibility="Collapsed">NEW LOAD</Button>
             <Button x:Name="btnCancel" Style="{StaticResource buttonStackPanelBas}" Click="BtnCancel_Click" Visibility="Collapsed">CANCEL</Button>
+           
         </StackPanel>
     </Grid>
 </Window>

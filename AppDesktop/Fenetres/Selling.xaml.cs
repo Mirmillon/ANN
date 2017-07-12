@@ -275,7 +275,7 @@ namespace AppDesktop.Fenetres
             {
                 if(item.Nombre > 0)
                 {
-                    if (item.ClePrix == 11 || item.ClePrix == 12 || item.ClePrix == 13)
+                    if (item.ClePrix == 11 || item.ClePrix == 12 || item.ClePrix == 13 || item.ClePrix == 14 || item.ClePrix == 15 || item.ClePrix == 16 || item.ClePrix == 17 || item.ClePrix == 18 || item.ClePrix == 19 || item.ClePrix == 20 || item.ClePrix == 21 || item.ClePrix == 22 || item.ClePrix == 23 || item.ClePrix == 24)
                     {
                         new RDMS.Selling().SetSaleOther(cleVente, item.ClePrix, item.Nombre);
                     }

@@ -6,6 +6,7 @@ namespace AppDesktop.RDMS
 {
     internal class Income
     {
+        internal double GetTurnOverToday() { return new Generic().GetDouble("GET_TO_TODAY"); }
 
         internal double GetCashCurrentYear() { return new Generic().GetDouble("GET_CASH_CURRENT_YEAR"); }
 

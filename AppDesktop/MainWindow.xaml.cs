@@ -25,17 +25,15 @@ namespace AppDesktop
             //SALES
             dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
             dgCustomerSale.ItemsSource = new RDMS.Customer().GetCustomers();
-            new Utilitaires.GestionComboBox().SetKindPayment(cbbKindPayment);
-            new Utilitaires.GestionComboBox().SetKindBundle(cbbKindItems);
             viewSales = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(dgSelling.ItemsSource);
             viewCustomer = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(dgCustomerSale.ItemsSource);
             //dgSelling
             new Utilitaires.GestionDgColumn().ColumnDate(dgSelling, "SALE DATE", "DateSelling");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgSelling, "ITEMS NUMBER", "NbItems");
-            new Utilitaires.GestionDgColumn().ColumnLabel(dgSelling, "SUM TOTAL", "Amount");
-            new Utilitaires.GestionDgColumn().ColumnCbKindPayment(dgSelling, "TypePayment");
+            //new Utilitaires.GestionDgColumn().ColumnLabel(dgSelling, "SUM TOTAL", "Amount");
+            //new Utilitaires.GestionDgColumn().ColumnCbKindPayment(dgSelling, "TypePayment");
             new Utilitaires.GestionDgColumn().ColumnLabel(dgSelling, "SUM TOTAL PAID", "Cash");
-            new Utilitaires.GestionDgColumn().ColumnLabel(dgSelling, "CREDIT", "Credit");
+            //new Utilitaires.GestionDgColumn().ColumnLabel(dgSelling, "CREDIT", "Credit");
             //dgCustomerSale
             new Utilitaires.GestionDgColumn().ColumnCustomer(dgCustomerSale);
             new Utilitaires.GestionDgColumn().ColumnLabel(dgCustomerSale, "PHONE NUMBER", "Phone");
@@ -141,8 +139,8 @@ namespace AppDesktop
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
-            cbbKindPayment.SelectionChanged += CbbKindPayment_SelectionChanged;
+            //SELLING
+            dpDateVente.SelectedDateChanged += DpDateVente_SelectedDateChanged;
             dgSelling.SelectionChanged += DgSelling_SelectionChanged;
             dgCustomerSale.SelectionChanged += DgCustomerSale_SelectionChanged;
             //CREDIT
@@ -229,6 +227,7 @@ namespace AppDesktop
                     case "DASHBOARD":
                         lbTitle.Content =  SetTitre() +" - DASHBOARDS";
                         btnNew.Visibility = Visibility.Collapsed;
+                        btnNewLoad.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Collapsed;
                         btnCancel.Visibility = Visibility.Collapsed;
                         btnAddStock.Visibility = Visibility.Collapsed;
@@ -239,6 +238,7 @@ namespace AppDesktop
                     case "SALES":
                         lbTitle.Content = SetTitre() + " - SALES MANAGEMENT";
                         btnNew.Visibility = Visibility.Visible;
+                        btnNewLoad.Visibility = Visibility.Visible;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
@@ -249,6 +249,7 @@ namespace AppDesktop
                     case "CREDITS":
                         lbTitle.Content = SetTitre() + " - CREDITS MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
+                        btnNewLoad.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
@@ -259,6 +260,7 @@ namespace AppDesktop
                     case "CUSTOMERS":
                         lbTitle.Content = SetTitre() + " - CUSTOMERS MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
+                        btnNewLoad.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
@@ -268,6 +270,7 @@ namespace AppDesktop
                     case "ITEMS":
                         lbTitle.Content = SetTitre() + " - ITEMS MANAGEMENT";
                         btnNew.Visibility = Visibility.Visible;
+                        btnNewLoad.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
@@ -278,6 +281,7 @@ namespace AppDesktop
                     case "STOCKS":
                         lbTitle.Content = SetTitre() + " - STOCKS MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
+                        btnNewLoad.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Visible;
@@ -288,6 +292,7 @@ namespace AppDesktop
                     case "PROVIDERS":
                         lbTitle.Content = SetTitre() + " - PROVIDERS MANAGEMENT : SEE, MODIFY AND DELETE PROVIDER AND CHOOSE BUNDLES";
                         btnNew.Visibility = Visibility.Visible;
+                        btnNewLoad.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
@@ -299,6 +304,7 @@ namespace AppDesktop
                     case "BUNDLES":
                         lbTitle.Content = SetTitre() + " - BUNDLES  MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
+                        btnNewLoad.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
@@ -308,6 +314,7 @@ namespace AppDesktop
                     case "BRANDS":
                         lbTitle.Content = SetTitre() + " - BRANDS  MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
+                        btnNewLoad.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
@@ -317,6 +324,7 @@ namespace AppDesktop
                     case "OUTCOMES":
                         lbTitle.Content = SetTitre() + " - OUTCOME  MANAGEMENT";
                         btnNew.Visibility = Visibility.Visible;
+                        btnNewLoad.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
@@ -330,6 +338,13 @@ namespace AppDesktop
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e) { Close(); }
+
+        private void BtnNewLoad_Click(object sender, RoutedEventArgs e)
+        {
+            Fenetres.Load f = new Fenetres.Load();
+            f.Owner = this;
+            f.Show();
+        }
 
         private void BtnValidate_Click(object sender, RoutedEventArgs e)
         {
@@ -505,6 +520,7 @@ namespace AppDesktop
             lbOperatingCost.Content = SetMontant(new RDMS.Outcome().GetOperatingCurrentYear());
             lbSumOutcome.Content = SetMontant(new RDMS.Outcome().GetOutcomeCurrentYear());
             lbToTotal.Content = SetMontant(new RDMS.Selling().GetTurnOverCurrentYear());
+            lbToToday.Content = SetMontant(new RDMS.Income().GetTurnOverToday());
             lbCurrentBalance.Content = SetMontant(-SetDouble(lbSumOutcome.Content) + (SetDouble(lbToTotal.Content)));
             
         }
@@ -590,18 +606,12 @@ namespace AppDesktop
             Classes.Customers c = dgCustomerSale.SelectedItem as Classes.Customers;
         }
 
-        private void CbbKindPayment_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void DpDateVente_SelectedDateChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if(cbbKindPayment.SelectedIndex != -1)
-            {
-                viewSales.Filter = FilterSelling;
-            }
+            viewSales.Filter = FilterDateSale;
         }
 
-        private bool FilterSelling(object o)
-        {
-            return (o as Classes.Sellings).TypePayment == (int)cbbKindPayment.SelectedValue;
-        }
+
 
         private bool FilterCustomer(object o)
         {
@@ -611,6 +621,12 @@ namespace AppDesktop
                 return (o as Classes.Customers).Cle == sale.CleClient;
             }
             else { return false; }
+        }
+
+
+        private bool FilterDateSale(object o)
+        {
+            return (o as Classes.Sellings).DateSelling == dpDateVente.SelectedDate;
         }
         #endregion FIN ONGLET SELLING
 
@@ -686,7 +702,7 @@ namespace AppDesktop
 
         private void CbSize_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            viewItem.Filter = FilterSelling;
+           //TODO Verifier l'interet de garder cet événement.
         }
 
         private void CbBrand_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -945,14 +961,14 @@ namespace AppDesktop
                     SetLabelContent0PHP(lbToClo);
                 }
 
-                //if (venteAnnee[2] != null)
-                //{
-                //    SetMontant(lbToLoa, venteAnnee[2].Amount);
-                //}
-                //else
-                //{
-                //    SetLabelContent0PHP(lbToLoa);
-                //}
+                if (venteAnnee[2] != null)
+                {
+                    SetMontant(lbToLoa, venteAnnee[2].Amount);
+                }
+                else
+                {
+                    SetLabelContent0PHP(lbToLoa);
+                }
             }
             else
             {
@@ -998,5 +1014,7 @@ namespace AppDesktop
             return " Number of days since opening : " + nbJoursOuverture.ToString() + " Objectif : " + (System.Math.Round(incomeSouhaitable)).ToString() + " PHP" + " Real : " + System.Math.Round(incomeRealise).ToString() + " PHP";
 
         }
+
+
     }
 }

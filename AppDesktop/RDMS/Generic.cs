@@ -62,7 +62,7 @@ namespace AppDesktop.RDMS
                 {
                     System.Windows.Forms.MessageBox.Show(ex.ToString());
                     conn.Close();
-                    return -1;
+                    return -0.0;
                 }
             }
         }
