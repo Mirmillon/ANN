@@ -53,7 +53,16 @@ namespace AppDesktop.RDMS
                 try
                 {
                     conn.Open();
-                    d = (double)commande.ExecuteScalar();
+                    object o = commande.ExecuteScalar();
+                    if (!(o == System.DBNull.Value))
+                    {
+                        d = (double)o;
+                    }
+                    else
+                    {
+                        d = 0;
+                    }
+                   
                     conn.Close();
                     return d;
                     

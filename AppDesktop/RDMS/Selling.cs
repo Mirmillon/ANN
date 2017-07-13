@@ -61,8 +61,7 @@ namespace AppDesktop.RDMS
         }
 
         internal double GetTurnOverCurrentYear() {
-            double d = new Generic().GetDouble("GET_TURNOVER_CURRENT_YEAR");
-            return d;
+            return new Generic().GetDouble("GET_TURNOVER_CURRENT_YEAR");
         }
 
         internal int SetSale(int cleKindPayment, System.DateTime dateSale, int n, double amount, double cash)
@@ -364,6 +363,11 @@ namespace AppDesktop.RDMS
                     return null;
                 }
             }
+        }
+
+        internal System.Collections.Generic.List<Classes.ReferencesSimples> GetCategoriesVente()
+        {
+           return  new Generic().GetReferencesSimples("GET_CATEGORIES_VENTE");
         }
     }
 }

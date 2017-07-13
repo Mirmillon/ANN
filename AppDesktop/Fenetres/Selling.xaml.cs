@@ -7,7 +7,7 @@ namespace AppDesktop.Fenetres
     /// </summary>
     public partial class Selling : Window
     {
-        //private System.Collections.Generic.List<Classes.ItemsSale> liste = null;
+        private System.Windows.Data.CollectionView viewItem = null;
 
         public Selling()
         {
@@ -16,39 +16,33 @@ namespace AppDesktop.Fenetres
             tbCash.TextChanged += TbCash_TextChanged;
 
             gridItems.ItemsSource = GetListeSimple();
-            //new Utilitaires.GestionDgColumn().ColumnCbKindItem(gridItems, "TypeArticle");
             new Utilitaires.GestionDgColumn().ColumnCodeItem(gridItems);
             new Utilitaires.GestionDgColumn().ColumnLabel(gridItems, "NOMBRE" , "Nombre");
             new Utilitaires.GestionDgColumn().ColumnLabel(gridItems, "SUM", "Cout");
             new Utilitaires.GestionDgColumn().ColumnLabel(gridItems, "LABEL", "Label");
-
-            //gridItems.RowEditEnding += GridItems_RowEditEnding;
+            new Utilitaires.GestionDgColumn().ColumnLabel(gridItems, "CATEGORY", "CategorieVente");
 
             btnDone.Click += BtnDone_Click;
             btnValidate.IsEnabled = false;
 
+            viewItem = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(gridItems.ItemsSource);
+
+            cbbCategorie.ItemsSource = new RDMS.Selling().GetCategoriesVente();
+            cbbCategorie.SelectedValuePath = "Cle";
+            cbbCategorie.DisplayMemberPath = "Label";
         }
 
-        private void BtnDone_Click(object sender, RoutedEventArgs e)
-        {
-           // MessageBox.Show(gridItems.Items[0].GetType().ToString());
-           SetResultat();
-        }
+        private void BtnDone_Click(object sender, RoutedEventArgs e) {SetResultat();}
 
-        //private void GridItems_RowEditEnding(object sender, System.Windows.Controls.DataGridRowEditEndingEventArgs e)
-        //{
-        //    if (e.EditAction == System.Windows.Controls.DataGridEditAction.Commit)
-        //    {
-        //        SetResultat();
-        //    }
-        //}
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+
             new Utilitaires.GestionComboBox().SetKindPayment(cbbTypePayment);
             //SALE
             Classes.Sellings sale = new Classes.Sellings();
             dgSelling.DataContext = sale;
+            cbbCategorie.SelectionChanged += CbbCategorie_SelectionChanged;
             //CREDIT
             Classes.Credits credit = new Classes.Credits();
             dgCredit.DataContext = credit;
@@ -56,6 +50,31 @@ namespace AppDesktop.Fenetres
             Classes.Customers customer = new Classes.Customers();
             dgCustomer.DataContext = customer;
         }
+
+        private void CbbCategorie_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            viewItem.Filter = FilterCategorie;
+        }
+
+        private bool FilterCategorie(object o)
+        {
+            Classes.ReferencesSimples r = cbbCategorie.SelectedItem as Classes.ReferencesSimples;
+            if (r != null)
+            {
+                if(r.Label == "Aucune")
+                {
+                    return (o as Classes.ItemsSale).CategorieVente != r.Label;
+                }
+                else
+                {
+                    return (o as Classes.ItemsSale).CategorieVente == r.Label;
+
+                }
+            }
+            else { return false; }
+        }
+
+
 
         private void BtnClose_Click(object sender, RoutedEventArgs e){Close();}
 
@@ -81,6 +100,7 @@ namespace AppDesktop.Fenetres
                         SetIncome(sale);
                         SetListeItems(cleSale);
                         f.dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
+                        f.ViewSales.Refresh();
                         break;
                     case "CASH-CREDIT":
                         cleSale = SetSale(sale);
@@ -204,6 +224,7 @@ namespace AppDesktop.Fenetres
                 s.ClePrix= type[i].ClePrix;
                 s.Prix = type[i].Prix;
                 s.Label = type[i].Label;
+                s.CategorieVente = type[i].Categorie;
                 l.Add(s);
             }
             return l;

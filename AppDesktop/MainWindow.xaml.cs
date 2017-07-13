@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 
+
 namespace AppDesktop
 {
     /// <summary>
@@ -12,6 +13,8 @@ namespace AppDesktop
         System.Windows.Data.CollectionView viewCustomer = null;
         System.Windows.Data.CollectionView viewOutcome = null;
         System.Windows.Data.CollectionView viewItem = null;
+
+        public System.Windows.Data.CollectionView ViewSales { get => viewSales; set => viewSales = value; }
 
         public MainWindow()
         {
@@ -169,8 +172,6 @@ namespace AppDesktop
 
         }
 
-
-
         private void RadioModify_Checked(object sender, RoutedEventArgs e)
         {
             System.Windows.Controls.RadioButton rb = sender as System.Windows.Controls.RadioButton;
@@ -227,7 +228,6 @@ namespace AppDesktop
                     case "DASHBOARD":
                         lbTitle.Content =  SetTitre() +" - DASHBOARDS";
                         btnNew.Visibility = Visibility.Collapsed;
-                        btnNewLoad.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Collapsed;
                         btnCancel.Visibility = Visibility.Collapsed;
                         btnAddStock.Visibility = Visibility.Collapsed;
@@ -238,7 +238,6 @@ namespace AppDesktop
                     case "SALES":
                         lbTitle.Content = SetTitre() + " - SALES MANAGEMENT";
                         btnNew.Visibility = Visibility.Visible;
-                        btnNewLoad.Visibility = Visibility.Visible;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
@@ -249,7 +248,6 @@ namespace AppDesktop
                     case "CREDITS":
                         lbTitle.Content = SetTitre() + " - CREDITS MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
-                        btnNewLoad.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
@@ -260,7 +258,6 @@ namespace AppDesktop
                     case "CUSTOMERS":
                         lbTitle.Content = SetTitre() + " - CUSTOMERS MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
-                        btnNewLoad.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
@@ -270,7 +267,6 @@ namespace AppDesktop
                     case "ITEMS":
                         lbTitle.Content = SetTitre() + " - ITEMS MANAGEMENT";
                         btnNew.Visibility = Visibility.Visible;
-                        btnNewLoad.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
@@ -281,7 +277,6 @@ namespace AppDesktop
                     case "STOCKS":
                         lbTitle.Content = SetTitre() + " - STOCKS MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
-                        btnNewLoad.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Visible;
@@ -292,7 +287,6 @@ namespace AppDesktop
                     case "PROVIDERS":
                         lbTitle.Content = SetTitre() + " - PROVIDERS MANAGEMENT : SEE, MODIFY AND DELETE PROVIDER AND CHOOSE BUNDLES";
                         btnNew.Visibility = Visibility.Visible;
-                        btnNewLoad.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
@@ -304,7 +298,6 @@ namespace AppDesktop
                     case "BUNDLES":
                         lbTitle.Content = SetTitre() + " - BUNDLES  MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
-                        btnNewLoad.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
@@ -314,7 +307,6 @@ namespace AppDesktop
                     case "BRANDS":
                         lbTitle.Content = SetTitre() + " - BRANDS  MANAGEMENT";
                         btnNew.Visibility = Visibility.Collapsed;
-                        btnNewLoad.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
@@ -324,7 +316,6 @@ namespace AppDesktop
                     case "OUTCOMES":
                         lbTitle.Content = SetTitre() + " - OUTCOME  MANAGEMENT";
                         btnNew.Visibility = Visibility.Visible;
-                        btnNewLoad.Visibility = Visibility.Collapsed;
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
@@ -339,12 +330,6 @@ namespace AppDesktop
 
         private void BtnClose_Click(object sender, RoutedEventArgs e) { Close(); }
 
-        private void BtnNewLoad_Click(object sender, RoutedEventArgs e)
-        {
-            Fenetres.Load f = new Fenetres.Load();
-            f.Owner = this;
-            f.Show();
-        }
 
         private void BtnValidate_Click(object sender, RoutedEventArgs e)
         {
@@ -608,6 +593,7 @@ namespace AppDesktop
 
         private void DpDateVente_SelectedDateChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            //viewSales.Refresh();
             viewSales.Filter = FilterDateSale;
         }
 

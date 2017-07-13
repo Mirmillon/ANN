@@ -7,6 +7,7 @@ namespace AppDesktop.Classes
         int nombre;
         double cout;
         string label;
+        string categorieVente;//clothes, loan, beauty
 
         public int Nombre
         {
@@ -32,8 +33,10 @@ namespace AppDesktop.Classes
                 else { return 0; }
             }
 
-            set => cout = value; }
+            set => cout = value;
+        }
 
         public string Label { get => label; set => label = value; }
+        public string CategorieVente { get => categorieVente; set => categorieVente = value; }
     }
 }

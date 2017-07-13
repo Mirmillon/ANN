@@ -1045,7 +1045,7 @@
             <Button x:Name="btnAddStock" Style="{StaticResource buttonStackPanelBas}" Click="BtnAddStock_Click" Visibility="Collapsed">ADD STOCKS</Button>
             <Button x:Name="btnDelete" Style="{StaticResource buttonStackPanelBas}" Click="BtnDelete_Click" Visibility="Collapsed">DELETE</Button>
             <Button x:Name="btnNew" Style="{StaticResource buttonStackPanelBas}" Click="BtnNew_Click" Visibility="Collapsed">NEW</Button>
-            <Button x:Name="btnNewLoad" Style="{StaticResource buttonStackPanelBas}" Click="BtnNewLoad_Click" Visibility="Collapsed">NEW LOAD</Button>
+           
             <Button x:Name="btnCancel" Style="{StaticResource buttonStackPanelBas}" Click="BtnCancel_Click" Visibility="Collapsed">CANCEL</Button>
            
         </StackPanel>

@@ -59,6 +59,8 @@
                                        Mode=TwoWay,
                                        TargetNullValue={x:Static System:DateTime.Now}}"
             ></DatePicker>
+            <Label Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}">CATEGORY</Label>
+            <ComboBox x:Name="cbbCategorie" Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="3"  Style="{DynamicResource ComboBoxStandard}"/>
             <Button x:Name="btnDone" Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="2" Style="{DynamicResource buttonStandard}">FINISH</Button>
             <Label Grid.Row="5" Grid.Column="7" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}">ITEMS NUMBER</Label>
             <TextBox x:Name="tbNbItem" Grid.Row="5" Grid.Column="9" Grid.ColumnSpan="1" Style="{DynamicResource TextBoxBusiness}" Text="{Binding NbItems}" />
@@ -98,7 +100,7 @@
             <Label Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Style="{DynamicResource LabelStandard}">BALANCE</Label>
             <TextBox x:Name="tbDue" Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="3" Style="{DynamicResource TextBoxBusiness}" Text="{Binding MontantDu}"/>
         </Grid>
-        <Grid x:Name="dgCustomer" Grid.Row="9" Grid.RowSpan="2" IsEnabled="False" ShowGridLines="True">
+        <Grid x:Name="dgCustomer" Grid.Row="9" Grid.RowSpan="2" IsEnabled="False" ShowGridLines="False">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
