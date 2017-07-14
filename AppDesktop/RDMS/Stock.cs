@@ -399,7 +399,7 @@ namespace AppDesktop.RDMS
             }
         }
 
-        internal void UptadeStock(int cle,  int nombreItems)
+        internal void AddStock(int cle,  int nombreItems)
         {
            
             FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
@@ -423,6 +423,61 @@ namespace AppDesktop.RDMS
                     conn.Close();
                    
                 }
+            }
+        }
+
+        internal void RemoveStock(int cle, int nombreItems)
+        {
+
+            FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
+            using (FirebirdSql.Data.FirebirdClient.FbCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = "UPD_MINUS_STOCK";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                FirebirdSql.Data.FirebirdClient.FbParameterCollection pc = cmd.Parameters;
+                pc.Add("CLE", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cle;
+                pc.Add("NB", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = nombreItems;
+
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteScalar();
+
+                }
+                catch (System.Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.ToString());
+                    conn.Close();
+
+                }
+            }
+        }
+
+        internal void SetPrice(double prix, string label, string categorie)
+        {
+            FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
+            using (FirebirdSql.Data.FirebirdClient.FbCommand commande = conn.CreateCommand())
+            {
+                commande.CommandText = "SET_PRICE";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                FirebirdSql.Data.FirebirdClient.FbParameterCollection pc = commande.Parameters;
+              
+                pc.Add("PRIX", FirebirdSql.Data.FirebirdClient.FbDbType.Double, 0).Value = prix;
+                pc.Add("LABEL", FirebirdSql.Data.FirebirdClient.FbDbType.VarChar, 30).Value = label;
+                pc.Add("CATEGORIE", FirebirdSql.Data.FirebirdClient.FbDbType.VarChar, 0).Value = categorie;
+                try
+                {
+                    conn.Open();
+                    commande.ExecuteScalar();
+
+                }
+                catch (System.Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.ToString());
+                    conn.Close();
+                   
+                }
+
             }
         }
 

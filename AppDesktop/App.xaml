@@ -4,6 +4,12 @@
              xmlns:local="clr-namespace:AppDesktop"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <Style x:Key="radioButtonStandard" TargetType="RadioButton">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FlowDirection" Value="LeftToRight"/>
+            
+
+        </Style>
         <!--STACKPANEL-->
         <Style x:Key="stackPanelStandard" TargetType="StackPanel">
             <Setter Property="Orientation" Value="Horizontal"/>

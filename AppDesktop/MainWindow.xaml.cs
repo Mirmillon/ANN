@@ -138,6 +138,12 @@ namespace AppDesktop
             viewOutcome = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(dgOutcome.ItemsSource);
             new Utilitaires.GestionComboBox().SetKindOutcome(cbOutcome);
             new Utilitaires.GestionComboBox().SetCategoriesOutcome(cbCategorie);
+
+            //DATA
+            dgClothes07.ItemsSource = new RDMS.Data().GetDataClothesMonth();
+            new Utilitaires.GestionDgColumn().ColumnPrice(dgClothes07);
+            new Utilitaires.GestionDgColumn().ColumnLabel(dgClothes07, "NUMBER", "Nombre");
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -231,6 +237,7 @@ namespace AppDesktop
                         btnValidate.Visibility = Visibility.Collapsed;
                         btnCancel.Visibility = Visibility.Collapsed;
                         btnAddStock.Visibility = Visibility.Collapsed;
+                        btnRemoveStock.Visibility = Visibility.Collapsed;
                         btnValidate.Content = "VALIDATE";
                         SetDashboard();
                         SetVentesMois();
@@ -241,6 +248,7 @@ namespace AppDesktop
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
+                        btnRemoveStock.Visibility = Visibility.Collapsed;
                         btnNew.Content = "NEW SALE";
                         btnValidate.Content = "VALIDATE";
                         btnValidate.IsEnabled = false;
@@ -251,6 +259,7 @@ namespace AppDesktop
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
+                        btnRemoveStock.Visibility = Visibility.Collapsed;
                         btnValidate.IsEnabled = true;
                         btnValidate.Content = "VALIDATE";
                         dgCredit.ItemsSource = new RDMS.Credit().GetCredit();
@@ -261,6 +270,7 @@ namespace AppDesktop
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
+                        btnRemoveStock.Visibility = Visibility.Collapsed;
                         btnValidate.IsEnabled = false;
                         btnValidate.Content = "VALIDATE";
                         break;
@@ -270,6 +280,7 @@ namespace AppDesktop
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
+                        btnRemoveStock.Visibility = Visibility.Collapsed;
                         btnNew.Content = "NEW ITEM";
                         btnValidate.IsEnabled = false;
                         btnValidate.Content = "VALIDATE";
@@ -280,6 +291,7 @@ namespace AppDesktop
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Visible;
+                        btnRemoveStock.Visibility = Visibility.Visible;
                         btnValidate.IsEnabled = true;
                         btnValidate.Content = "VALIDATE";
                         dgValuesTotal.ItemsSource = new RDMS.Stock().GetValeursTotal();
@@ -290,6 +302,7 @@ namespace AppDesktop
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
+                        btnRemoveStock.Visibility = Visibility.Collapsed;
                         btnNew.Content = "NEW PROVIDER";
                         dgProviderBundle.ItemsSource = new RDMS.Bundle().GetProviderBundles();
                         btnValidate.Content = "BUY";
@@ -301,6 +314,7 @@ namespace AppDesktop
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
+                        btnRemoveStock.Visibility = Visibility.Collapsed;
                         btnValidate.Content = "VALIDATE";
                         btnValidate.IsEnabled = true;
                         break;
@@ -310,6 +324,7 @@ namespace AppDesktop
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
+                        btnRemoveStock.Visibility = Visibility.Collapsed;
                         btnValidate.IsEnabled = true;
                         btnValidate.Content = "VALIDATE";
                         break;
@@ -319,9 +334,20 @@ namespace AppDesktop
                         btnValidate.Visibility = Visibility.Visible;
                         btnCancel.Visibility = Visibility.Visible;
                         btnAddStock.Visibility = Visibility.Collapsed;
+                        btnRemoveStock.Visibility = Visibility.Collapsed;
                         btnNew.Content = "NEW OUTCOME";
                         btnValidate.Content = "VALIDATE";
                         btnValidate.IsEnabled = false;
+                        break;
+                    case "SALES DATA":
+                        lbTitle.Content = SetTitre() + " - SALES DATA";
+                        btnNew.Visibility = Visibility.Collapsed;
+                        btnValidate.Visibility = Visibility.Collapsed;
+                        btnRemoveStock.Visibility = Visibility.Collapsed;
+                        btnCancel.Visibility = Visibility.Visible;
+                        btnAddStock.Visibility = Visibility.Collapsed;
+                        dgClothes07.ItemsSource = new RDMS.Data().GetDataClothesMonth();
+
                         break;
                 }
             }
@@ -544,20 +570,13 @@ namespace AppDesktop
         private string SetMontant(double d)
         {
 
-            return d.ToString() + " PHP";
+            return System.Math.Round(d).ToString() + " PHP";
         }
 
         private void SetMontant(System.Windows.Controls.Label l ,double d)
         {
              l.Content = d.ToString() + " PHP";
-            if (d > 10500)
-            {
-                l.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.LawnGreen);
-            }
-            else
-            {
-                l.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Orange);
-            }
+            
 
 
         }
@@ -593,7 +612,7 @@ namespace AppDesktop
 
         private void DpDateVente_SelectedDateChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            //viewSales.Refresh();
+            viewSales.Refresh();
             viewSales.Filter = FilterDateSale;
         }
 
@@ -649,6 +668,16 @@ namespace AppDesktop
         {
             Fenetres.Stock f = new Fenetres.Stock();
             f.Owner = this;
+            f.Show();
+        }
+
+        private void BtnRemoveStock_Click(object sender, RoutedEventArgs e)
+        {
+            Fenetres.Stock f = new Fenetres.Stock();
+            f.Owner = this;
+            f.btnMinus.Visibility = Visibility.Visible;
+            f.btnValidate.Visibility = Visibility.Collapsed;
+            f.lblTitre.Content = "REMOVE STOCK";
             f.Show();
         }
         #endregion FIN ONGLET STOCK
@@ -861,6 +890,13 @@ namespace AppDesktop
             System.Collections.Generic.List<Classes.Sales> venteLoad = new RDMS.Selling().GetSalesLoadMonth();
             System.Collections.Generic.List<Classes.Sales> venteTotal = new RDMS.Selling().GetSalesAllMonth();
             System.Collections.Generic.List<Classes.Sales> venteAnnee = new RDMS.Selling().GetSalesAllYear();
+            System.Collections.Generic.List<Classes.DataClothes> clothes = new RDMS.Data().GetDataCurrentMonth();
+
+            if(clothes.Count > 0)
+            {
+                lblNbClo07.Content = clothes[0].Nombre.ToString();
+                lblAvgPriceClo07.Content = SetMontant(clothes[0].Moyenne);
+            }
 
             //Verification que la liste des ventes de vetement n'est pas vide.
             if (venteClothes.Count > 0)

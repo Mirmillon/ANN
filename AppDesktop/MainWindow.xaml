@@ -76,6 +76,7 @@
             <Button x:Name="btnBundles" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">BUNDLES</Button>
             <Button x:Name="btnBrands" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">BRANDS</Button>
             <Button x:Name="btnOutcome" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">OUTCOMES</Button>
+            <Button x:Name="btnData" Style="{StaticResource buttonStackPanelGauche}" Click="BtnLateralGauche_Click">SALES DATA</Button>
         </StackPanel>
         <Grid x:Name="gridCentre" Grid.Row="1" Grid.RowSpan="22" Grid.Column="2" Grid.ColumnSpan="22">
             <Grid x:Name="gridDashBoard" Style="{StaticResource GridStandard}" Visibility="Visible">
@@ -159,20 +160,18 @@
                     <Label x:Name="lbTo10" Grid.Row="3"  Grid.Column="3"  Style="{DynamicResource LabelDashboard}" ></Label>
                     <Label x:Name="lbTo11" Grid.Row="4"  Grid.Column="3"  Style="{DynamicResource LabelDashboard}" ></Label>
                     <Label x:Name="lbTo12" Grid.Row="5"  Grid.Column="3"  Style="{DynamicResource LabelDashboard}" ></Label>
-                    <Label Grid.Row="0"  Grid.Column="4"  Style="{DynamicResource LabelDashboard}" >TURNOVER TOTAL</Label>
-                    <Label Grid.Row="1"  Grid.Column="4"  Style="{DynamicResource LabelDashboard}" >BEAUTY</Label>
-                    <Label Grid.Row="2"  Grid.Column="4"  Style="{DynamicResource LabelDashboard}" >CLOTHES</Label>
-                    <Label Grid.Row="3"  Grid.Column="4"  Style="{DynamicResource LabelDashboard}" >LOAD</Label>
+                    
+                    <Label Grid.Row="0"  Grid.Column="4"  Style="{DynamicResource LabelDashboard}" >TURNOVER TODAY</Label>
+                    <Label Grid.Row="2"  Grid.Column="4"  Style="{DynamicResource LabelDashboard}" >BEAUTY</Label>
+                    <Label Grid.Row="3"  Grid.Column="4"  Style="{DynamicResource LabelDashboard}" >CLOTHES</Label>
+                    <Label Grid.Row="4"  Grid.Column="4"  Style="{DynamicResource LabelDashboard}" >LOAD</Label>
+                    <Label Grid.Row="5"  Grid.Column="4"  Style="{DynamicResource LabelDashboard}" Foreground="Blue">TURNOVER TOTAL</Label>
+                    <Label x:Name="lbToToday" Grid.Row="0"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" ></Label>
+                    <Label x:Name="lbToBea" Grid.Row="2"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" ></Label>
+                    <Label x:Name="lbToClo" Grid.Row="3"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" ></Label>
+                    <Label x:Name="lbToLoa" Grid.Row="4"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" ></Label>
+                    <Label x:Name="lbToTotal" Grid.Row="5"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
 
-                    <Label Grid.Row="5"  Grid.Column="4"  Style="{DynamicResource LabelDashboard}" >TURNOVER TODAY</Label>
-                    <Label x:Name="lbToTotal" Grid.Row="0"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
-                    <Label x:Name="lbToBea" Grid.Row="1"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
-                    <Label x:Name="lbToClo" Grid.Row="2"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
-                    <Label x:Name="lbToLoa" Grid.Row="3"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
-                    <Label x:Name="lbToToday" Grid.Row="5"  Grid.Column="5"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>
-
-
-                    <!--<Label x:Name="lbCash" Grid.Row="0"  Grid.Column="7"  Style="{DynamicResource LabelDashboard}" Foreground="Blue"></Label>-->
 
 
                     <Rectangle Grid.Row="0" Grid.RowSpan="6" Grid.Column="10" Grid.ColumnSpan="2" Fill="#b86479"/>
@@ -214,45 +213,72 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
 
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="2" Style="{DynamicResource LabelDashboard}" >JANUARY</Label>
                     <Label Grid.Row="1" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Clothes</Label>
-                    <Label Grid.Row="2" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Beauty</Label>
-                    <Label Grid.Row="3" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Load</Label>
+                    <Label Grid.Row="2" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Clothes Number</Label>
+                    <Label Grid.Row="3" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Average Price</Label>
+                    <Label Grid.Row="4" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Beauty</Label>
+                    <Label Grid.Row="5" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Load</Label>
+                    
                     <Label Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="2" Style="{DynamicResource LabelDashboard}" >FEBRUARY</Label>
                     <Label Grid.Row="0" Grid.RowSpan="1" Grid.Column="4" Grid.ColumnSpan="2" Style="{DynamicResource LabelDashboard}" >MARCH</Label>
                     <Label Grid.Row="0" Grid.RowSpan="1" Grid.Column="6" Grid.ColumnSpan="2" Style="{DynamicResource LabelDashboard}" >APRIL</Label>
                     <Label Grid.Row="0" Grid.RowSpan="1" Grid.Column="8" Grid.ColumnSpan="2" Style="{DynamicResource LabelDashboard}" >MAY</Label>
                     <Label Grid.Row="0" Grid.RowSpan="1" Grid.Column="10" Grid.ColumnSpan="2" Style="{DynamicResource LabelDashboard}" >JUNE</Label>
-                    <Rectangle Grid.Row="4" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="2" Fill="#47b0bf"/>
-                    <Label Grid.Row="4" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="2" Style="{DynamicResource LabelDashboard}" >JULY</Label>
-                    <Label Grid.Row="5" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Clothes</Label>
-                    <Label Name="lblClo07" Grid.Row="5" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" />
-                    <Label Grid.Row="6" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Beauty</Label>
-                    <Label Name="lblBea07" Grid.Row="6" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" /> 
-                    <Label Grid.Row="7" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Load</Label>
-                    <Label Name="lblLoa07" Grid.Row="7" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" /> 
-                    <Label Grid.Row="4" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="2" Style="{DynamicResource LabelDashboard}" >AUGUST</Label>
-                    <Label Grid.Row="5" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Clothes</Label>
-                    <Label Grid.Row="6" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Beauty</Label>
-                    <Label Grid.Row="7" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Load</Label>
-                    <Label Grid.Row="4" Grid.RowSpan="1" Grid.Column="4" Grid.ColumnSpan="2" Style="{DynamicResource LabelDashboard}" >SEPTEMBER</Label>
-                    <Label Grid.Row="5" Grid.RowSpan="1" Grid.Column="4" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Clothes</Label>
-                    <Label Grid.Row="6" Grid.RowSpan="1" Grid.Column="4" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Beauty</Label>
-                    <Label Grid.Row="7" Grid.RowSpan="1" Grid.Column="4" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Load</Label>
-                    <Label Grid.Row="4" Grid.RowSpan="1" Grid.Column="6" Grid.ColumnSpan="2" Style="{DynamicResource LabelDashboard}" >OCTOBER</Label>
-                    <Label Grid.Row="5" Grid.RowSpan="1" Grid.Column="6" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Clothes</Label>
-                    <Label Grid.Row="6" Grid.RowSpan="1" Grid.Column="6" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Beauty</Label>
-                    <Label Grid.Row="7" Grid.RowSpan="1" Grid.Column="6" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Load</Label>
-                    <Label Grid.Row="4" Grid.RowSpan="1" Grid.Column="8" Grid.ColumnSpan="2" Style="{DynamicResource LabelDashboard}" >NOVEMBER</Label>
-                    <Label Grid.Row="5" Grid.RowSpan="1" Grid.Column="8" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Clothes</Label>
-                    <Label Grid.Row="6" Grid.RowSpan="1" Grid.Column="8" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Beauty</Label>
-                    <Label Grid.Row="7" Grid.RowSpan="1" Grid.Column="8" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Load</Label>
-                    <Label Grid.Row="4" Grid.RowSpan="1" Grid.Column="10" Grid.ColumnSpan="2" Style="{DynamicResource LabelDashboard}" >DECEMBER</Label>
-                    <Label Grid.Row="5" Grid.RowSpan="1" Grid.Column="10" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Clothes</Label>
-                    <Label Grid.Row="6" Grid.RowSpan="1" Grid.Column="10" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Beauty</Label>
-                    <Label Grid.Row="7" Grid.RowSpan="1" Grid.Column="10" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Load</Label>
+                    
+                    <Rectangle Grid.Row="6" Grid.RowSpan="6" Grid.Column="0" Grid.ColumnSpan="12" Fill="#47b0bf"/>
+                    <Label Grid.Row="6" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="2" Style="{DynamicResource LabelDashboard}" >JULY</Label>
+                    <Label Grid.Row="7" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Clothes</Label>
+                    <Label Name="lblClo07" Grid.Row="7" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" />
+                    <Label Grid.Row="8" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Clothes Number</Label>
+                    <Label Name="lblNbClo07" Grid.Row="8" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" />
+                    <Label Grid.Row="9" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Average Price</Label>
+                    <Label Name="lblAvgPriceClo07" Grid.Row="9" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" />
+                    <Label Grid.Row="10" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Beauty</Label>
+                    <Label Name="lblBea07" Grid.Row="10" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" /> 
+                    <Label Grid.Row="11" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Load</Label>
+                    <Label Name="lblLoa07" Grid.Row="11" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" />
+                    
+                    <Label Grid.Row="6" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="2" Style="{DynamicResource LabelDashboard}" >AUGUST</Label>
+                    <Label Grid.Row="7" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Clothes</Label>
+                    <Label Grid.Row="8" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Clothes Number</Label>
+                    <Label Grid.Row="9" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Average Price</Label>
+                    <Label Grid.Row="10" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Beauty</Label>
+                    <Label Grid.Row="11" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Load</Label>
+
+                    <Label Grid.Row="6" Grid.RowSpan="1" Grid.Column="4" Grid.ColumnSpan="2" Style="{DynamicResource LabelDashboard}" >SEPTEMBER</Label>
+                    <Label Grid.Row="7" Grid.RowSpan="1" Grid.Column="4" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Clothes</Label>
+                    <Label Grid.Row="8" Grid.RowSpan="1" Grid.Column="4" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Clothes Number</Label>
+                    <Label Grid.Row="9" Grid.RowSpan="1" Grid.Column="4" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Average Price</Label>
+                    <Label Grid.Row="10" Grid.RowSpan="1" Grid.Column="4" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Beauty</Label>
+                    <Label Grid.Row="11" Grid.RowSpan="1" Grid.Column="4" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Load</Label>
+                    
+                    <Label Grid.Row="6" Grid.RowSpan="1" Grid.Column="6" Grid.ColumnSpan="2" Style="{DynamicResource LabelDashboard}" >OCTOBER</Label>
+                    <Label Grid.Row="7" Grid.RowSpan="1" Grid.Column="6" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Clothes</Label>
+                    <Label Grid.Row="8" Grid.RowSpan="1" Grid.Column="6" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Clothes Number</Label>
+                    <Label Grid.Row="9" Grid.RowSpan="1" Grid.Column="6" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Average Price</Label>
+                    <Label Grid.Row="10" Grid.RowSpan="1" Grid.Column="6" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Beauty</Label>
+                    <Label Grid.Row="11" Grid.RowSpan="1" Grid.Column="6" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Load</Label>
+                    
+                    <Label Grid.Row="6" Grid.RowSpan="1" Grid.Column="8" Grid.ColumnSpan="2" Style="{DynamicResource LabelDashboard}" >NOVEMBER</Label>
+                    <Label Grid.Row="7" Grid.RowSpan="1" Grid.Column="8" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Clothes</Label>
+                    <Label Grid.Row="8" Grid.RowSpan="1" Grid.Column="8" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Clothes Number</Label>
+                    <Label Grid.Row="9" Grid.RowSpan="1" Grid.Column="8" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Average Price</Label>
+                    <Label Grid.Row="10" Grid.RowSpan="1" Grid.Column="8" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Beauty</Label>
+                    <Label Grid.Row="11" Grid.RowSpan="1" Grid.Column="8" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Load</Label>
+                    
+                    <Label Grid.Row="6" Grid.RowSpan="1" Grid.Column="10" Grid.ColumnSpan="2" Style="{DynamicResource LabelDashboard}" >DECEMBER</Label>
+                    <Label Grid.Row="7" Grid.RowSpan="1" Grid.Column="10" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Clothes</Label>
+                    <Label Grid.Row="8" Grid.RowSpan="1" Grid.Column="10" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Clothes Number</Label>
+                    <Label Grid.Row="9" Grid.RowSpan="1" Grid.Column="10" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Average Price</Label>
+                    <Label Grid.Row="10" Grid.RowSpan="1" Grid.Column="10" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Beauty</Label>
+                    <Label Grid.Row="11" Grid.RowSpan="1" Grid.Column="10" Grid.ColumnSpan="1" Style="{DynamicResource LabelDashboard}" >Load</Label>
 
 
 
@@ -344,8 +370,9 @@
                 <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource LabelStandard}">DATE</Label>
                 <DatePicker x:Name="dpDateVente" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" 
                             Style="{DynamicResource DateTimeStandard}" ></DatePicker>
-                <Label Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Style="{StaticResource LabelStandard}">CATEGORY</Label>
-                <ComboBox x:Name="cbCategorieVente" Grid.Row="0" Grid.Column="8" Grid.ColumnSpan="3" Style="{StaticResource ComboBoxStandard}"></ComboBox>
+                <Label Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Style="{StaticResource LabelStandard}">DISPLAY</Label>
+                <RadioButton x:Name="rbToday" Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="2" Style="{StaticResource radioButtonStandard}" Content="Today Sales"/>
+                <RadioButton x:Name="rbAll" Grid.Row="0" Grid.Column="9" Grid.ColumnSpan="2" Style="{StaticResource radioButtonStandard}" Content="All Sales"/>
                 <DataGrid x:Name="dgSelling" Grid.Row="1" Grid.Column="1" Grid.RowSpan="20" Grid.ColumnSpan="22" AutoGenerateColumns="False" Margin="5,10">
                 </DataGrid>
                 <DataGrid x:Name="dgCustomerSale" Grid.Row="21" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="22" AutoGenerateColumns="False" Margin="5,10">
@@ -1038,11 +1065,71 @@
                 <DataGrid x:Name="dgOutcome" Grid.Row="1" Grid.Column="1" Grid.RowSpan="15" Grid.ColumnSpan="22" AutoGenerateColumns="False" Margin="5,10">
                 </DataGrid>
             </Grid>
+            <Grid x:Name="gridData" Style="{StaticResource GridStandard}" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0"  Grid.ColumnSpan="2" Style="{DynamicResource LabelSousTitre}">JULY</Label>
+                <DataGrid x:Name="dgClothes07" Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="3" Grid.RowSpan="5" AutoGenerateColumns="False" Margin="5"></DataGrid>
+              
+
+            </Grid>
         </Grid>
         <StackPanel Style="{DynamicResource stackPanelBas}" Grid.Row="23"  Grid.ColumnSpan="24">
             <Button x:Name="btnClose" Style="{StaticResource buttonStackPanelBas}" Click="BtnClose_Click">CLOSE</Button>
             <Button x:Name="btnValidate" Style="{StaticResource buttonStackPanelBas}" Click="BtnValidate_Click" Visibility="Collapsed">VALIDATE</Button>
             <Button x:Name="btnAddStock" Style="{StaticResource buttonStackPanelBas}" Click="BtnAddStock_Click" Visibility="Collapsed">ADD STOCKS</Button>
+            <Button x:Name="btnRemoveStock" Style="{StaticResource buttonStackPanelBas}" Click="BtnRemoveStock_Click" Visibility="Collapsed">REMOVE STOCKS</Button>
+            
             <Button x:Name="btnDelete" Style="{StaticResource buttonStackPanelBas}" Click="BtnDelete_Click" Visibility="Collapsed">DELETE</Button>
             <Button x:Name="btnNew" Style="{StaticResource buttonStackPanelBas}" Click="BtnNew_Click" Visibility="Collapsed">NEW</Button>
            

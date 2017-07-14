@@ -131,6 +131,21 @@ namespace AppDesktop.Utilitaires
             return d;
         }
 
+        internal System.Windows.Controls.DataGridComboBoxColumn ColumnPrice(System.Windows.Controls.DataGrid dg)
+        {
+            System.Windows.Controls.DataGridComboBoxColumn d = new System.Windows.Controls.DataGridComboBoxColumn();
+            System.Windows.Data.Binding b = new System.Windows.Data.Binding("ClePrix");
+            //Set the properties on the new column
+            d.ItemsSource = new RDMS.Stock().GetPrices();
+            d.SelectedValuePath = "ClePrix";
+            d.DisplayMemberPath = "Prix";
+            d.SelectedValueBinding = b;
+            d.Header = "PRICE";
+            //Add the column to the DataGrid
+            dg.Columns.Add(d);
+            return d;
+        }
+
         internal System.Windows.Controls.DataGridComboBoxColumn ColumnCustomerCredit(System.Windows.Controls.DataGrid dg)
         {
             System.Windows.Controls.DataGridComboBoxColumn d = new System.Windows.Controls.DataGridComboBoxColumn();
@@ -171,6 +186,21 @@ namespace AppDesktop.Utilitaires
             d.DisplayMemberPath = "Prix";
             d.SelectedValueBinding = b;
             d.Header = "PRICE";
+            //Add the column to the DataGrid
+            dg.Columns.Add(d);
+            return d;
+        }
+
+        internal System.Windows.Controls.DataGridComboBoxColumn ColumnCbClothesGender(System.Windows.Controls.DataGrid dg)
+        {
+            System.Windows.Controls.DataGridComboBoxColumn d = new System.Windows.Controls.DataGridComboBoxColumn();
+            System.Windows.Data.Binding b = new System.Windows.Data.Binding("CleGender");
+            //Set the properties on the new column
+            d.ItemsSource = new RDMS.Item().GetGenders();
+            d.SelectedValuePath = "Cle";
+            d.DisplayMemberPath = "Label";
+            d.SelectedValueBinding = b;
+            d.Header = "CLOTHES GENDER";
             //Add the column to the DataGrid
             dg.Columns.Add(d);
             return d;

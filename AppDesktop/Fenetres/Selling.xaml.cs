@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿
+using System.Windows;
+
 
 namespace AppDesktop.Fenetres
 {
@@ -8,6 +10,9 @@ namespace AppDesktop.Fenetres
     public partial class Selling : Window
     {
         private System.Windows.Data.CollectionView viewItem = null;
+        private System.Collections.Generic.List<Classes.ItemsSale> liste = null;
+
+        internal System.Collections.Generic.List<Classes.ItemsSale> Liste { get => liste; set => liste = value; }
 
         public Selling()
         {
@@ -21,6 +26,7 @@ namespace AppDesktop.Fenetres
             new Utilitaires.GestionDgColumn().ColumnLabel(gridItems, "SUM", "Cout");
             new Utilitaires.GestionDgColumn().ColumnLabel(gridItems, "LABEL", "Label");
             new Utilitaires.GestionDgColumn().ColumnLabel(gridItems, "CATEGORY", "CategorieVente");
+            new Utilitaires.GestionDgColumn().ColumnCbClothesGender(gridItems);
 
             btnDone.Click += BtnDone_Click;
             btnValidate.IsEnabled = false;
@@ -216,7 +222,7 @@ namespace AppDesktop.Fenetres
 
         private System.Collections.Generic.List<Classes.ItemsSale> GetListeSimple()
         {
-            System.Collections.Generic.List<Classes.ItemsSale> l = new System.Collections.Generic.List<Classes.ItemsSale>();
+            liste = new System.Collections.Generic.List<Classes.ItemsSale>();
             System.Collections.Generic.List<Classes.Price> type = new RDMS.Stock().GetPrices();
             for (int i = 0; i < type.Count; ++i)
             {
@@ -225,9 +231,9 @@ namespace AppDesktop.Fenetres
                 s.Prix = type[i].Prix;
                 s.Label = type[i].Label;
                 s.CategorieVente = type[i].Categorie;
-                l.Add(s);
+                liste.Add(s);
             }
-            return l;
+            return liste;
         }
 
         private int GetNombre()
@@ -238,7 +244,6 @@ namespace AppDesktop.Fenetres
             {
                 nombre += liste[i].Nombre;
             }
-
             return nombre;
         }
 
@@ -250,7 +255,6 @@ namespace AppDesktop.Fenetres
             {
                 total += liste[i].Cout;
             }
-
             return total;
         }
 
@@ -261,8 +265,6 @@ namespace AppDesktop.Fenetres
             tbAmount.Text = System.String.Empty;
             tbAmount.Text = GetTotal().ToString();
             gridItems.ItemsSource = GetCoutByCode();
-
-
         }
 
         private System.Collections.Generic.List<Classes.ItemsSale> GetCoutByCode()
@@ -273,12 +275,10 @@ namespace AppDesktop.Fenetres
                 s.Cout = s.Nombre * s.Prix;
             }
             return liste;
-            
         }
 
         private System.Collections.Generic.List<Classes.ItemsSale>  GetListeItems()
         {
-
             System.Collections.Generic.List<Classes.ItemsSale> liste = new System.Collections.Generic.List<Classes.ItemsSale>();
             System.Collections.IEnumerable l = gridItems.ItemsSource;
             foreach (var i in l)
@@ -290,19 +290,18 @@ namespace AppDesktop.Fenetres
 
         private void  SetListeItems(int cleVente)
         {
-           
             System.Collections.Generic.List<Classes.ItemsSale> liste = GetListeItems();
             foreach(Classes.ItemsSale item in liste)
             {
                 if(item.Nombre > 0)
                 {
-                    if (item.ClePrix == 11 || item.ClePrix == 12 || item.ClePrix == 13 || item.ClePrix == 14 || item.ClePrix == 15 || item.ClePrix == 16 || item.ClePrix == 17 || item.ClePrix == 18 || item.ClePrix == 19 || item.ClePrix == 20 || item.ClePrix == 21 || item.ClePrix == 22 || item.ClePrix == 23 || item.ClePrix == 24)
+                    if (item.CategorieVente.Equals("Load") || item.CategorieVente.Equals("Beauty"))
                     {
                         new RDMS.Selling().SetSaleOther(cleVente, item.ClePrix, item.Nombre);
                     }
                     else 
                     {
-                        new RDMS.Selling().SetSaleClothes(cleVente, item.ClePrix, item.Nombre);
+                        new RDMS.Selling().SetSaleClothes(cleVente, item.ClePrix, item.Nombre,item.CleGender);
                     }
                 }
             }

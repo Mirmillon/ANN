@@ -94,7 +94,7 @@ namespace AppDesktop.RDMS
             }
         }
 
-        internal void SetSaleClothes(int cleVente, int clePrix, int nombre)
+        internal void SetSaleClothes(int cleVente, int clePrix, int nombre,int cleGender)
         {
 
             FirebirdSql.Data.FirebirdClient.FbConnection conn = new FirebirdSql.Data.FirebirdClient.FbConnection(new Connexion().ChaineConnection());
@@ -106,7 +106,7 @@ namespace AppDesktop.RDMS
                 pc.Add("CLE_VENTE", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cleVente;
                 pc.Add("CLE_TYPE", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = clePrix;
                 pc.Add("NUMBER", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = nombre;
-               
+                pc.Add("CLE_GENDER", FirebirdSql.Data.FirebirdClient.FbDbType.Integer, 0).Value = cleGender;
 
                 try
                 {
@@ -369,5 +369,7 @@ namespace AppDesktop.RDMS
         {
            return  new Generic().GetReferencesSimples("GET_CATEGORIES_VENTE");
         }
+
+
     }
 }

@@ -8,6 +8,7 @@ namespace AppDesktop.Classes
         double cout;
         string label;
         string categorieVente;//clothes, loan, beauty
+        int cleGender = -1;
 
         public int Nombre
         {
@@ -38,5 +39,21 @@ namespace AppDesktop.Classes
 
         public string Label { get => label; set => label = value; }
         public string CategorieVente { get => categorieVente; set => categorieVente = value; }
+        public int CleGender
+        {
+            get => cleGender;
+            set
+            {
+                if ((categorieVente.Equals("Load")) || (categorieVente.Equals("Beauty")))
+                {
+                    cleGender = 0;
+                }
+                else
+                {
+                    cleGender = value;
+                }
+
+            }
+        }
     }
 }

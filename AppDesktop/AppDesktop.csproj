@@ -63,6 +63,7 @@
     <Compile Include="Classes\Countries.cs" />
     <Compile Include="Classes\Credits.cs" />
     <Compile Include="Classes\Customers.cs" />
+    <Compile Include="Classes\DataClothes.cs" />
     <Compile Include="Classes\Items.cs" />
     <Compile Include="Classes\ItemsSale.cs" />
     <Compile Include="Classes\ItemStock.cs" />
@@ -81,6 +82,9 @@
     </Compile>
     <Compile Include="Fenetres\Outcome.xaml.cs">
       <DependentUpon>Outcome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fenetres\Price.xaml.cs">
+      <DependentUpon>Price.xaml</DependentUpon>
     </Compile>
     <Compile Include="Fenetres\Provider.xaml.cs">
       <DependentUpon>Provider.xaml</DependentUpon>
@@ -101,6 +105,7 @@
     <Compile Include="RDMS\Credit.cs" />
     <Compile Include="RDMS\Customer.cs" />
     <Compile Include="RDMS\Dashboard.cs" />
+    <Compile Include="RDMS\Data.cs" />
     <Compile Include="RDMS\Generic.cs" />
     <Compile Include="RDMS\Income.cs" />
     <Compile Include="RDMS\Item.cs" />
@@ -118,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Fenetres\Outcome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Fenetres\Price.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

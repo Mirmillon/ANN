@@ -35,7 +35,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Style="{DynamicResource stackPanelHautSup}">
-            <Label Style="{DynamicResource LabelTitre}">ADD STOCK</Label>
+            <Label x:Name="lblTitre" Style="{DynamicResource LabelTitre}">ADD STOCK</Label>
         </StackPanel>
         <DataGrid Name="dgStock" Grid.Row="1" Grid.RowSpan="10" Grid.ColumnSpan="12" AutoGenerateColumns="False"></DataGrid>
         <!--<WrapPanel Name="spStock" Grid.Row="1" Grid.RowSpan="10" Grid.ColumnSpan="12" FlowDirection="LeftToRight">
@@ -64,6 +64,8 @@
         <StackPanel Style="{DynamicResource stackPanelBas}">
             <Button x:Name="btnClose" Style="{StaticResource buttonStackPanelBas}" Click="BtnClose_Click">CLOSE</Button>
             <Button x:Name="btnValidate" Style="{StaticResource buttonStackPanelBas}" Click="BtnValidate_Click" >VALIDATE</Button>
+            <Button x:Name="btnMinus" Style="{StaticResource buttonStackPanelBas}"  Visibility="Collapsed" Click="BtnValidate_Click" >VALIDATE</Button>
+            <Button x:Name="btnPrice" Style="{StaticResource buttonStackPanelBas}" Click="BtnPrice_Click" >NEW PRICE</Button>
 
 
         </StackPanel>
