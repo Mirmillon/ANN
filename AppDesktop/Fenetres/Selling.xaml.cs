@@ -105,8 +105,8 @@ namespace AppDesktop.Fenetres
                         sale.Cle = cleSale;
                         SetIncome(sale);
                         SetListeItems(cleSale);
-                        f.dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
-                        f.ViewSales.Refresh();
+                        f.dgSelling.ItemsSource = new RDMS.Selling().GetSellingsToday();
+                  
                         break;
                     case "CASH-CREDIT":
                         cleSale = SetSale(sale);
@@ -116,7 +116,7 @@ namespace AppDesktop.Fenetres
                         cleCustomer = SetCustomer(customer);
                         cleCredit = SetCredit(cleCustomer, cleSale, credit);
                         new RDMS.Customer().SetCustomerSale(cleSale, cleCustomer);
-                        f.dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
+                        f.dgSelling.ItemsSource = new RDMS.Selling().GetSellingsToday();
                         break;
                     case "CREDIT":
                         cleSale = SetSale(sale);
@@ -126,7 +126,7 @@ namespace AppDesktop.Fenetres
                         cleCustomer = SetCustomer(customer);
                         cleCredit = SetCredit(cleCustomer, cleSale, credit);
                         new RDMS.Customer().SetCustomerSale(cleSale, cleCustomer);
-                        f.dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
+                        f.dgSelling.ItemsSource = new RDMS.Selling().GetSellingsToday();
                         break;
                 }
             }

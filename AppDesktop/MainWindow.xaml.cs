@@ -26,9 +26,9 @@ namespace AppDesktop
             //SELLING
 
             //SALES
-            dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
+            
             dgCustomerSale.ItemsSource = new RDMS.Customer().GetCustomers();
-            viewSales = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(dgSelling.ItemsSource);
+            
             viewCustomer = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(dgCustomerSale.ItemsSource);
             //dgSelling
             new Utilitaires.GestionDgColumn().ColumnDate(dgSelling, "SALE DATE", "DateSelling");
@@ -152,6 +152,10 @@ namespace AppDesktop
             dpDateVente.SelectedDateChanged += DpDateVente_SelectedDateChanged;
             dgSelling.SelectionChanged += DgSelling_SelectionChanged;
             dgCustomerSale.SelectionChanged += DgCustomerSale_SelectionChanged;
+
+            rbAll.Checked += RbAll_Checked;
+            rbToday.Checked += RbToday_Checked;
+            rbToday.IsChecked = true;
             //CREDIT
             dgCredit.SelectionChanged += DgCredit_SelectionChanged;
             //BRAND
@@ -177,6 +181,8 @@ namespace AppDesktop
             dgItem.MouseDoubleClick += dg_MouseDoubleClick;
 
         }
+
+
 
         private void RadioModify_Checked(object sender, RoutedEventArgs e)
         {
@@ -608,6 +614,19 @@ namespace AppDesktop
         private void DgCustomerSale_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             Classes.Customers c = dgCustomerSale.SelectedItem as Classes.Customers;
+        }
+
+        private void RbToday_Checked(object sender, RoutedEventArgs e)
+        {
+            dgSelling.ItemsSource = null;
+            dgSelling.ItemsSource = new RDMS.Selling().GetSellingsToday();
+        }
+
+        private void RbAll_Checked(object sender, RoutedEventArgs e)
+        {
+            dgSelling.ItemsSource = null;
+            dgSelling.ItemsSource = new RDMS.Selling().GetSellings();
+            viewSales = (System.Windows.Data.CollectionView)System.Windows.Data.CollectionViewSource.GetDefaultView(dgSelling.ItemsSource);
         }
 
         private void DpDateVente_SelectedDateChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)

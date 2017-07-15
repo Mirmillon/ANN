@@ -371,7 +371,7 @@
                 <DatePicker x:Name="dpDateVente" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" 
                             Style="{DynamicResource DateTimeStandard}" ></DatePicker>
                 <Label Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Style="{StaticResource LabelStandard}">DISPLAY</Label>
-                <RadioButton x:Name="rbToday" Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="2" Style="{StaticResource radioButtonStandard}" Content="Today Sales"/>
+                <RadioButton x:Name="rbToday" Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="2" Style="{StaticResource radioButtonStandard}"  Content="Today Sales"/>
                 <RadioButton x:Name="rbAll" Grid.Row="0" Grid.Column="9" Grid.ColumnSpan="2" Style="{StaticResource radioButtonStandard}" Content="All Sales"/>
                 <DataGrid x:Name="dgSelling" Grid.Row="1" Grid.Column="1" Grid.RowSpan="20" Grid.ColumnSpan="22" AutoGenerateColumns="False" Margin="5,10">
                 </DataGrid>
